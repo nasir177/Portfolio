@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather App | Nasir Hussain</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Font: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-color: #000000;
+            --text-color: #333333;
+            --bg-color: #e8e8e8;
+            --font-display: 'Inter', sans-serif;
+        }
+
+        body {
+            font-family: var(--font-display);
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 0;
+            transition: opacity 0.5s ease-out;
+        }
+
+        .content-container {
+            max-width: 1400px; 
+            margin: 0 auto;
+            padding: 0 60px; 
+        }
+
+        /* Navigation */
+        .initial {
+            font-size: 2.5rem; 
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .nav-link {
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--primary-color);
+            text-decoration: none;
+            padding: 0 20px;
+            transition: color 0.2s, opacity 0.2s;
+        }
+
+        .nav-link:hover {
+            opacity: 0.6;
+        }
+
+        /* Hero Section with Split Layout */
+        .hero-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+            min-height: 80vh;
+            padding: 80px 0;
+        }
+
+        .hero-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .project-title {
+            font-size: 5rem;
+            font-weight: 800;
+            line-height: 1;
+            margin-bottom: 20px;
+            color: #000;
+        }
+
+        .project-subtitle {
+            font-size: 1.25rem;
+            color: #666;
+            font-weight: 400;
+            line-height: 1.6;
+        }
+
+        .hero-video-container {
+            position: relative;
+            width: 100%;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+        }
+
+        .hero-video {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Case Study Content */
+        .case-study-content {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 80px 0;
+        }
+
+        .section-heading {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #000;
+        }
+
+        .section-content {
+            font-size: 1.125rem;
+            line-height: 1.8;
+            color: #444;
+            margin-bottom: 40px;
+        }
+
+        .case-study-section {
+            margin-bottom: 60px;
+        }
+
+        /* Full Width Images */
+        .project-image-full {
+            width: auto;
+            aspect-ratio: 16/9;
+            background: linear-gradient(135deg, #d5d5d5 0%, #c0c0c0 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #888;
+            font-size: 1rem;
+            margin: 60px 0;
+        }
+
+        .image-caption {
+            text-align: center;
+            font-size: 0.95rem;
+            color: #666;
+            font-style: italic;
+            margin-top: 16px;
+            margin-bottom: 60px;
+        }
+
+        /* More Projects Grid */
+        .more-projects-section {
+            background: #fff;
+            padding: 80px 0;
+            margin-top: 80px;
+        }
+
+        .more-projects-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .project-card-mini {
+            text-decoration: none;
+            color: inherit;
+            transition: transform 0.3s ease;
+        }
+
+        .project-card-mini:hover {
+            transform: translateY(-8px);
+        }
+
+        .project-card-mini .thumbnail {
+            width: 100%;
+            aspect-ratio: 1;
+            background: #e5e5e5;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            transition: opacity 0.3s;
+        }
+
+        .project-card-mini:hover .thumbnail {
+            opacity: 0.8;
+        }
+
+        .project-card-mini h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #000;
+        }
+
+        /* Footer */
+        .footer-cta {
+            background: #fff;
+            padding: 80px 0;
+        }
+
+        .footer-nav {
+            padding: 40px 0;
+            border-top: 1px solid #d0d0d0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .contact-button {
+            display: inline-block;
+            background: #000;
+            color: #fff;
+            padding: 18px 48px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin-top: 24px;
+        }
+
+        .contact-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+
+        .social-icon {
+            width: 24px;
+            height: 24px;
+            color: #666;
+            transition: color 0.2s;
+        }
+
+        .social-icon:hover {
+            color: #000;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 1024px) {
+            .content-container {
+                padding: 0 40px; 
+            }
+            .hero-section {
+                gap: 60px;
+                padding: 60px 0;
+            }
+            .project-title {
+                font-size: 4rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .content-container {
+                padding: 0 20px; 
+            }
+            .initial {
+                font-size: 2rem;
+            }
+            .nav-link {
+                padding: 0 12px;
+                font-size: 0.9rem;
+            }
+            .hero-section {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                padding: 40px 0;
+                min-height: auto;
+            }
+            .project-title {
+                font-size: 2.5rem;
+            }
+            .project-subtitle {
+                font-size: 1rem;
+            }
+            .section-heading {
+                font-size: 1.5rem;
+            }
+            .section-content {
+                font-size: 1rem;
+            }
+            .more-projects-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            .footer-nav {
+                flex-direction: column;
+                gap: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header class="sticky top-0 bg-white py-6 z-50 border-b border-gray-200" style="background-color: #e8e8e8;">
+    <div class="content-container flex justify-between items-center">
+        <div class="initial">N.</div>
+
+        <nav class="flex items-center">
+            <a href="/Home/home.html" class="nav-link">Home</a>
+            <a href="/Aboutus/about.html" class="nav-link">About</a>
+            <a href="/Resume/resume.html" class="nav-link">Resume</a>
+            <a href="/Contact/contact.html" class="nav-link">Contact</a>
+        </nav>
+    </div>
+</header>
+
+<main>
+    <!-- HERO SECTION WITH SPLIT LAYOUT -->
+    <section class="hero-section" style="background-color: #e8e8e8;">
+        <div class="content-container" style="grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; max-width: 1400px; margin: 0 auto;">
+            <!-- Left Side: Title & Description -->
+            <div class="hero-content">
+                <h1 class="project-title">Weather App</h1>
+                <p class="project-subtitle">UI/UX Designer | Developer • Solo Developer</p>
+            </div>
+
+            <!-- Right Side: Video -->
+            <div class="hero-video-container">
+                <video 
+                    class="hero-video"
+                    autoplay 
+                    loop 
+                    muted 
+                    playsinline>
+                    <source src="C:\Users\Asus\Downloads\Weaather.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        </div>
+    </section>
+
+    <!-- CASE STUDY CONTENT -->
+    <div class="case-study-content">
+        <div class="content-container">
+
+            <!-- Full Width Image -->
+            <section>
+                <div class="project-image-full">
+                    <span>High-Fidelity Mockups</span>
+                </div>
+                <p class="image-caption">
+                    Pictured above: Home Page, Collection Page, Product Page, About Us Page, and Help Center Page.
+                </p>
+            </section>
+
+            <!-- 01 Overview -->
+            <section class="case-study-section">
+                <h2 class="section-heading">01. Overview</h2>
+                <p class="section-content">
+                 This weather app is a personal portfolio project built to deliver real-time weather information from around the world with an immersive, multi-sensory interface. It combines live API data (temperature, humidity, condition, date, and day) with dynamic background videos and ambient sounds that change according to the current weather in the selected location, creating a memorable user experience.                </p>
+            </section>
+
+            <!-- 02 Problem -->
+            <section class="case-study-section">
+                <h2 class="section-heading">02. Problem</h2>
+                <p class="section-content">
+                    Typical weather apps present raw data with static icons, which can feel dry and require users to mentally translate numbers into real-life impact (e.g., “Do I need an umbrella or jacket?”). Many users, especially casual ones, want a quick, emotional understanding of what the weather “feels like” rather than reading charts or small symbols. The challenge was to design a weather app that keeps the information accurate and clear, while making the experience engaging, intuitive, and instantly understandable.​
+                </p>
+            </section>
+
+            <!-- 03 Design Goals -->
+            <section class="case-study-section">
+                <h2 class="section-heading">03. Design Goals</h2>
+                <p class="section-content">
+                    The core goals were:
+                </p>
+                <ul style="list-style-type: disc; margin-left: 20px; font-size: 1.125rem; line-height: 2.2; color: #444;">
+                    <li>Make it effortless to check weather for any city worldwide with a single, prominent search field.</li>
+                    <br>
+                    <li>Present key metrics (temperature, condition, humidity, wind Speed, Haze, sun rise, sun set, sea, location, date, and day) in a clean, readable layout that works on small screens.</li>
+                    <br>
+                    <li>Use visuals and sound to help users "feel" the weather, reducing cognitive load.</li>
+                    <br>
+                    <li>Ensure performance and usability are strong enough that friends and family can use it daily without instructions.</li>
+                </ul>
+            </section>
+
+            <!-- 03 Design Process -->
+            <section class="case-study-section">
+                <h2 class="section-heading">03. Design Process</h2>
+                <p class="section-content">
+                    The process started by defining the primary flow: open the  splash screen → app → type a city name → see current weather details and matching visual/audio feedback. The search bar was placed at the top with high contrast so users can start typing immediately, and auto-suggestion-style behavior was considered for faster city selection. Below the search, a large temperature display and condition text (e.g., “Today 30.05°C” with weather icon) were positioned in the center for quick reading, with supplementary details like humidity and other metrics grouped in structured cards at the bottom.
+                </p>
+                <p class="section-content">
+                    Visual exploration focused on using full-screen background media instead of flat colors. Multiple background sets were planned: clear skies with gentle clouds for sunny weather, darker clouds with subtle lightning for haze or storms, and rain footage for rainy conditions. Color choices and overlays were tuned to ensure text remained readable on top of video, using gradients and semi-transparent panels where needed. After the visual direction was defined, the interface was implemented and iteratively tweaked based on real device previews to balance aesthetics with legibility.
+                </p>
+            </section>
+
+            <!-- 04 Interaction & Motion -->
+            <section class="case-study-section">
+                <h2 class="section-heading">04. Interaction & Motion</h2>
+                <p class="section-content">
+                    Micro-interactions were a key part of the experience. When a user searches for a city, the transition from one weather state to another uses smooth fades and subtle motion rather than harsh jumps. The background video and sound cross-fade to match the new weather condition, giving a feeling of continuity. The keyboard and search state are integrated into the layout so that users can see enough of the background and result while still typing, which is visible in the multi-screen layout where search, main card, and background coexist harmoniously.
+                </p>
+                <p class="section-content">
+                    Audio was treated as an optional enhancement rather than a distraction. The idea behind the ambient sounds (rain, soft thunder, gentle wind) is to:
+
+                    <ul style="list-style-type: disc; margin-left: 20px; font-size: 1.125rem; line-height: 2.2; color: #444;">
+                        <li>Help users quickly understand the seriousness of weather (e.g., storm sounds hint at caution).</li>
+                        <br>
+                        <li>Provide a relaxing environment when the app is docked on a stand or used as a "weather mood screen."</li>
+                        <br>
+                        <li>Support focus or relaxation, for example, using rain sound as white noise while working or sleeping.</li>
+                        <br>
+                        <li>Simple controls or system volume are relied upon so users can mute when needed without breaking the visual experience.</li>
+                    </ul>
+                </p>
+            </section>
+
+            <!-- 04 Features -->
+            <section class="case-study-section">
+                <h2 class="section-heading">04. Features</h2>
+                <p class="section-content">
+                Major features of the app include:
+
+                    <ul style="list-style-type: disc; margin-left: 20px; font-size: 1.125rem; line-height: 2.2; color: #444;">
+                        <li>Global search: Users can type any city name and instantly fetch its current weather details.</li>
+                        <br>
+                        <li>Real-time metrics: Temperature, condition (e.g., sunny, haze, rain), humidity, and other key stats are displayed along with the current day and date.</li>
+                        <br>
+                        <li>Dynamic background video:<br>
+
+1.Sunny: clean sky or soft clouds with calm ambient sound to give a light, positive mood.<br>
+
+2.Haze / storm: darker clouds with thunder visuals and sound to signal that conditions may be rough.<br>
+
+3.Rain: rainfall video with rain sound to prepare users for wet conditions.</li>
+                        <br>
+                        <li>Consistent layout across states so users always know where to look for main temperature, condition, and extra information.</li>
+                        <li>Mobile-optimized UI with large tap targets, readable typography, and a vertical layout suited for one-handed use.</li><br>
+                    </ul>
+                </p>
+            </section>
+
+            <!-- 05 How It Helps Users -->
+            <section class="case-study-section">
+                <h2 class="section-heading">05. How It Helps Users</h2>
+                <p class="section-content">
+                    The experience is designed to support users in several practical ways:
+                </p>
+                <ul style="list-style-type: disc; margin-left: 20px; font-size: 1.125rem; line-height: 2.2; color: #444;">
+                    <li><strong>Faster decisions:</strong> Instead of interpreting icons, users can feel instantly if they need an umbrella, a raincoat, or a jacket simply by seeing and hearing the scene.</li>
+                    <br>
+                    <li><strong>Planning the day:</strong> Real-time temperature and humidity help users decide what to wear, whether to carry water, or if they should plan indoor vs outdoor activities.</li>
+                    <br>
+                    <li><strong>Travel and commute prep:</strong> Stormy or rainy visuals with corresponding sounds make it obvious that travel may be slower, encouraging users to leave early or reschedule plans.</li>
+                    <br>
+                    <li><strong>Emotional comfort:</strong> Calm sunny or rain scenes with ambient sound can act as a relaxing background while working, studying, or falling asleep, turning a utility app into a small daily ritual.</li>
+                    <br>
+                    <li><strong>Accessibility of understanding:</strong> For children or older adults who may not read small numbers easily, the big visuals and sounds communicate the weather conditions in a more intuitive way.</li>
+                </ul>
+            </section>
+
+            <!-- 06 Testing & Feedback -->
+            <section class="case-study-section">
+                <h2 class="section-heading">06. Testing & Feedback</h2>
+                <p class="section-content">
+                    The app was tested with friends and family as a small user group. They were asked to complete basic tasks such as searching for their city, checking temperature and humidity, and switching between multiple locations. Feedback highlighted that:
+                </p>
+                <ul style="list-style-type: disc; margin-left: 20px; font-size: 1.125rem; line-height: 2.2; color: #444;">
+                    <li>The search feature was easy to discover and use.</li>
+                    <br>
+                    <li>The large temperature text and day/date were simple to understand at a glance.</li>
+                    <br>
+                    <li>The dynamic backgrounds and sounds made the app more enjoyable and memorable than standard weather apps.</li>
+                </ul>
+                <p class="section-content">
+                    Based on feedback, adjustments were made to font sizes, contrast, and timing of transitions so that information remained clear even when the background was visually rich.
+                </p>
+            </section>
+        </div>
+    </div>
+
+    <!-- MORE CASE STUDIES -->
+    <section class="more-projects-section">
+        <div class="content-container">
+            <h2 class="text-3xl font-semibold text-center mb-4">Read more of my case studies</h2>
+
+            <div class="more-projects-grid">
+                <a href="project-nekyo.html" class="project-card-mini">
+                    <div class="thumbnail">Nekyo E-commerce</div>
+                    <h3>Nekyo Fashion Platform</h3>
+                </a>
+
+                <a href="project-weather.html" class="project-card-mini">
+                    <div class="thumbnail">Weather App</div>
+                    <h3>Weather Forecast App</h3>
+                </a>
+
+                <a href="project-chillchat.html" class="project-card-mini">
+                    <div class="thumbnail">ChillChat</div>
+                    <h3>Real-Time Chat App</h3>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT FOOTER CTA -->
+    <section class="footer-cta">
+        <div class="content-container">
+            <p class="text-lg text-gray-700 mb-2">👋 Get in touch at</p>
+            <a href="mailto:nasirhussain11118@gmail.com" class="text-2xl font-semibold hover:underline break-all block">
+                nasirhussain11118@gmail.com
+            </a>
+            <a href="contact.html" class="contact-button">Contact me</a>
+        </div>
+    </section>
+
+    <!-- FOOTER NAV -->
+    <footer class="footer-cta">
+        <div class="content-container footer-nav">
+            <nav class="flex gap-6">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="about.html" class="nav-link">About</a>
+                <a href="resume.html" class="nav-link">Resume</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+            </nav>
+
+            <a href="https://www.linkedin.com/in/nasir-hussain-analyst" target="_blank" class="social-icon" title="LinkedIn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.784-1.75-1.75s.784-1.75 1.75-1.75 1.75.784 1.75 1.75-.784 1.75-1.75 1.75zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                </svg>
+            </a>
+        </div>
+    </footer>
+</main>
+
+<script>
+    // Smooth fade-in on load
+    window.addEventListener('load', () => {
+        document.body.style.opacity = '1';
+    });
+</script>
+
+</body>
+</html>

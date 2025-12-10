@@ -1,0 +1,117 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+:root {
+    --primary-color: #000000;
+    --text-color: #333333;
+    --bg-color: #f7f7f7; /* Slightly off-white background matching the new mockup */
+    --font-display: 'Inter', sans-serif;
+    --desktop-margin: 120px;
+}
+
+body {
+    font-family: var(--font-display);
+    color: var(--text-color);
+    background-color: var(--bg-color);
+    padding: 0;
+    margin: 0;
+    min-height: 100vh;
+    padding-bottom: 70px; /* Space for the bottom area on mobile/desktop */
+    transition: background-color 0.3s;
+}
+
+.content-container {
+    max-width: 1200px; 
+    margin: 0 auto;
+    padding: 0 60px; 
+}
+
+/* Navigation Links */
+.nav-link {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--primary-color);
+    text-decoration: none;
+    padding: 0 16px;
+    transition: color 0.2s, opacity 0.2s;
+}
+
+.nav-link:hover {
+    opacity: 0.7;
+}
+
+/* Hero Text Styles (Minimal and large) */
+.initial {
+    font-size: 2.5rem; 
+    font-weight: 700;
+}
+.greeting-large {
+    font-size: 5rem; 
+    line-height: 1.1;
+    font-weight: 800;
+    margin-top: var(--desktop-margin);
+}
+.bio-text {
+    font-size: 1.25rem; 
+    line-height: 1.6;
+    max-width: 800px;
+    margin-top: 20px;
+}
+
+/* Project Card Styles */
+.project-card-visual {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16/10;
+    border-radius: 4px;
+    object-fit: cover;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+.project-card:hover .project-card-visual {
+    transform: scale(0.98);
+    opacity: 0.9;
+}
+
+.project-title {
+    font-size: 1.4rem; 
+    font-weight: 600;
+    margin-top: 20px;
+}
+.project-description {
+    font-size: 1rem; 
+    color: #666;
+    margin-top: 5px;
+}
+
+/* Responsive Overrides */
+@media (max-width: 1024px) {
+    .content-container {
+        padding: 0 40px; 
+    }
+    .greeting-large {
+        font-size: 4rem;
+        margin-top: 80px;
+    }
+}
+
+@media (max-width: 768px) {
+    .content-container {
+        padding: 0 20px; 
+    }
+    /* Reduce greeting size for mobile */
+    .greeting-large {
+        font-size: 3rem; 
+        margin-top: 40px;
+    }
+    /* Stack projects vertically */
+    .project-grid {
+        grid-template-columns: 1fr !important;
+        gap: 40px;
+    }
+    /* Ensure nav is centered/compact on mobile */
+    .nav-desktop {
+        font-size: 0.9rem;
+    }
+    .nav-link {
+        padding: 0 8px;
+    }
+}
