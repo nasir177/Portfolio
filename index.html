@@ -1,173 +1,640 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Nasir Hussain | Portfolio Home</title>
-    <link rel="stylesheet" href="home.css" />
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #1e1b4b 100%);
+            background-attachment: fixed;
+            color: #f3f4f6;
+            overflow-x: hidden;
+        }
+        
+        /* Animated background particles */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+        
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(2px);
+            animation: float 15s infinite ease-in-out;
+        }
+        
+        .particle::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, rgba(96, 165, 250, 0.4) 40%, transparent 70%);
+            animation: pulse 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0) translateX(0) scale(1); opacity: 0.4; }
+            25% { transform: translateY(-120px) translateX(80px) scale(1.2); opacity: 0.8; }
+            50% { transform: translateY(-200px) translateX(-60px) scale(0.8); opacity: 0.5; }
+            75% { transform: translateY(-150px) translateX(120px) scale(1.1); opacity: 0.7; }
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.6; }
+            50% { transform: translate(-50%, -50%) scale(1.5); opacity: 0.3; }
+        }
+        
+        /* Header styles */
+        header {
+            backdrop-filter: blur(20px);
+            background: rgba(30, 27, 75, 0.95);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .content-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .initial {
+            font-size: 2rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: pulseGlow 2s ease-in-out infinite;
+        }
+        
+        @keyframes pulseGlow {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        
+        .nav-desktop {
+            display: flex;
+            gap: 2.5rem;
+        }
+        
+        .nav-link {
+            position: relative;
+            color: #e0e7ff;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 100%);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            color: #ffffff;
+        }
+        
+        .nav-link:hover::after,
+        .nav-link.font-bold::after {
+            width: 100%;
+        }
+        
+        /* Main content */
+        main {
+            position: relative;
+            z-index: 1;
+            min-height: calc(100vh - 80px);
+        }
+        
+        .glass-card {
+            background: rgba(30, 27, 75, 0.6);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 4rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 3rem;
+            animation: slideInUp 0.8s ease-out;
+        }
+        
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .greeting-large {
+            font-size: 4.5rem;
+            font-weight: 900;
+            line-height: 1.1;
+            background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1.5rem;
+            animation: slideInLeft 0.8s ease-out;
+        }
+        
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        .bio-text {
+            font-size: 1.5rem;
+            line-height: 1.8;
+            color: #c7d2fe;
+            animation: slideInLeft 0.8s ease-out 0.2s backwards;
+        }
+        
+        /* Project grid */
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+        
+        .project-link {
+            position: relative;
+            overflow: hidden;
+            border-radius: 20px;
+            background: rgba(30, 27, 75, 0.6);
+            backdrop-filter: blur(20px);
+            padding: 1.5rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            animation: fadeInUp 0.6s ease-out backwards;
+            text-decoration: none;
+            display: block;
+        }
+        
+        .project-link:nth-child(1) { animation-delay: 0.1s; }
+        .project-link:nth-child(2) { animation-delay: 0.2s; }
+        .project-link:nth-child(3) { animation-delay: 0.3s; }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .project-link:hover {
+            transform: translateY(-10px);
+            border-color: rgba(96, 165, 250, 0.5);
+            box-shadow: 0 20px 60px rgba(96, 165, 250, 0.4);
+        }
+        
+        .project-link video {
+            border-radius: 12px;
+        }
+        
+        .project-link h2 {
+            margin-top: 1rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #e0e7ff;
+            transition: color 0.3s ease;
+        }
+        
+        .project-link:hover h2 {
+            background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .project-link p {
+            color: #c7d2fe;
+        }
+        
+        /* Section title */
+        .section-title {
+            font-size: 3rem;
+            font-weight: 800;
+            text-align: center;
+            margin: 5rem 0 3rem;
+            background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .figma-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+        
+        .figma-card {
+            background: rgba(30, 27, 75, 0.6);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            animation: fadeInUp 0.6s ease-out backwards;
+        }
+        
+        .figma-card:nth-child(1) { animation-delay: 0.1s; }
+        .figma-card:nth-child(2) { animation-delay: 0.2s; }
+        .figma-card:nth-child(3) { animation-delay: 0.3s; }
+        
+        .figma-card:hover {
+            transform: translateY(-15px);
+            border-color: rgba(96, 165, 250, 0.5);
+            box-shadow: 0 25px 70px rgba(96, 165, 250, 0.4);
+        }
+        
+        .figma-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+        
+        .figma-card:hover .figma-image {
+            transform: scale(1.1);
+        }
+        
+        .figma-content {
+            padding: 1.5rem;
+        }
+        
+        .figma-tag {
+            display: inline-block;
+            padding: 0.4rem 1rem;
+            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+            color: white;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+        }
+        
+        .figma-card h3 {
+            color: #e0e7ff;
+        }
+        
+        .figma-card p {
+            color: #c7d2fe;
+        }
+        
+        /* Contact section */
+        .contact-section {
+            text-align: center;
+            margin-top: 5rem;
+            padding: 4rem;
+            background: rgba(30, 27, 75, 0.6);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            animation: fadeInUp 0.6s ease-out 0.4s backwards;
+        }
+        
+        .contact-section p {
+            color: #c7d2fe;
+        }
+        
+        .contact-btn {
+            display: inline-block;
+            padding: 1rem 3rem;
+            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.4);
+        }
+        
+        .contact-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(59, 130, 246, 0.6);
+        }
+        
+        /* Footer */
+        .footer-mobile {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(30, 27, 75, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 1rem 0;
+            box-shadow: 0 -4px 30px rgba(0, 0, 0, 0.3);
+            z-index: 100;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .footer-mobile a {
+            color: #e0e7ff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-mobile a:hover {
+            color: #60a5fa;
+        }
+        
+        .footer-mobile svg {
+            color: #60a5fa;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-desktop {
+                display: none;
+            }
+            
+            .footer-mobile {
+                display: flex !important;
+                justify-content: space-around;
+                align-items: center;
+            }
+            
+            .greeting-large {
+                font-size: 2.5rem;
+            }
+            
+            .bio-text {
+                font-size: 1.1rem;
+            }
+            
+            .glass-card {
+                padding: 2rem;
+            }
+            
+            .project-grid,
+            .figma-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            main {
+                padding-bottom: 5rem;
+            }
+            
+            .contact-section {
+                padding: 2rem;
+            }
+        }
+        
+        /* Scroll reveal animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.6s ease-out;
+        }
+        
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
 </head>
 
 <body>
-    <header class="sticky top-0 bg-white py-6 z-10 border-b border-gray-100">
+    <!-- Animated background particles -->
+    <div class="particles" id="particles"></div>
+
+    <header class="sticky top-0 py-6 z-50">
         <div class="content-container flex justify-between items-center">
             <div class="initial">N.</div>
 
             <nav class="nav-desktop">
-                <a href="index.html" class="nav-link font-bold underline underline-offset-8 decoration-2">Home</a>
+                <a href="index.html" class="nav-link font-bold">Home</a>
                 <a href="Aboutus/about.html" class="nav-link">About</a>
                 <a href="resume.html" class="nav-link">Resume</a>
                 <a href="Contact/contact.html" class="nav-link">Contact</a>
             </nav>
-
         </div>
     </header>
 
     <main class="py-16">
         <div class="content-container">
-
-            <section class="mb-20">
-                <h1 class="greeting-large mb-4">Hi , I'm Nasir.</h1>
-                <p class="bio-text text-gray-700">
-                   Ui/UX Designer  Developer based in New Delhi | Crafting Intuitive, Responsive Digital Experiences with a Creative Edge.
+            <section class="glass-card">
+                <h1 class="greeting-large">Hi, I'm Nasir.</h1>
+                <p class="bio-text">
+                    UI/UX Designer & Developer based in New Delhi | Crafting Intuitive, Responsive Digital Experiences with a Creative Edge.
                 </p>
             </section>
 
-           <section class="project-grid grid grid-cols-2 gap-10">
-
-
-            <a href="Project Detail/projectDetailAzkaFashion.html" class="group cursor-pointer project-link block h-auto" data-project-id="2">
-        <div class="w-full aspect-video bg-gray-200 rounded-md mb-4 overflow-hidden relative">
-            <video class="w-full h-full object-cover transform transition-transform duration-500 group-hover:scale-105"
-                autoplay muted loop playsinline poster="C:\Users\Asus\Desktop\Azka Fashion poster.jpg">
-                <source src="Videos/AzkaFashion.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-        </div>
-         <h2 class="text-xl font-semibold group-hover:underline">Azka Fashion</h2>
-        <p class="text-gray-600 text-sm mt-1 leading-relaxed">
-            A fully responsive e-commerce platform redesign replicating the global fashion retailer's experience, showcasing dynamic product grids and a seamless order system.
-        </p>
-    </a>
-
-            <a href="Project Detail/projectDetailNekyo.html" class="group cursor-pointer project-link block h-auto" data-project-id="2">
-        <div class="w-full aspect-video bg-gray-200 rounded-md mb-4 overflow-hidden relative">
-            <video class="w-full h-full object-cover transform transition-transform duration-500 group-hover:scale-105"
-                autoplay muted loop playsinline poster="C:\Users\Asus\Desktop\Uniqlo clone poster.jpg">
-                <source src="Videos\nekyo.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-        </div>
-         <h2 class="text-xl font-semibold group-hover:underline">Nekyo</h2>
-        <p class="text-gray-600 text-sm mt-1 leading-relaxed"> 
-            An immersive language app focused on mastering the basics. Features include a digital canvas for stroke-order practice, a video lesson feed for immersion, and gamified flashcards to make learning essential Japanese vocabulary fun and effective.
-        </p>
-    </a>
-<!-- 
-             <a href="project-SpeedyEats.html" class="group cursor-pointer project-link block h-auto" data-project-id="1">
-        <div class="w-full aspect-video bg-gray-200 rounded-md mb-4 overflow-hidden relative">
-            <video class="w-full h-full object-cover transform transition-transform duration-500 group-hover:scale-105"
-                autoplay muted loop playsinline poster="C:\Users\Asus\Desktop\Uniqlo clone poster.jpg">
-                <source src="C:\Users\Asus\Downloads\SpeedyEats.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-        </div>
-        <h2 class="text-xl font-semibold group-hover:underline">SpeedyEats</h2>
-        <p class="text-gray-600 text-sm mt-1 leading-relaxed">
-            A fully responsive e-commerce platform redesign replicating the global fashion retailer's experience, showcasing dynamic product grids and a seamless cart system.
-        </p>
-    </a> -->
-
-   
-
-    <!-- <a href="project-uniqlo.html" class="group cursor-pointer project-link block h-auto" data-project-id="1">
-        <div class="w-full aspect-video bg-gray-200 rounded-md mb-4 overflow-hidden relative">
-            <video class="w-full h-full object-cover transform transition-transform duration-500 group-hover:scale-105"
-                autoplay muted loop playsinline poster="C:\Users\Asus\Desktop\Uniqlo clone poster.jpg">
-                <source src="C:\Users\Asus\Desktop\uniqlo clone.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-        </div>
-        <h2 class="text-xl font-semibold group-hover:underline">Uniqlo Clone</h2>
-        <p class="text-gray-600 text-sm mt-1 leading-relaxed">
-            A fully responsive e-commerce platform redesign replicating the global fashion retailer's experience, showcasing dynamic product grids and a seamless cart system.
-        </p>
-    </a> -->
-
-    <!-- <a href="Project Detail/projectDetailWeather.html" class="group cursor-pointer project-link block h-auto" data-project-id="2">
-        <div class="w-full aspect-video bg-gray-200 rounded-md mb-4 overflow-hidden relative">
-            <video class="w-full h-full object-cover transform transition-transform duration-500 group-hover:scale-105"
-                autoplay muted loop playsinline poster="C:\Users\Asus\Desktop\Uniqlo clone poster.jpg">
-                <source src="Videos\Weaather.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-        </div>
-        <h2 class="text-xl font-semibold group-hover:underline">Weather App</h2>
-        <p class="text-gray-600 text-sm mt-1 leading-relaxed">
-            A dynamic weather forecasting tool featuring real-time location tracking, live condition updates, and an immersive UI that changes based on the time of day.
-        </p>
-    </a> -->
-
-    <!-- <a href="Project Detail/projectDetailChillChat.html" class="group cursor-pointer project-link block h-auto" data-project-id="3">
-        <div class="w-full aspect-video bg-gray-200 rounded-md mb-4 overflow-hidden relative">
-            <video class="w-full h-full object-cover transform transition-transform duration-500 group-hover:scale-105"
-                autoplay muted loop playsinline poster="https://placehold.co/600x400/cccccc/ffffff?text=Loading+Video...">
-                <source src="Videos\ChillChat.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-        </div>
-        <h2 class="text-xl font-semibold group-hover:underline">ChillChat</h2>
-        <p class="text-gray-600 text-sm mt-1 leading-relaxed">
-            A real-time messaging application designed for seamless connection, showcasing instant data synchronization and a clean, user-centric chat interface.
-        </p>
-    </a> -->
-
-    <a href="Project Detail/projectDetailBookItNow.html" class="group cursor-pointer project-link block h-auto" data-project-id="4">
-        <div class="w-full aspect-video bg-gray-200 rounded-md mb-4 overflow-hidden relative">
-            <video class="w-full h-full object-cover transform transition-transform duration-500 group-hover:scale-105"
-                autoplay muted loop playsinline poster="https://placehold.co/600x400/cccccc/ffffff?text=Loading+Video...">
-                <source src="Videos\BookItNow.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-        </div>
-        <h2 class="text-xl font-semibold group-hover:underline">BookItNow</h2>
-        <p class="text-gray-600 text-sm mt-1 leading-relaxed">
-            A comprehensive reservation management system, showcasing intuitive calendar scheduling, automated booking flows, and service integration for businesses.
-        </p>
-    </a> 
-
-</section>
-
-            <section class="mt-20 pt-10 border-t border-gray-200">
-                <p class="text-lg font-medium text-gray-800 mb-4">
-                    👋 Get in touch at <span class="font-bold">nasirhussain11118@gmail.com</span>
-                </p>
-                <a href="contact.html"
-                    class="inline-block px-8 py-3 bg-black text-white text-base font-semibold rounded-lg hover:bg-gray-800 transition duration-300">
-                    Contact me
+            <h2 class="section-title reveal">Development Projects</h2>
+            <section class="project-grid">
+                <a href="Project Detail/projectDetailAzkaFashion.html" class="project-link">
+                    <div class="w-full aspect-video bg-gray-700 rounded-md mb-4 overflow-hidden relative">
+                        <video class="w-full h-full object-cover transform transition-transform duration-500 group-hover:scale-105"
+                            autoplay muted loop playsinline poster="C:\Users\Asus\Desktop\Azka Fashion poster.jpg">
+                            <source src="Videos/AzkaFashion.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                    <h2>Azka Fashion</h2>
+                    <p class="text-sm mt-1 leading-relaxed">
+                        A fully responsive e-commerce platform redesign replicating the global fashion retailer's experience, showcasing dynamic product grids and a seamless order system.
+                    </p>
                 </a>
+
+                <a href="Project Detail/projectDetailNekyo.html" class="project-link">
+                    <div class="w-full aspect-video bg-gray-700 rounded-md mb-4 overflow-hidden relative">
+                        <video class="w-full h-full object-cover transform transition-transform duration-500 group-hover:scale-105"
+                            autoplay muted loop playsinline poster="C:\Users\Asus\Desktop\Uniqlo clone poster.jpg">
+                            <source src="Videos\nekyo.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                    <h2>Nekyo</h2>
+                    <p class="text-sm mt-1 leading-relaxed"> 
+                        An immersive language app focused on mastering the basics. Features include a digital canvas for stroke-order practice, a video lesson feed for immersion, and gamified flashcards to make learning essential Japanese vocabulary fun and effective.
+                    </p>
+                </a>
+
+                <a href="Project Detail/projectDetailBookItNow.html" class="project-link">
+                    <div class="w-full aspect-video bg-gray-700 rounded-md mb-4 overflow-hidden relative">
+                        <video class="w-full h-full object-cover transform transition-transform duration-500 group-hover:scale-105"
+                            autoplay muted loop playsinline poster="https://placehold.co/600x400/cccccc/ffffff?text=Loading+Video...">
+                            <source src="Videos\BookItNow.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                    <h2>BookItNow</h2>
+                    <p class="text-sm mt-1 leading-relaxed">
+                        A comprehensive reservation management system, showcasing intuitive calendar scheduling, automated booking flows, and service integration for businesses.
+                    </p>
+                </a> 
+            </section>
+
+            <!-- UI/UX Design Section -->
+            <h2 class="section-title reveal">UI/UX Design Projects</h2>
+            <section class="figma-grid">
+                <div class="figma-card reveal">
+                    <img src="Images/car.park1.png" alt="Car.Park" class="figma-image">
+                    <div class="figma-content">
+                        <span class="figma-tag">FIGMA DESIGN</span>
+                        <h3 class="text-xl font-bold mb-2">Car.Park - Parking Solution</h3>
+                        <p class="text-sm leading-relaxed">
+                            A smart parking solution app with real-time tracking, interactive maps, and seamless booking.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="figma-card reveal">
+                    <img src="Images/justeat.png" alt="Food Delivery App" class="figma-image">
+                    <div class="figma-content">
+                        <span class="figma-tag">FIGMA DESIGN</span>
+                        <h3 class="text-xl font-bold mb-2">Just Eat - Food Delivery</h3>
+                        <p class="text-sm leading-relaxed">
+                            Direct pizza delivery for local shops—zero third-party commissions. Interactive, animated menus that break the mold of static pizza apps.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="figma-card reveal">
+                    <img src="Images/AureaFurniture.png" alt="Auréa Furniture" class="figma-image">
+                    <div class="figma-content">
+                        <span class="figma-tag">FIGMA DESIGN</span>
+                        <h3 class="text-xl font-bold mb-2">Auréa Furniture - Showcase</h3>
+                        <p class="text-sm leading-relaxed">
+                            A dynamic furniture showcase platform featuring animated product galleries, detailed furniture collections, and an integrated contact system for seamless order inquiries and customer engagement.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="contact-section">
+                <p class="text-2xl font-medium mb-6">
+                    👋 Let's create something amazing together
+                </p>
+                <p class="text-lg mb-8">
+                    Get in touch at <span class="font-bold text-white">nasirhussain11118@gmail.com</span>
+                </p>
+               <a href="https://mail.google.com/mail/?view=cm&fs=1&to=nasirhussain11118@gmail.com" target="_blank" class="contact-btn">
+                  Contact Me
+               </a>
             </section>
         </div>
     </main>
 
     <footer class="footer-mobile">
-        <nav class="content-container flex justify-around text-xs">
-            <a href="index.html" class="text-center flex flex-col items-center text-black font-bold">Home</a>
-            <a href="Aboutus/about.html" class="text-center flex flex-col items-center text-gray-300">About</a>
-            <a href="resume.html" class="text-center flex flex-col items-center text-gray-300">Resume</a>
-            <a href="Contact/contact.html" class="text-center flex flex-col items-center text-gray-300">Contact</a>
-            <div class="text-center flex flex-col items-center text-gray-500">
-                <a href="https://www.linkedin.com/in/nasirhussain-/" target="_blank" class="social-icon" title="LinkedIn">
+        <nav class="flex justify-around items-center w-full px-4 text-xs gap-2">
+            <a href="index.html" class="text-center flex flex-col items-center font-bold">Home</a>
+            <a href="Aboutus/about.html" class="text-center flex flex-col items-center">About</a>
+            <a href="resume.html" class="text-center flex flex-col items-center">Resume</a>
+            <a href="Contact/contact.html" class="text-center flex flex-col items-center">Contact</a>
+            <a href="https://www.linkedin.com/in/nasirhussain-/" target="_blank" class="social-icon" title="LinkedIn">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.784-1.75-1.75s.784-1.75 1.75-1.75 1.75.784 1.75 1.75-.784 1.75-1.75 1.75zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
                 </svg>
             </a>
-            </div>
         </nav>
     </footer>
 
-    <script src="home.js"></script>
-</body>
+    <script>
+        // Create animated particles
+        const particlesContainer = document.getElementById('particles');
+        for (let i = 0; i < 15; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.width = Math.random() * 100 + 50 + 'px';
+            particle.style.height = particle.style.width;
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.top = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 5 + 's';
+            particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+            particlesContainer.appendChild(particle);
+        }
 
+        // Scroll reveal animation
+        const reveals = document.querySelectorAll('.reveal');
+        
+        function checkScroll() {
+            reveals.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (elementTop < windowHeight - 100) {
+                    element.classList.add('active');
+                }
+            });
+        }
+        
+        window.addEventListener('scroll', checkScroll);
+        checkScroll();
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
 </html>

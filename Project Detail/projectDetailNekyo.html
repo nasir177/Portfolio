@@ -14,281 +14,487 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
     <style>
-        :root {
-            --primary-color: #000000;
-            --text-color: #333333;
-            --bg-color: #e8e8e8;
-            --font-display: 'Inter', sans-serif;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
         body {
-            font-family: var(--font-display);
-            color: var(--text-color);
-            background-color: var(--bg-color);
-            margin: 0;
-            padding: 0;
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #1e1b4b 100%);
+            background-attachment: fixed;
+            color: #f3f4f6;
+            overflow-x: hidden;
             transition: opacity 0.5s ease-out;
         }
 
-        .content-container {
-            max-width: 1400px; 
-            margin: 0 auto;
-            padding: 0 60px; 
+        /* Animated background particles */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
         }
 
-        /* Navigation */
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(2px);
+            animation: float 15s infinite ease-in-out;
+        }
+
+        .particle::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, rgba(102, 126, 234, 0.4) 40%, transparent 70%);
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { 
+                transform: translateY(0) translateX(0) scale(1); 
+                opacity: 0.4;
+            }
+            25% { 
+                transform: translateY(-120px) translateX(80px) scale(1.2); 
+                opacity: 0.8;
+            }
+            50% { 
+                transform: translateY(-200px) translateX(-60px) scale(0.8); 
+                opacity: 0.5;
+            }
+            75% { 
+                transform: translateY(-150px) translateX(120px) scale(1.1); 
+                opacity: 0.7;
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% { 
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 0.6;
+            }
+            50% { 
+                transform: translate(-50%, -50%) scale(1.5);
+                opacity: 0.3;
+            }
+        }
+
+        .content-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Header */
+        header {
+            backdrop-filter: blur(20px);
+            background: rgba(30, 27, 75, 0.95);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
         .initial {
-            font-size: 2.5rem; 
-            font-weight: 700;
-            color: var(--primary-color);
+            font-size: 2rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: pulseGlow 2s ease-in-out infinite;
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        .nav-desktop {
+            display: flex;
+            gap: 2.5rem;
         }
 
         .nav-link {
-            font-size: 1rem;
-            font-weight: 500;
-            color: var(--primary-color);
+            position: relative;
+            color: #e0e7ff;
             text-decoration: none;
-            padding: 0 20px;
-            transition: color 0.2s, opacity 0.2s;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 100%);
+            transition: width 0.3s ease;
         }
 
         .nav-link:hover {
-            opacity: 0.6;
+            color: #ffffff;
         }
 
-        /* Hero Section with Split Layout */
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
         .hero-section {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 80px;
+            gap: 4rem;
             align-items: center;
-            min-height: 80vh;
-            padding: 80px 0;
+            min-height: 85vh;
+            padding: 4rem 0;
+            animation: fadeInUp 0.8s ease-out;
         }
 
-        .hero-content {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .project-title {
-            font-size: 5rem;
-            font-weight: 800;
-            line-height: 1;
-            margin-bottom: 20px;
-            color: #000;
+            font-size: 4.5rem;
+            font-weight: 900;
+            line-height: 1.1;
+            background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1.5rem;
+            animation: slideInLeft 0.8s ease-out;
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
         }
 
         .project-subtitle {
             font-size: 1.25rem;
-            color: #666;
-            font-weight: 400;
-            line-height: 1.6;
+            color: #c7d2fe;
+            font-weight: 500;
+            margin-bottom: 2rem;
+            animation: slideInLeft 0.8s ease-out 0.2s backwards;
         }
 
+        /* Hero Video Container */
         .hero-video-container {
             position: relative;
             width: 100%;
-            border-radius: 12px;
+            border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.5);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            animation: slideInRight 0.8s ease-out 0.2s backwards;
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
         }
 
         .hero-video {
             width: 100%;
             height: auto;
             display: block;
+            transition: transform 0.3s ease;
         }
 
-        /* Case Study Content */
-        .case-study-content {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 80px 0;
+        .hero-video-container:hover .hero-video {
+            transform: scale(1.02);
+        }
+
+        /* Glass Card */
+        .glass-card {
+            background: rgba(30, 27, 75, 0.6);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 3rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 2rem;
+            animation: fadeInUp 0.6s ease-out backwards;
         }
 
         .section-heading {
-            font-size: 1.75rem;
+            font-size: 2rem;
             font-weight: 700;
-            margin-bottom: 20px;
-            color: #000;
+            color: #60a5fa;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .section-heading::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 100%);
+            border-radius: 2px;
         }
 
         .section-content {
             font-size: 1.125rem;
             line-height: 1.8;
-            color: #444;
-            margin-bottom: 40px;
+            color: #e0e7ff;
+            margin-bottom: 1.5rem;
         }
 
         .case-study-section {
-            margin-bottom: 60px;
+            margin-bottom: 2rem;
         }
 
-        /* Full Width Images */
+        /* Project Image */
         .project-image-full {
-            width: auto;
-            aspect-ratio: 16/9;
-            background: linear-gradient(135deg, #d5d5d5 0%, #c0c0c0 100%);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #888;
-            font-size: 1rem;
-            margin: 60px 0;
+            width: 100%;
+            height: auto;
+            border-radius: 20px;
+            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.4);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            margin: 3rem 0;
+            animation: fadeInUp 0.6s ease-out 0.3s backwards;
         }
 
         .image-caption {
             text-align: center;
             font-size: 0.95rem;
-            color: #666;
+            color: #c7d2fe;
             font-style: italic;
-            margin-top: 16px;
-            margin-bottom: 60px;
+            margin-top: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        /* List Styling */
+        ul {
+            list-style-type: disc;
+            margin-left: 20px;
+            font-size: 1.125rem;
+            line-height: 2.2;
+            color: #e0e7ff;
+        }
+
+        ul li {
+            margin-bottom: 1rem;
         }
 
         /* More Projects Grid */
-        .more-projects-section {
-            background: #fff;
-            padding: 80px 0;
-            margin-top: 80px;
-        }
-
         .more-projects-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 40px;
-            margin-top: 40px;
+            gap: 2rem;
+            margin-top: 3rem;
         }
 
         .project-card-mini {
+            background: rgba(30, 27, 75, 0.6);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 1.5rem;
+            border: 2px solid rgba(255, 255, 255, 0.1);
             text-decoration: none;
-            color: inherit;
-            transition: transform 0.3s ease;
+            transition: all 0.3s ease;
+            color: #e0e7ff;
         }
 
         .project-card-mini:hover {
-            transform: translateY(-8px);
+            transform: translateY(-10px);
+            border-color: rgba(96, 165, 250, 0.5);
+            box-shadow: 0 20px 60px rgba(96, 165, 250, 0.3);
         }
 
         .project-card-mini .thumbnail {
             width: 100%;
             aspect-ratio: 1;
-            background: #e5e5e5;
-            border-radius: 8px;
-            margin-bottom: 16px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            margin-bottom: 1rem;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #999;
-            transition: opacity 0.3s;
-        }
-
-        .project-card-mini:hover .thumbnail {
-            opacity: 0.8;
+            color: #9ca3af;
+            font-size: 0.9rem;
         }
 
         .project-card-mini h3 {
             font-size: 1.25rem;
             font-weight: 600;
-            color: #000;
+            color: #e0e7ff;
         }
 
         /* Footer */
         .footer-cta {
-            background: #fff;
-            padding: 80px 0;
+            background: transparent;
+            padding: 4rem 0;
         }
 
         .footer-nav {
-            padding: 40px 0;
-            border-top: 1px solid #d0d0d0;
+            padding: 2rem 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
             display: flex;
             justify-content: space-between;
             align-items: center;
+            margin-top: 3rem;
         }
 
         .contact-button {
             display: inline-block;
-            background: #000;
-            color: #fff;
-            padding: 18px 48px;
-            border-radius: 50px;
-            font-weight: 600;
+            padding: 1rem 3rem;
+            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+            color: white;
             font-size: 1rem;
+            font-weight: 600;
+            border-radius: 50px;
             text-decoration: none;
-            transition: transform 0.2s, box-shadow 0.2s;
-            margin-top: 24px;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.4);
+            margin-top: 1.5rem;
         }
 
         .contact-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(59, 130, 246, 0.6);
         }
 
-        .social-icon {
-            width: 24px;
-            height: 24px;
-            color: #666;
-            transition: color 0.2s;
+        /* Footer Mobile */
+        .footer-mobile {
+            display: none;
         }
 
-        .social-icon:hover {
-            color: #000;
-        }
-
-        /* Mobile Responsive */
-        @media (max-width: 1024px) {
-            .content-container {
-                padding: 0 40px; 
-            }
-            .hero-section {
-                gap: 60px;
-                padding: 60px 0;
-            }
-            .project-title {
-                font-size: 4rem;
-            }
-        }
-
+        /* Responsive */
         @media (max-width: 768px) {
+            .nav-desktop {
+                display: none;
+            }
+
+            .footer-mobile {
+                display: block;
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                background: rgba(30, 27, 75, 0.95);
+                backdrop-filter: blur(20px);
+                padding: 1rem 0;
+                box-shadow: 0 -4px 30px rgba(0, 0, 0, 0.3);
+                z-index: 100;
+                border-top: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
             .content-container {
-                padding: 0 20px; 
+                padding: 0 1rem;
             }
-            .initial {
-                font-size: 2rem;
-            }
-            .nav-link {
-                padding: 0 12px;
-                font-size: 0.9rem;
-            }
+
             .hero-section {
                 grid-template-columns: 1fr;
-                gap: 40px;
-                padding: 40px 0;
+                gap: 2rem;
                 min-height: auto;
+                padding: 2rem 0;
             }
+
+            .hero-section > .content-container {
+                grid-template-columns: 1fr !important;
+                gap: 2rem !important;
+            }
+
             .project-title {
                 font-size: 2.5rem;
             }
+
             .project-subtitle {
                 font-size: 1rem;
             }
+
+            .glass-card {
+                padding: 1.5rem;
+            }
+
             .section-heading {
                 font-size: 1.5rem;
             }
+
             .section-content {
                 font-size: 1rem;
             }
+
             .more-projects-grid {
                 grid-template-columns: 1fr;
-                gap: 30px;
             }
+
             .footer-nav {
                 flex-direction: column;
-                gap: 20px;
+                gap: 1rem;
+                display: none;
+            }
+
+            main {
+                padding-bottom: 6rem;
+            }
+
+            .project-image-full {
+                border-radius: 12px;
+                margin: 2rem 0;
+            }
+
+            ul {
+                font-size: 1rem;
+            }
+
+            .footer-mobile {
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+                padding: 1rem;
+            }
+
+            .footer-link {
+                color: #e0e7ff;
+                text-decoration: none;
+                font-size: 0.9rem;
+                transition: all 0.3s ease;
+            }
+
+            .footer-link:hover {
+                color: #60a5fa;
             }
         }
     </style>
@@ -296,12 +502,14 @@
 
 <body>
 
+<!-- Animated background particles -->
+<div class="particles" id="particles"></div>
+
 <!-- HEADER -->
-<header class="sticky top-0 bg-white py-6 z-50 border-b border-gray-200" style="background-color: #e8e8e8;">
+<header class="sticky top-0 py-6 z-50">
     <div class="content-container flex justify-between items-center">
         <div class="initial">N.</div>
-
-        <nav class="flex items-center">
+        <nav class="nav-desktop">
             <a href="/HOME/home.html" class="nav-link">Home</a>
             <a href="/ABOUT/about.html" class="nav-link">About</a>
             <a href="/RESUME/resume.html" class="nav-link">Resume</a>
@@ -312,8 +520,8 @@
 
 <main>
     <!-- HERO SECTION WITH SPLIT LAYOUT -->
-    <section class="hero-section" style="background-color: #e8e8e8;">
-        <div class="content-container" style="grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; max-width: 1400px; margin: 0 auto;">
+    <section class="hero-section">
+        <div class="content-container" style="grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; max-width: 1200px; margin: 0 auto;">
             <!-- Left Side: Title & Description -->
             <div class="hero-content">
                 <h1 class="project-title">Nekyo</h1>
@@ -336,152 +544,144 @@
     </section>
 
     <!-- CASE STUDY CONTENT -->
-    <div class="case-study-content">
-        <div class="content-container">
+    <div class="content-container" style="max-width: 900px; padding-top: 4rem;">
 
-            <!-- Full Width Image -->
-            <section>
-                <img 
-                    src="../Images/Nekyo.png" 
-                    alt="Azka Fashion - Home Page, Collection Page, Product Page, About Us Page, and Contact Page mockups"
-                    class="project-image-full"
-                    style="width: 100%; height: auto; background: none; aspect-ratio: auto;"
-                >
-                <p class="image-caption">
-                    Pictured above: Nekyo home page with Hiragana, Katakana, and Kanji tabs, character grid layout, and call-to-action buttons for creating a profile and signing in.
-                </p>
-            </section>
+        <!-- Full Width Image -->
+        <section>
+            <img 
+                src="../Images/Nekyo.png" 
+                alt="Nekyo - Home Page, Character Practice, Learn Section, Practice Board, Videos, and Conversation Screen mockups"
+                class="project-image-full"
+            >
+            <p class="image-caption">
+                Pictured above: Nekyo home page with Hiragana, Katakana, and Kanji tabs, character grid layout, and call-to-action buttons for creating a profile and signing in.
+            </p>
+        </section>
 
 
-            <!-- 01 Overview -->
-            <section class="case-study-section">
-                <h2 class="section-heading">01. Overview</h2>
-                <p class="section-content">
-                    Nekyo is a Japanese learning web application built with React and then carefully migrated to TypeScript 
-                    to follow modern best practices for type-safe frontend development. It targets anime fans, students, and self‑learners who want a friendly way to practice Hiragana, Katakana, Kanji, and basic conversations,
-                </p>
-            </section>
+        <!-- 01 Overview -->
+        <section class="glass-card" style="animation-delay: 0.4s">
+            <h2 class="section-heading">01. Overview</h2>
+            <p class="section-content">
+                Nekyo is a Japanese learning web application built with React and then carefully migrated to TypeScript 
+                to follow modern best practices for type-safe frontend development. It targets anime fans, students, and self‑learners who want a friendly way to practice Hiragana, Katakana, Kanji, and basic conversations.
+            </p>
+        </section>
 
-            <!-- 02 Problem -->
-            <section class="case-study-section">
-                <h2 class="section-heading">02. Problem</h2>
-                <p class="section-content">
-                    Most beginner Japanese learners struggle with motivation and consistency because many apps feel either too academic or poorly structured. On the development side, JavaScript-only codebases in learning apps can become hard to maintain as features grow, especially when handling multiple content types like characters, vocabulary, and quizzes. Nekyo solves both issues by combining a playful, Japanese-inspired UI with a strongly-typed TypeScript 
-                    codebase that makes the app reliable and easy to extend.
-                </p>
-            </section>
+        <!-- 02 Problem -->
+        <section class="glass-card" style="animation-delay: 0.5s">
+            <h2 class="section-heading">02. Problem</h2>
+            <p class="section-content">
+                Most beginner Japanese learners struggle with motivation and consistency because many apps feel either too academic or poorly structured. On the development side, JavaScript-only codebases in learning apps can become hard to maintain as features grow, especially when handling multiple content types like characters, vocabulary, and quizzes. Nekyo solves both issues by combining a playful, Japanese-inspired UI with a strongly-typed TypeScript 
+                codebase that makes the app reliable and easy to extend.
+            </p>
+        </section>
 
-            <!-- 03 Design Process -->
-            <section class="case-study-section">
-                <h2 class="section-heading">03. Design Process</h2>
-                <p class="section-content">
-                    The UX process started by mapping core learning journeys: land on the hero section, pick a script (Hiragana, Katakana, Kanji), practice characters, and then test understanding through vocabulary and conversation quizzes. The Home/Hero section uses a full-screen video background with a mascot and primary CTA, making the app feel like an inviting, anime-style experience rather than a dry textbook.
-                    From there, each major learning mode was broken into focused UIs: a character practice screen for step-by-step recognition, a practice board for repetitive writing/reading drills, and a conversation quiz screen for applying phrases in context. Navigation, hierarchy, and spacing were tuned so users always know what to do next, with clear buttons like “Start,” “Next,” and “Check answer” and consistent layouts across devices.                </p>
-                <!-- <p class="section-content">
-                </p> -->
-            </section>
+        <!-- 03 Design Process -->
+        <section class="glass-card" style="animation-delay: 0.6s">
+            <h2 class="section-heading">03. Design Process</h2>
+            <p class="section-content">
+                The UX process started by mapping core learning journeys: land on the hero section, pick a script (Hiragana, Katakana, Kanji), practice characters, and then test understanding through vocabulary and conversation quizzes. The Home/Hero section uses a full-screen video background with a mascot and primary CTA, making the app feel like an inviting, anime-style experience rather than a dry textbook.
+                From there, each major learning mode was broken into focused UIs: a character practice screen for step-by-step recognition, a practice board for repetitive writing/reading drills, and a conversation quiz screen for applying phrases in context. Navigation, hierarchy, and spacing were tuned so users always know what to do next, with clear buttons like "Start," "Next," and "Check answer" and consistent layouts across devices.
+            </p>
+        </section>
 
-            <!-- Full Width Image -->
-            <section style="width: 100vw; position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; padding: 60px 20px;">
-                <img 
-                    src="../Images/NekyoMockup.png" 
-                    alt="Azka Fashion - Home Page, Collection Page, Product Page, About Us Page, and Contact Page mockups"
-                    style="width: 100%; height: auto; background: none; display: block; margin: 0 auto;"
-                >
-                <p class="image-caption">
-                    Pictured above: Nekyo learning interface showcasing the Home screen with character practice modules, Learn section with structured lessons and quizzes, Practice board for handwriting drills, Videos section for grammar resources, and the Conversation screen with custom kana keyboard for interactive dialogue practice.
-                </p>
-            </section>
+        <!-- Full Width Image -->
+        <section style="margin: 3rem 0;">
+            <img 
+                src="../Images/NekyoMockup.png" 
+                alt="Nekyo learning interface showcasing the Home screen with character practice modules, Learn section with structured lessons and quizzes, Practice board for handwriting drills, Videos section for grammar resources, and the Conversation screen with custom kana keyboard for interactive dialogue practice."
+                class="project-image-full"
+            >
+            <p class="image-caption">
+                Pictured above: Nekyo learning interface showcasing the Home screen with character practice modules, Learn section with structured lessons and quizzes, Practice board for handwriting drills, Videos section for grammar resources, and the Conversation screen with custom kana keyboard for interactive dialogue practice.
+            </p>
+        </section>
 
-            <!-- 04 Key Screens & Interactions -->
-            <section class="case-study-section">
-                <h2 class="section-heading">04. Key Screens & Interactions</h2>
+        <!-- 04 Key Screens & Interactions -->
+        <section class="glass-card" style="animation-delay: 0.7s">
+            <h2 class="section-heading">04. Key Screens & Interactions</h2>
 
-                <ul style="list-style-type: disc; margin-left: 20px; font-size: 1.125rem; line-height: 2.2; color: #444;">
-                    <li>Home/Hero section: Full-screen video hero with Japanese visuals, app title, and CTA leading into learning modules. This screen establishes brand identity and emotional connection from the first second.</li>
-                    <br>
-                    <li>Character practice UI: Separate views for Hiragana, Katakana, and Kanji where each character is shown with reading and meaning. When users click on any character, an audio pronunciation plays automatically, helping them learn the correct sound for each kana and kanji. Typed data models drive the character lists, making it easy to iterate over characters and ensure consistent rendering with integrated audio playback.</li>
-                    <br>
-                    <li> Learn: The Learn area is structured into clear lessons and quizzes so users can build knowledge step by step. Each lesson introduces focused topics—such as Hiragana, Katakana, basic Kanji, and core vocabulary—and then immediately reinforces them with short quizzes to check recognition and understanding. This keeps the experience active rather than passive, helping learners move from “seeing a character” to actually recalling it when asked.
-                    <br>
-                     Quizzes are integrated directly into the lesson flow, so learners always know what to do next: study, attempt questions, review feedback, and then continue to the next topic. This creates a smooth, course-like progression that feels more like a guided path than a random collection of screens.</li>
-                    <br>
-                    <li>Practice board: An on-screen canvas where learners can actually draw each character with their finger or mouse, just like writing in a Board. They can clear the canvas to try again or export their practice as PNG/JPG and save it on their device for later review.</li>
-                    <br>
-                    <li> Videos: The Videos section curates high-quality external video content focused on Japanese grammar and foundational language concepts. Instead of asking learners to search the internet themselves, Nekyo brings the best grammar explanations into one place, saving time and reducing confusion about where to start.
-                    <br>
-                    These videos complement the app’s interactive practice: users can watch a grammar explanation (for example, sentence structure or particles), then switch back to characters, vocabulary, or conversation practice to apply what they just learned. This combination of structured lessons, quizzes, and expert video content makes Nekyo feel like a compact, well-organized learning hub rather than just a simple character drill app. </li>
-                    <br>
-                    <li>Conversation screen: A guided chat-style interface where learners answer practical questions like “How do you say ‘Good morning’ in Japanese?” using a custom on-screen kana keyboard. The layout clearly separates the chat bubble, answer input, and keyboard, so users can focus on building sentences while the typed data models keep each prompt, answer, and validation step consistent and easy to maintain.</li>
-                </ul>
-            </section>
+            <ul>
+                <li>Home/Hero section: Full-screen video hero with Japanese visuals, app title, and CTA leading into learning modules. This screen establishes brand identity and emotional connection from the first second.</li>
 
-             <!-- 05 Tech Stack & Implementation -->
-            <section class="case-study-section">
-                <h2 class="section-heading">05. Tech Stack & Implementation</h2>
-                <p>Nekyo runs entirely on the frontend using:</p>
-                <ul style="list-style-type: disc; margin-left: 20px; font-size: 1.125rem; line-height: 2.2; color: #444;">
-                    <li>TypeScript (primary language) for type safety and maintainable code.</li>
-                    <br>
-                    <li>React for component-based UI and state management.</li>
-                    <br>
-                    <li>Tailwind CSS Modules for scoped, maintainable styling.</li>
-                    <br>
-                    <li>Local JSON files as the content source for characters, vocabulary, and quizzes, keeping the app lightweight and serverless.</li>
-                    <br>
-                    <li>Vercel for fast, production-like hosting.</li>
-                    
-                </ul>
-            </section>
+                <li>Character practice UI: Separate views for Hiragana, Katakana, and Kanji where each character is shown with reading and meaning. When users click on any character, an audio pronunciation plays automatically, helping them learn the correct sound for each kana and kanji. Typed data models drive the character lists, making it easy to iterate over characters and ensure consistent rendering with integrated audio playback.</li>
 
-            <!-- 04 Solution & Results -->
-            <section class="case-study-section">
-                <h2 class="section-heading">04. Solution & Results</h2>
-                <p class="section-content">
-                    Nekyo delivers a cohesive learning experience that balances strong interface design with solid implementation. The journey starts with a visually rich hero screen that establishes the brand, uses motion and color to set a calm study mood, and presents a single clear call‑to‑action so new learners know exactly where to begin. From there, the navigation and layout stay consistent: a structured Learn section with clearly separated lessons and quizzes for Hiragana, Katakana, Kanji, and vocabulary, a Characters view for quick reference, an interactive Practice board for on‑screen handwriting, a conversational chat screen with a custom kana keyboard, and a Videos area that surfaces hand‑picked grammar resources instead of overwhelming users with links.
-                    <br>
-                    Each surface is designed to reduce cognitive load for beginners: spacious typography, clear hierarchy, and predictable placement of actions like “Start,” “Check answer,” and “Next.” The dark theme, accent colors, and mascot details give the product a distinct Japanese-inspired identity without sacrificing readability. Micro-interactions—such as state changes on buttons, feedback after quiz answers, and smooth transitions between sections—reinforce a sense of progress and make the experience feel more like a guided course than a static website.
-                    <br>
-                    On the frontend side, the UI is implemented with React and TypeScript in a way that mirrors this UX clarity. Lessons, quizzes, characters, and conversation prompts are all modeled with strict types and JSON-driven content, which keeps the interface flexible while preventing broken states or mismatched data. The practice canvas, conversation keyboard, and responsive layout are broken into reusable components, making it straightforward to add new scripts, quiz types, or breakpoints without redesigning the system. Together, the visual design decisions and the underlying architecture show the ability to think like a product designer and ship like a frontend engineer—exactly the balance expected in a UI/UX-focused frontend role.
-                </p>
-                
-            </section>
+                <li>Learn: The Learn area is structured into clear lessons and quizzes so users can build knowledge step by step. Each lesson introduces focused topics—such as Hiragana, Katakana, basic Kanji, and core vocabulary—and then immediately reinforces them with short quizzes to check recognition and understanding. This keeps the experience active rather than passive, helping learners move from "seeing a character" to actually recalling it when asked.
+                <br><br>
+                Quizzes are integrated directly into the lesson flow, so learners always know what to do next: study, attempt questions, review feedback, and then continue to the next topic. This creates a smooth, course-like progression that feels more like a guided path than a random collection of screens.</li>
 
-        </div>
+                <li>Practice board: An on-screen canvas where learners can actually draw each character with their finger or mouse, just like writing in a Board. They can clear the canvas to try again or export their practice as PNG/JPG and save it on their device for later review.</li>
+
+                <li>Videos: The Videos section curates high-quality external video content focused on Japanese grammar and foundational language concepts. Instead of asking learners to search the internet themselves, Nekyo brings the best grammar explanations into one place, saving time and reducing confusion about where to start.
+                <br><br>
+                These videos complement the app's interactive practice: users can watch a grammar explanation (for example, sentence structure or particles), then switch back to characters, vocabulary, or conversation practice to apply what they just learned. This combination of structured lessons, quizzes, and expert video content makes Nekyo feel like a compact, well-organized learning hub rather than just a simple character drill app.</li>
+
+                <li>Conversation screen: A guided chat-style interface where learners answer practical questions like "How do you say 'Good morning' in Japanese?" using a custom on-screen kana keyboard. The layout clearly separates the chat bubble, answer input, and keyboard, so users can focus on building sentences while the typed data models keep each prompt, answer, and validation step consistent and easy to maintain.</li>
+            </ul>
+        </section>
+
+        <!-- 05 Tech Stack & Implementation -->
+        <section class="glass-card" style="animation-delay: 0.8s">
+            <h2 class="section-heading">05. Tech Stack & Implementation</h2>
+            <p class="section-content">Nekyo runs entirely on the frontend using:</p>
+            <ul>
+                <li>TypeScript (primary language) for type safety and maintainable code.</li>
+                <li>React for component-based UI and state management.</li>
+                <li>Tailwind CSS Modules for scoped, maintainable styling.</li>
+                <li>Local JSON files as the content source for characters, vocabulary, and quizzes, keeping the app lightweight and serverless.</li>
+                <li>Vercel for fast, production-like hosting.</li>
+            </ul>
+        </section>
+
+        <!-- 06 Solution & Results -->
+        <section class="glass-card" style="animation-delay: 0.9s">
+            <h2 class="section-heading">06. Solution & Results</h2>
+            <p class="section-content">
+                Nekyo delivers a cohesive learning experience that balances strong interface design with solid implementation. The journey starts with a visually rich hero screen that establishes the brand, uses motion and color to set a calm study mood, and presents a single clear call‑to‑action so new learners know exactly where to begin. From there, the navigation and layout stay consistent: a structured Learn section with clearly separated lessons and quizzes for Hiragana, Katakana, Kanji, and vocabulary, a Characters view for quick reference, an interactive Practice board for on‑screen handwriting, a conversational chat screen with a custom kana keyboard, and a Videos area that surfaces hand‑picked grammar resources instead of overwhelming users with links.
+            </p>
+            <p class="section-content">
+                Each surface is designed to reduce cognitive load for beginners: spacious typography, clear hierarchy, and predictable placement of actions like "Start," "Check answer," and "Next." The dark theme, accent colors, and mascot details give the product a distinct Japanese-inspired identity without sacrificing readability. Micro-interactions—such as state changes on buttons, feedback after quiz answers, and smooth transitions between sections—reinforce a sense of progress and make the experience feel more like a guided course than a static website.
+            </p>
+            <p class="section-content">
+                On the frontend side, the UI is implemented with React and TypeScript in a way that mirrors this UX clarity. Lessons, quizzes, characters, and conversation prompts are all modeled with strict types and JSON-driven content, which keeps the interface flexible while preventing broken states or mismatched data. The practice canvas, conversation keyboard, and responsive layout are broken into reusable components, making it straightforward to add new scripts, quiz types, or breakpoints without redesigning the system. Together, the visual design decisions and the underlying architecture show the ability to think like a product designer and ship like a frontend engineer—exactly the balance expected in a UI/UX-focused frontend role.
+            </p>
+        </section>
+
     </div>
 
     <!-- MORE CASE STUDIES -->
-    <section class="more-projects-section">
-        <div class="content-container">
-            <h2 class="text-3xl font-semibold text-center mb-4">Read more of my case studies</h2>
+    <section class="content-container" style="padding-top: 4rem;">
+        <h2 class="text-3xl font-bold text-center mb-4" style="color: #60a5fa;">Read more of my case studies</h2>
 
-            <div class="more-projects-grid">
-                <a href="project-nekyo.html" class="project-card-mini">
-                    <div class="thumbnail">Nekyo E-commerce</div>
-                    <h3>Nekyo Fashion Platform</h3>
-                </a>
+        <div class="more-projects-grid">
+            <a href="projectDetailAzkaFashion.html" class="project-card-mini">
+                <div class="thumbnail">Azka Fashion</div>
+                <h3>Azka Fashion Platform</h3>
+            </a>
 
-                <a href="project-weather.html" class="project-card-mini">
-                    <div class="thumbnail">Weather App</div>
-                    <h3>Weather Forecast App</h3>
-                </a>
+            <a href="projectDetailWeather.html" class="project-card-mini">
+                <div class="thumbnail">Weather App</div>
+                <h3>Weather Forecast App</h3>
+            </a>
 
-                <a href="project-chillchat.html" class="project-card-mini">
-                    <div class="thumbnail">ChillChat</div>
-                    <h3>Real-Time Chat App</h3>
-                </a>
-            </div>
+            <a href="projectDetailChillchat.html" class="project-card-mini">
+                <div class="thumbnail">ChillChat</div>
+                <h3>Real-Time Chat App</h3>
+            </a>
         </div>
     </section>
 
     <!-- CONTACT FOOTER CTA -->
     <section class="footer-cta">
         <div class="content-container">
-            <p class="text-lg text-gray-700 mb-2">👋 Get in touch at</p>
-            <a href="mailto:nasirhussain11118@gmail.com" class="text-2xl font-semibold hover:underline break-all block">
+            <p class="text-lg" style="color: #c7d2fe; margin-bottom: 0.5rem;">👋 Get in touch at</p>
+            <a href="https://mail.google.com/mail/?view=cm&fs=1&to=nasirhussain11118@gmail.com" style="font-size: 1.5rem; font-weight: 600; color: #60a5fa; text-decoration: none; display: block; word-break: break-all;" class="hover:underline">
                 nasirhussain11118@gmail.com
-            </a>
-            <a href="contact.html" class="contact-button">Contact me</a>
+            </a> 
+             <a href="https://mail.google.com/mail/?view=cm&fs=1&to=nasirhussain11118@gmail.com" target="_blank" class="contact-button">
+                  Contact Me
+               </a>
         </div>
     </section>
 
@@ -489,15 +689,30 @@
     <footer class="footer-cta">
         <div class="content-container footer-nav">
             <nav class="flex gap-6">
-                <a href="index.html" class="nav-link">Home</a>
-                <a href="About/about.html" class="nav-link">About</a>
-                <a href="Resume/resume.html" class="nav-link">Resume</a>
-                <a href="Contact/contact.html" class="nav-link">Contact</a>
+                <a href="/index.html" class="nav-link">Home</a>
+                <a href="/ABOUT/about.html" class="nav-link">About</a>
+                <a href="/RESUME/resume.html" class="nav-link">Resume</a>
+                <a href="/CONTACT/contact.html" class="nav-link">Contact</a>
             </nav>
 
-            <a href="https://www.linkedin.com/in/nasirhussain-/" target="_blank" class="social-icon" title="LinkedIn">
+            <a href="https://www.linkedin.com/in/nasirhussain-/" target="_blank" style="width: 24px; height: 24px; color: #c7d2fe; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center;" class="hover:text-blue-400" title="LinkedIn">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.784-1.75-1.75s.784-1.75 1.75-1.75 1.75.784 1.75 1.75-.784 1.75-1.75 1.75zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                </svg>
+            </a>
+        </div>
+    </footer>
+
+    <!-- MOBILE FOOTER -->
+    <footer class="footer-mobile">
+        <div class="content-container" style="display: flex; justify-content: space-around; align-items: center; width: 100%;">
+            <a href="/index.html" class="footer-link">Home</a>
+            <a href="/ABOUT/about.html" class="footer-link">About</a>
+            <a href="/RESUME/resume.html" class="footer-link">Resume</a>
+            <a href="/CONTACT/contact.html" class="footer-link">Contact</a>
+            <a href="https://www.linkedin.com/in/nasirhussain-/" target="_blank" class="footer-link" title="LinkedIn">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/>
                 </svg>
             </a>
         </div>
@@ -505,8 +720,26 @@
 </main>
 
 <script>
+    // Generate random particles
+    function createParticles() {
+        const container = document.getElementById('particles');
+        const particleCount = window.innerWidth > 768 ? 15 : 8;
+        
+        for (let i = 0; i < particleCount; i++) {
+            const particle = document.createElement('div');
+            particle.classList.add('particle');
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.top = Math.random() * 100 + '%';
+            particle.style.width = Math.random() * 300 + 50 + 'px';
+            particle.style.height = particle.style.width;
+            particle.style.animationDelay = Math.random() * 5 + 's';
+            container.appendChild(particle);
+        }
+    }
+
     // Smooth fade-in on load
     window.addEventListener('load', () => {
+        createParticles();
         document.body.style.opacity = '1';
     });
 </script>
