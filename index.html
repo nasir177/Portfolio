@@ -474,10 +474,38 @@
     <main class="py-16">
         <div class="content-container">
             <section class="glass-card">
-                <h1 class="greeting-large">Hi, I'm Nasir.</h1>
-                <p class="bio-text">
-                    UI/UX Designer & Developer based in New Delhi | Crafting Intuitive, Responsive Digital Experiences with a Creative Edge.
-                </p>
+<section class="hero-content mt-20 mb-12 text-center max-w-4xl mx-auto px-4">
+    
+    <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight mb-6">
+        Hi, I'm <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-600">Nasir.</span>
+    </h1>
+
+    <div class="flex flex-wrap justify-center gap-3 mb-8">
+        <span class="px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-blue-200 text-sm md:text-base font-semibold tracking-wide hover:bg-white/10 hover:border-blue-500/50 hover:text-blue-300 transition-all duration-300 cursor-default">
+            UI/UX Designer
+        </span>
+        
+        <span class="px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-purple-200 text-sm md:text-base font-semibold tracking-wide hover:bg-white/10 hover:border-purple-500/50 hover:text-purple-300 transition-all duration-300 cursor-default">
+            Product Designer
+        </span>
+        
+        <span class="px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-emerald-200 text-sm md:text-base font-semibold tracking-wide hover:bg-white/10 hover:border-emerald-500/50 hover:text-emerald-300 transition-all duration-300 cursor-default">
+            Frontend Developer
+        </span>
+    </div>
+
+    <div class="space-y-4 text-lg md:text-xl leading-relaxed text-gray-300">
+        <p>
+            I bridge the gap between creative design and engineering. My approach combines 
+            <strong class="text-white font-medium">Design Thinking</strong> with robust 
+            <strong class="text-white font-medium">Frontend Architecture</strong>.
+        </p>
+        <p>
+            From crafting intuitive <span class="text-blue-400">Figma prototypes</span> to engineering scalable <span class="text-blue-400">React applications</span>, I build inclusive, high-impact digital products that delight users and drive business growth.
+        </p>
+    </div>
+
+</section>               
             </section>
 
             <h2 class="section-title reveal">Development Projects</h2>
@@ -525,42 +553,126 @@
                 </a> 
             </section>
 
-            <!-- UI/UX Design Section -->
-            <h2 class="section-title reveal">UI/UX Design Projects</h2>
-            <section class="figma-grid">
-                <div class="figma-card reveal">
-                    <img src="Images/car.park1.png" alt="Car.Park" class="figma-image">
-                    <div class="figma-content">
-                        <span class="figma-tag">FIGMA DESIGN</span>
-                        <h3 class="text-xl font-bold mb-2">Car.Park - Parking Solution</h3>
-                        <p class="text-sm leading-relaxed">
-                            A smart parking solution app with real-time tracking, interactive maps, and seamless booking.
-                        </p>
-                    </div>
-                </div>
+          <div class="content-container mt-20 mb-20">
+    <h2 class="section-title reveal text-4xl font-bold text-center mb-12 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">
+        UI/UX Design Projects
+    </h2>
 
-                <div class="figma-card reveal">
-                    <img src="Images/justeat.png" alt="Food Delivery App" class="figma-image">
-                    <div class="figma-content">
-                        <span class="figma-tag">FIGMA DESIGN</span>
-                        <h3 class="text-xl font-bold mb-2">Just Eat - Food Delivery</h3>
-                        <p class="text-sm leading-relaxed">
-                            Direct pizza delivery for local shops—zero third-party commissions. Interactive, animated menus that break the mold of static pizza apps.
-                        </p>
-                    </div>
-                </div>
+   <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        
+    <a href="Project Detail/projectDetailCar.Park.html" class="group relative block h-full">
+        <div class="h-full bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-blue-500/20 hover:border-blue-500/50 flex flex-col">
+            
+            <div class="relative w-full aspect-video overflow-hidden">
+                <video class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" 
+                       autoplay muted loop playsinline poster="Images/car.park1.jpg">
+                    <source src="Videos/Car.park.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <div class="absolute inset-0 bg-gradient-to-t from-[#1e1b4b] to-transparent opacity-60 pointer-events-none"></div>
+            </div>
 
-                <div class="figma-card reveal">
-                    <img src="Images/AureaFurniture.png" alt="Auréa Furniture" class="figma-image">
-                    <div class="figma-content">
-                        <span class="figma-tag">FIGMA DESIGN</span>
-                        <h3 class="text-xl font-bold mb-2">Auréa Furniture - Showcase</h3>
-                        <p class="text-sm leading-relaxed">
-                            A dynamic furniture showcase platform featuring animated product galleries, detailed furniture collections, and an integrated contact system for seamless order inquiries and customer engagement.
-                        </p>
-                    </div>
+            <div class="p-6 flex flex-col flex-grow">
+                <div class="flex items-center justify-between mb-3">
+                    <span class="text-xs font-bold tracking-wider text-blue-400 uppercase bg-blue-500/10 px-3 py-1 rounded-full border border-blue-500/20">
+                        Figma Design
+                    </span>
                 </div>
-            </section>
+                
+                <h3 class="text-2xl font-bold text-white mb-3 group-hover:text-blue-300 transition-colors">
+                    Car.Park
+                </h3>
+                
+                <p class="text-gray-400 text-sm leading-relaxed mb-6 flex-grow">
+                    A smart parking solution app with real-time tracking, interactive maps, and seamless booking for Tier 1 & 2 cities.
+                </p>
+
+                <div class="flex items-center text-blue-400 font-semibold group-hover:text-white transition-colors mt-auto">
+                    <span>Read Case Study</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2 transform transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </a>
+
+    <a href="Project Detail/projectDetailJusteats.html" class="group relative block h-full">
+        <div class="h-full bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-orange-500/20 hover:border-orange-500/50 flex flex-col">
+            
+            <div class="relative w-full aspect-video overflow-hidden">
+                <video class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" 
+                       autoplay muted loop playsinline poster="Images/justeat.jpg">
+                    <source src="Videos/justeat.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <div class="absolute inset-0 bg-gradient-to-t from-[#1e1b4b] to-transparent opacity-60 pointer-events-none"></div>
+            </div>
+
+            <div class="p-6 flex flex-col flex-grow">
+                <div class="flex items-center justify-between mb-3">
+                    <span class="text-xs font-bold tracking-wider text-orange-400 uppercase bg-orange-500/10 px-3 py-1 rounded-full border border-orange-500/20">
+                        Figma Design
+                    </span>
+                </div>
+                
+                <h3 class="text-2xl font-bold text-white mb-3 group-hover:text-orange-300 transition-colors">
+                    Just Eat
+                </h3>
+                
+                <p class="text-gray-400 text-sm leading-relaxed mb-6 flex-grow">
+                    Direct pizza delivery for local shops—zero third-party commissions. Interactive, animated menus that break the mold of static apps.
+                </p>
+
+                <div class="flex items-center text-orange-400 font-semibold group-hover:text-white transition-colors mt-auto">
+                    <span>Read Case Study</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2 transform transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </a>
+
+    <a href="Project Detail/projectDetailAureaFurniture.html" class="group relative block h-full">
+        <div class="h-full bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-purple-500/20 hover:border-purple-500/50 flex flex-col">
+            
+            <div class="relative w-full aspect-video overflow-hidden">
+                <video class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" 
+                       autoplay muted loop playsinline poster="Images/AureaFurniture.jpg">
+                    <source src="Videos/AureaFurniture.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <div class="absolute inset-0 bg-gradient-to-t from-[#1e1b4b] to-transparent opacity-60 pointer-events-none"></div>
+            </div>
+
+            <div class="p-6 flex flex-col flex-grow">
+                <div class="flex items-center justify-between mb-3">
+                    <span class="text-xs font-bold tracking-wider text-purple-400 uppercase bg-purple-500/10 px-3 py-1 rounded-full border border-purple-500/20">
+                        Figma Design
+                    </span>
+                </div>
+                
+                <h3 class="text-2xl font-bold text-white mb-3 group-hover:text-purple-300 transition-colors">
+                    Auréa Furniture
+                </h3>
+                
+                <p class="text-gray-400 text-sm leading-relaxed mb-6 flex-grow">
+                    A dynamic furniture showcase platform featuring animated product galleries and a seamless inquiry system.
+                </p>
+
+                <div class="flex items-center text-purple-400 font-semibold group-hover:text-white transition-colors mt-auto">
+                    <span>Read Case Study</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2 transform transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </a>
+
+</section>
+</div>
 
             <section class="contact-section">
                 <p class="text-2xl font-medium mb-6">
