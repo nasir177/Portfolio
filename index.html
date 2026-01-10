@@ -125,56 +125,445 @@ margin-bottom:60px;
 }
 
 /* ---------------- PROJECTS ---------------- */
-.projects{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-gap:40px;
+/* ---------------- PROJECTS (CONSTRAINED BOX UI) ---------------- */
+#projects {
+    padding: 120px 0;
+    background: #000;
 }
-.card{
-background:#070707;
-border:1px solid #111;
-padding:40px;
-transition:.4s;
-}
-.card:hover{
-border-color:var(--blood);
-transform:translateY(-10px);
-box-shadow:0 20px 50px rgba(139,0,0,.3);
-}
-.card h3{color:var(--blood);margin-bottom:10px}
 
+.archived-title {
+    text-align: center;
+    color: var(--blood);
+    text-transform: uppercase;
+    letter-spacing: 12px;
+    font-size: 0.8rem;
+    margin-bottom: 80px;
+}
+
+.project-row {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 60vh; /* Controlled height instead of aspect-ratio */
+    padding: 60px 10%;
+    background: #050505;
+    border-bottom: 1px solid #111;
+    text-decoration: none;
+    gap: 40px;
+}
+
+@media (min-width: 1024px) {
+    .project-row { flex-direction: row; gap: 80px; }
+    .project-row.reverse { flex-direction: row-reverse; }
+}
+
+/* THE VIDEO CONTAINER BOX */
+.video-box {
+    width: 100%;
+    max-width: 600px; /* Limits the box size so it doesn't cut */
+    background: #000;
+    border: 1px solid #222;
+    line-height: 0; /* Removes bottom gap */
+    overflow: hidden;
+    transition: 0.5s ease;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.project-row:hover .video-box {
+    border-color: var(--blood);
+    transform: translateY(-5px);
+}
+
+.video-box video {
+    width: 100%;
+    height: auto; /* Maintains natural 1920x1080 proportions */
+    display: block;
+    transition: 0.7s ease;
+}
+
+.project-row:hover video {
+    filter: grayscale(0);
+}
+
+.project-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.project-info h3 {
+    color: #eee;
+    letter-spacing: 4px;
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+}
+
+.project-info p {
+    color: #555;
+    font-size: 0.95rem;
+    max-width: 450px;
+    margin-bottom: 35px;
+    line-height: 1.7;
+}
+
+.case-study-btn {
+    width: fit-content;
+    padding: 14px 40px;
+    background: #000;
+    border: 1px solid var(--blood);
+    color: var(--blood);
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    border-radius: 32px;
+    cursor: none;
+    transition: 0.3s;
+}
+
+.case-study-btn:hover {
+    background: var(--blood);
+    color: #fff;
+    box-shadow: 0 0 20px var(--blood);
+}
+
+.archived-title {
+    text-align: center;
+    color: var(--blood);
+    text-transform: uppercase;
+    letter-spacing: 12px;
+    font-size: 0.8rem;
+    margin-bottom: 80px;
+}
+
+.project-row {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    /* Maintain 16:9 aspect ratio container */
+    aspect-ratio: 16 / 9; 
+    background: #050505;
+    overflow: hidden;
+    border-bottom: 1px solid #111;
+    text-decoration: none;
+    color: inherit;
+}
+
+@media (min-width: 768px) {
+    .project-row { flex-direction: row; }
+    .project-row.reverse { flex-direction: row-reverse; }
+}
+
+.project-video {
+    width: 100%;
+    height: 100%;
+    background: #000; /* Black bars if video is slightly off-ratio */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+@media (min-width: 768px) { .project-video { width: 50%; } }
+
+.project-video video {
+    width: 100%;
+    height: 100%;
+    /* CHANGED: contain ensures the full 1920x1080 frame fits */
+    object-fit: contain; 
+    filter: grayscale(1);
+    transition: 0.7s ease;
+}
+
+.project-row:hover .project-video video {
+    filter: grayscale(0);
+    transform: scale(1.02); /* Slight zoom for impact */
+}
+
+.project-info {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 60px;
+    background: #050505;
+}
+
+@media (min-width: 768px) { .project-info { width: 50%; padding: 0 10%; } }
+
+.project-info h3 {
+    color: #eee;
+    letter-spacing: 4px;
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+}
+
+.project-info p {
+    color: #555;
+    font-size: 0.9rem;
+    max-width: 400px;
+    margin-bottom: 30px;
+    line-height: 1.6;
+}
+
+.case-study-btn {
+    width: fit-content;
+    padding: 12px 35px;
+    background: #000;
+    border: 1px solid var(--blood);
+    color: var(--blood);
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    border-radius: 32px;
+    cursor: none;
+    transition: 0.3s;
+    box-shadow: 0 0 10px rgba(139, 0, 0, 0.2);
+}
+
+.case-study-btn:hover {
+    background: var(--blood);
+    color: #fff;
+    box-shadow: 0 0 25px var(--blood);
+    transform: scale(1.05);
+}
+
+.archived-title {
+    text-align: center;
+    color: var(--blood);
+    text-transform: uppercase;
+    letter-spacing: 12px;
+    font-size: 0.8rem;
+    margin-bottom: 80px;
+}
+
+.project-row {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: #000;
+    overflow: hidden;
+    border-bottom: 1px solid #111;
+    text-decoration: none;
+    color: inherit;
+}
+
+@media (min-width: 768px) {
+    .project-row { flex-direction: row; }
+    .project-row.reverse { flex-direction: row-reverse; }
+}
+
+.project-video {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+@media (min-width: 768px) { .project-video { width: 50%; } }
+
+.project-video video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(1);
+    transition: 0.7s ease;
+}
+
+.project-row:hover .project-video video {
+    filter: grayscale(0);
+    transform: scale(1.05);
+}
+
+.project-info {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 60px;
+    background: #050505;
+}
+
+@media (min-width: 768px) { .project-info { width: 50%; padding: 0 10%; } }
+
+.project-info h3 {
+    color: #eee;
+    letter-spacing: 4px;
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+}
+
+.project-info p {
+    color: #555;
+    font-size: 0.9rem;
+    max-width: 400px;
+    margin-bottom: 30px;
+    line-height: 1.6;
+}
+
+.case-study-btn {
+    width: fit-content;
+    padding: 12px 35px;
+    background: #000;
+    border: 1px solid var(--blood);
+    color: var(--blood);
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    border-radius: 32px; /* Requested 32px corners */
+    cursor: none;
+    transition: 0.3s;
+    box-shadow: 0 0 10px rgba(139, 0, 0, 0.2);
+}
+
+.case-study-btn:hover {
+    background: var(--blood);
+    color: #fff;
+    box-shadow: 0 0 25px var(--blood);
+    transform: scale(1.05);
+}
 /* ---------------- ABOUT ---------------- */
-.about{
-display:grid;grid-template-columns:1fr 1fr;
-gap:80px;
+/* ---------------- UPDATED SKILLS UI ---------------- */
+.skills {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
-.skills li{
-list-style:none;
-padding:12px;
-border:1px solid #111;
-margin-bottom:10px;
-display:flex;justify-content:space-between;
+
+.skills li {
+    list-style: none;
+    padding: 15px;
+    border: 1px solid #111;
+    background: #050505;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.8rem;
+    transition: 0.3s;
 }
-.skills span{color:var(--blood)}
+
+.skills li:hover {
+    border-color: var(--blood);
+    box-shadow: inset 0 0 10px rgba(139, 0, 0, 0.2);
+}
+
+.skills span {
+    color: var(--blood);
+    font-weight: bold;
+    text-align: right;
+    font-size: 0.7rem;
+    letter-spacing: 1px;
+}
+
+/* EDUCATION*/
+/* ---------------- TIMELINE UI ---------------- */
+.timeline {
+    border-left: 2px solid #111;
+    margin-left: 10px;
+    padding-left: 30px;
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 50px;
+}
+
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -37px;
+    top: 5px;
+    width: 12px;
+    height: 12px;
+    background: var(--void);
+    border: 2px solid var(--blood);
+    border-radius: 50%;
+}
+
+.timeline-date {
+    color: var(--blood);
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+}
+
+.timeline-title {
+    color: #fff;
+    font-size: 1.1rem;
+    letter-spacing: 2px;
+    margin-bottom: 5px;
+}
+
+.timeline-sub {
+    color: #666;
+    font-size: 0.8rem;
+    margin-bottom: 15px;
+}
 
 /* ---------------- CONTACT ---------------- */
-.contact{
-text-align:center;
-background:#070707;
-padding:80px;
-border:1px solid #111;
+/* ---------------- CONTACT & RESUME BUTTONS ---------------- */
+.contact-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    margin-top: 40px;
 }
-.contact a{
-display:inline-block;margin-top:30px;
-padding:15px 40px;
-border:1px solid var(--blood);
-color:var(--blood);
-text-decoration:none;
-letter-spacing:3px;
+
+@media (min-width: 768px) {
+    .contact-container { flex-direction: row; justify-content: center; }
 }
-.contact a:hover{
-background:var(--blood);color:#fff;
-box-shadow:0 0 20px var(--blood);
+
+.horror-btn {
+    display: inline-block;
+    padding: 16px 45px;
+    border: 2px solid var(--blood);
+    color: var(--blood);
+    text-decoration: none;
+    letter-spacing: 4px;
+    font-weight: bold;
+    font-size: 0.8rem;
+    border-radius: 32px; /* Requested 32px corners */
+    background: transparent;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+/* Fill effect on hover */
+.horror-btn::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 0; height: 100%;
+    background: var(--blood);
+    transition: all 0.4s;
+    z-index: -1;
+}
+
+.horror-btn:hover {
+    color: #fff;
+    box-shadow: 0 0 30px var(--blood);
+    transform: translateY(-3px);
+}
+
+.horror-btn:hover::before {
+    width: 100%;
+}
+
+.horror-btn:active {
+    transform: scale(0.95);
+}
+
+/* Specific contrast for the primary button */
+.btn-primary {
+    background: rgba(139, 0, 0, 0.1);
 }
 </style>
 </head>
@@ -186,11 +575,11 @@ box-shadow:0 0 20px var(--blood);
 <div class="cursor-dot" id="dot"></div>
 
 <nav id="nav">
-<div style="color:var(--blood)">NASIR.VOID</div>
+<div style="color:var(--blood)">N.</div>
 <div style="display:flex;gap:30px">
-<a href="#projects">WORK</a>
-<a href="#about">SOUL</a>
-<a href="#contact">SUMMON</a>
+<a href="#projects">PROJECTS</a>
+<a href="#about">ABOUT</a>
+<a href="#contact">CONTACT</a>
 </div>
 </nav>
 
@@ -209,52 +598,189 @@ box-shadow:0 0 20px var(--blood);
 
 <!-- PROJECTS -->
 <section id="projects">
-<h2 class="title">Archived Works</h2>
-<div class="projects">
-<div class="card">
-<h3>AZKA FASHION</h3>
-<p>Luxury ecommerce UI/UX with conversion-focused flows.</p>
-</div>
-<div class="card">
-<h3>CAR.PARK</h3>
-<p>Smart parking system with real-time dashboard design.</p>
-</div>
-<div class="card">
-<h3>NEKYO</h3>
-<p>Gamified learning product for Japanese typography.</p>
-</div>
-</div>
+    <h2 class="archived-title">Showcase of Works</h2>
+    
+    <div class="project-container">
+        
+        <a href="Project Detail/projectDetailAzkaFashion.html" class="project-row">
+            <div class="video-box">
+                <video autoplay muted loop playsinline>
+                    <source src="videos/AzkaFashion.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="project-info">
+                <h3>AZKA FASHION</h3>
+                <p>Luxury ecommerce UI/UX with conversion-focused flows and minimalist aesthetics.</p>
+                <button class="case-study-btn">View Case Study</button>
+            </div>
+        </a>
+
+        <a href="projectDetailCar.Park.html" class="project-row reverse">
+            <div class="video-box">
+                <video autoplay muted loop playsinline>
+                    <source src="videos/Car.park.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="project-info">
+                <h3>CAR.PARK</h3>
+                <p>Mobile-first app design for finding parking in tier 1 cities, with features for electric vehicle charging.</p>
+                <button class="case-study-btn">View Case Study</button>
+            </div>
+        </a>
+
+        <a href="projectDetailNekyo.html" class="project-row">
+            <div class="video-box">
+                <video autoplay muted loop playsinline>
+                    <source src="videos/nekyo.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="project-info">
+                <h3>NEKYO</h3>
+                <p>Well-structured web and mobile responsive app for Japanese learning.</p>
+                <button class="case-study-btn">View Case Study</button>
+            </div>
+        </a>
+
+        <a href="projectDetailMiral.html" class="project-row reverse">
+            <div class="video-box">
+                <video autoplay muted loop playsinline>
+                    <source src="videos/MiralProperty.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="project-info">
+                <h3>MIRAL PROPERTIES</h3>
+                <p>Mobile-first app design to find and buy real estate in the UAE.</p>
+                <button class="case-study-btn">View Case Study</button>
+            </div>
+        </a>
+
+        <a href="projectDetailAureaFurniture.html" class="project-row">
+            <div class="video-box">
+                <video autoplay muted loop playsinline>
+                    <source src="videos/AureaFurniture.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="project-info">
+                <h3>AUREA FURNITURE</h3>
+                <p>Experience the elegance of modern living with our curated collection of furniture, designed to inspire and transform your space. Each piece combines artistry and functionality, ensuring that your home reflects your unique style.</p>
+                <br>
+                <button class="case-study-btn">View Case Study</button>
+            </div>
+        </a>
+
+         <a href="projectDetailJustEat.html" class="project-row reverse">
+            <div class="video-box">
+                <video autoplay muted loop playsinline>
+                    <source src="videos/Just Eat.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="project-info">
+                <h3>JUST EAT</h3>
+                <p>A seamless mobile-first ordering experience connecting users to local artisan pizza shops with real-time tracking and intuitive checkout.</p>
+                <button class="case-study-btn">View Case Study</button>
+            </div>
+        </a>
+
+    </div>
 </section>
 
 <!-- ABOUT -->
 <section id="about">
-<h2 class="title">The Soul</h2>
-<div class="about">
-<div>
-<p style="line-height:1.8;color:#888">
-I design products that feel alive.  
-Interfaces that breathe, observe, and stay with the user.
-</p>
-</div>
-<div>
-<ul class="skills">
-<li>UI / UX <span>VISION</span></li>
-<li>PRODUCT DESIGN <span>STRATEGY</span></li>
-<li>FIGMA <span>PRECISION</span></li>
-<li>HTML / CSS <span>STRUCTURE</span></li>
-<li>JS / REACT <span>ENGINE</span></li>
-</ul>
-</div>
-</div>
+    <h2 class="title">The Heart of It All</h2>
+    <div class="about">
+        <div class="about-bio">
+            <p style="line-height: 1.8; color: #888; margin-bottom: 30px;">
+                I am a <strong>Specialized Product Designer</strong> and Final-Year BCA student with a deep foundation in Full-Stack development. I don't just build interfaces; I bridge the gap between aesthetic vision and technical logic, ensuring every pixel is performant, accessible, and robust.
+            </p>
+            
+            <h4 style="color: var(--blood); margin-bottom: 15px; letter-spacing: 3px; font-size: 0.9rem;">FREELANCE IMPACT: AZKA FASHION</h4>
+            <p style="line-height: 1.8; color: #666; font-size: 0.9rem; margin-bottom: 30px;">
+                As a Digital Strategist and Designer, I transformed Azka Fashion’s digital identity. By optimizing user journeys and engineering a high-performance digital showroom, I drove a <strong>4x increase in brand following</strong> through cohesive design storytelling and friction-less conversion funnels.
+            </p>
+        </div>
+
+        <div class="about-skills">
+            <ul class="skills">
+        <li>UI/UX DESIGN <span>WIREFRAMING, LO-FI/HI-FI & RESPONSIVE BREAKPOINTS</span></li>
+        <li>PRODUCT DESIGN <span>USER RESEARCH, PERSONAS & USABILITY TESTING</span></li>
+        <li>FIGMA MASTERY <span>AUTO LAYOUT 3.0, VARIANTS, SLOTS & COMPONENTS</span></li>
+        <li>ADVANCED FIGMA <span>VARIABLES (TOKENS), PROPERTIES & SMART ANIMATE</span></li>
+        <li>AI GENERATIVE MASTERY <span>GEMINI (IMAGEN & NANO), MIDJOURNEY & VEO (AI VIDEO)</span></li>
+        <li>AI-POWERED UX <span>PROMPT ENGINEERING & CHATGPT FOR SYNTHESIZING RESEARCH</span></li>
+        <li>DESIGN SYSTEMS <span>ATOMIC DESIGN, SCALABLE LIBRARIES & DOCUMENTATION</span></li>
+        <li>PRODUCT STRATEGY <span>USER JOURNEY MAPPING, SITE MAPS & LOGIC FLOWS</span></li>
+        <li>FRONTEND ARCHITECTURE <span>HTML5, CSS3, JAVASCRIPT (ES6+), REACT & TYPESCRIPT</span></li>
+        <li>MODERN STYLING <span>TAILWIND CSS, FRAMER MOTION & GSAP ANIMATIONS</span></li>
+        <li>TECHNICAL TOOLS <span>GIT/GITHUB, POSTMAN, VERCEL & API INTEGRATION</span></li>
+        <li>SOFT SKILLS <span>STAKEHOLDER MANAGEMENT, AGILE & DEV-HANDOFF</span></li>
+    </ul>
+        </div>
+    </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="journey">
+    <h2 class="title">The Journey</h2>
+    <div class="about">
+        <div class="timeline">
+            <h4 style="color:var(--blood); margin-bottom: 30px; letter-spacing: 5px;">EXPERIENCE</h4>
+            
+            <div class="timeline-item">
+                <p class="timeline-date">CURRENT FOCUS</p>
+                <h3 class="timeline-title">PRODUCT DESIGNER & STRATEGIST</h3>
+                <p class="timeline-sub">Freelance | New Delhi</p>
+                <p style="color:#888; font-size: 0.85rem; line-height: 1.6;">
+                    Specializing in bridging the gap between aesthetic design and engineering. 
+                    I architect high-performance frontend structures and user-centric 
+                    interfaces that are visually stunning, performant, and robust.
+                </p>
+            </div>
+
+            <div class="timeline-item">
+                <p class="timeline-date">FREELANCE IMPACT</p>
+                <h3 class="timeline-title">UX DEVELOPER & DIGITAL STRATEGIST</h3>
+                <p class="timeline-sub">Azka Fashion</p>
+                <p style="color:#888; font-size: 0.85rem; line-height: 1.6;">
+                    Redesigned the core digital presence, transforming user journeys into 
+                    frictionless conversion funnels. This strategy drove a 4x increase 
+                    in brand followers through cohesive storytelling and SEO optimization.
+                </p>
+            </div>
+        </div>
+
+        <div class="timeline">
+            <h4 style="color:var(--blood); margin-bottom: 30px; letter-spacing: 5px;">EDUCATION</h4>
+            
+            <div class="timeline-item">
+                <p class="timeline-date">FINAL YEAR CANDIDATE</p>
+                <h3 class="timeline-title">BACHELOR OF COMPUTER APPLICATIONS (BCA)</h3>
+                <p class="timeline-sub">Jamia Hamdard University, New Delhi</p>
+                <p style="color:#888; font-size: 0.85rem; line-height: 1.6;">
+                    Developing a deep foundation in Software Engineering and Frontend Logic. 
+                    This academic background allows me to ensure every design choice is 
+                    programmatically feasible and technically sound.
+                </p>
+            </div>
+        </div>
+    </div>
 </section>
 
 <!-- CONTACT -->
 <section id="contact">
-<div class="contact">
-<h2 class="title">Summoning</h2>
-<p style="color:#666">nasirhussain11118@gmail.com</p>
-<a href="mailto:nasirhussain11118@gmail.com">INITIATE CONTACT</a>
-</div>
+    <div class="contact">
+        <h2 class="title">Summoning</h2>
+        <p style="color:#666; letter-spacing: 2px; margin-bottom: 10px;">nasirhussain11118@gmail.com</p>
+        
+        <div class="contact-container">
+            <a href="Nasir_Hussain_Resume.pdf" download="Nasir_Hussain_Resume.pdf" class="horror-btn">
+                DOWNLOAD RESUME
+            </a>
+
+            <a href="http://mail.google.com/mail/?view=cm&fs=1&to=nasirhussain11118@gmail.com" class="horror-btn btn-primary">
+                IContact Nasir
+            </a>
+        </div>
+    </div>
 </section>
 
 <script>

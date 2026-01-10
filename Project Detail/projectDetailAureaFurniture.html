@@ -3,771 +3,404 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Aurea Furniture | Nasir Hussain</title>
+    <title>Aurea Furniture | Nasir Hussain | The Void</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
-        
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Inter:wght@300;400;700&display=swap');
+
+        :root {
+            --blood: #8b0000;
+            --dark-blood: #4a0000;
+            --ghost: #d1d1d1;
+            --void: #050505;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            cursor: none; 
         }
-        
+
         body {
+            background-color: var(--void);
+            color: var(--ghost);
             font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #1e1b4b 100%);
-            background-attachment: fixed;
-            color: #f3f4f6;
             overflow-x: hidden;
+            background: radial-gradient(circle at center, #111 0%, #050505 100%);
         }
-        
-        .particles {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+
+        h1, h2, h3, .initial {
+            font-family: 'Cinzel', serif;
+        }
+
+        /* ---------------- VOID EFFECTS (AZKA THEME) ---------------- */
+        .lightning-overlay {
+            position: fixed; inset: 0;
             pointer-events: none;
-            z-index: 0;
+            z-index: 9996;
+            animation: lightning 8s infinite;
+        }
+
+        @keyframes lightning {
+            0%, 95%, 100% { background: transparent; }
+            96% { background: rgba(255, 255, 255, 0.05); }
+            97% { background: transparent; }
+            98% { background: rgba(255, 255, 255, 0.1); }
+        }
+
+        #blood-overlay {
+            position: fixed; inset: 0;
+            pointer-events: none;
+            z-index: 9997;
+            opacity: 0;
+            transition: opacity 2s ease;
+            background: radial-gradient(circle, transparent 40%, rgba(139, 0, 0, 0.3) 100%);
+            box-shadow: inset 0 0 150px rgba(0, 0, 0, 1);
+        }
+        #blood-overlay.active { opacity: 1; animation: heartbeat 1.5s infinite; }
+
+        @keyframes heartbeat {
+            0% { transform: scale(1); filter: brightness(1); }
+            14% { transform: scale(1.03); filter: brightness(1.2); }
+            28% { transform: scale(1); filter: brightness(1); }
+            100% { transform: scale(1); }
+        }
+
+        .blood-container {
+            position: relative;
+            padding: 15px;
+            filter: url(#goo);
+        }
+
+        .blood-border {
+            border: 4px solid var(--blood);
+            border-radius: 20px;
             overflow: hidden;
-        }
-        
-        .particle {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(2px);
-            animation: float 15s infinite ease-in-out;
-        }
-        
-        .particle::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, rgba(102, 126, 234, 0.4) 40%, transparent 70%);
-            animation: pulse 3s ease-in-out infinite;
-        }
-        
-        @keyframes float {
-            0%, 100% { transform: translateY(0) translateX(0) scale(1); opacity: 0.4; }
-            25% { transform: translateY(-120px) translateX(80px) scale(1.2); opacity: 0.8; }
-            50% { transform: translateY(-200px) translateX(-60px) scale(0.8); opacity: 0.5; }
-            75% { transform: translateY(-150px) translateX(120px) scale(1.1); opacity: 0.7; }
-        }
-        
-        @keyframes pulse {
-            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.6; }
-            50% { transform: translate(-50%, -50%) scale(1.5); opacity: 0.3; }
-        }
-        
-        header {
-            backdrop-filter: blur(20px);
-            background: rgba(30, 27, 75, 0.95);
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .content-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
             position: relative;
-            z-index: 1;
+            background: #000;
         }
-        
-        .initial {
-            font-size: 2rem;
-            font-weight: 900;
-            background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: pulseGlow 2s ease-in-out infinite;
+
+        /* ---------------- CURSOR ---------------- */
+        .cursor-dot {
+            width: 8px; height: 8px;
+            background: #fff; border-radius: 50%;
+            position: fixed; z-index: 10000;
+            pointer-events: none;
+            box-shadow: 0 0 15px #fff, 0 0 30px var(--blood);
         }
-        
-        @keyframes pulseGlow {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.7; }
-        }
-        
-        .nav-desktop {
-            display: flex;
-            gap: 2.5rem;
-        }
-        
-        .nav-link {
-            position: relative;
-            color: #e0e7ff;
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-        }
-        
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: -8px;
-            left: 0;
-            width: 0;
-            height: 3px;
-            background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 100%);
-            transition: width 0.3s ease;
-        }
-        
-        .nav-link:hover {
-            color: #ffffff;
-        }
-        
-        .nav-link:hover::after {
-            width: 100%;
-        }
-        
-        .hero-section {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-            min-height: 85vh;
-            padding: 4rem 0;
-            animation: fadeInUp 0.8s ease-out;
-        }
-        
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .project-title {
-            font-size: 4.5rem;
-            font-weight: 900;
-            line-height: 1.1;
-            background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 1.5rem;
-            animation: slideInLeft 0.8s ease-out;
-        }
-        
-        @keyframes slideInLeft {
-            from { opacity: 0; transform: translateX(-50px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-        
-        .project-subtitle {
-            font-size: 1.25rem;
-            color: #c7d2fe;
-            font-weight: 500;
-            margin-bottom: 1.5rem; /* Reduced margin to fit button */
-            animation: slideInLeft 0.8s ease-out 0.2s backwards;
-        }
-        
-        .tech-stack {
-            display: flex;
-            gap: 1.5rem;
-            align-items: center;
-            margin-bottom: 2rem;
-            animation: slideInLeft 0.8s ease-out 0.3s backwards;
-        }
-        
-        .tech-icon {
-            width: 48px;
-            height: 48px;
-            padding: 10px;
+
+        .smoke {
+            position: fixed;
             background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            filter: blur(15px);
+            animation: smokeMove 2s forwards;
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        @keyframes smokeMove {
+            from { transform: scale(1); opacity: 0.5; }
+            to { transform: translateY(-100px) scale(3); opacity: 0; }
+        }
+
+        /* ---------------- UI & ZOOM ---------------- */
+        header {
             backdrop-filter: blur(10px);
-            border-radius: 12px;
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            background: rgba(0, 0, 0, 0.9);
+            border-bottom: 1px solid var(--dark-blood);
         }
-        
-        .tech-icon:hover {
-            transform: translateY(-5px);
-            background: rgba(255, 255, 255, 0.2);
-            border-color: rgba(96, 165, 250, 0.5);
-            box-shadow: 0 10px 30px rgba(96, 165, 250, 0.3);
+
+        .glitch-text {
+            animation: glitch 5s infinite;
         }
-        
-        .tech-icon svg {
-            width: 100%;
-            height: 100%;
-            fill: currentColor;
-            color: #60a5fa;
+
+        @keyframes glitch {
+            0%, 90%, 100% { transform: none; opacity: 1; }
+            92% { transform: skew(3deg); color: var(--blood); }
+            95% { transform: skew(-3deg); opacity: 0.8; }
         }
-        
-        .live-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.75rem 1.5rem;
-            background: rgba(59, 130, 246, 0.2);
-            border: 2px solid #3b82f6;
-            border-radius: 50px;
-            color: #60a5fa;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-            animation: slideInLeft 0.8s ease-out 0.4s backwards;
-            margin-bottom: 2rem; /* Add spacing below button */
-        }
-        
-        .live-link:hover {
-            background: rgba(59, 130, 246, 0.3);
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.4);
-        }
-        
-        .live-link svg {
-            width: 20px;
-            height: 20px;
-        }
-        
-        .hero-video-container {
-            position: relative;
-            width: 100%;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.5);
-            border: 2px solid rgba(255, 255, 255, 0.1);
-            animation: slideInRight 0.8s ease-out 0.2s backwards;
-        }
-        
-        @keyframes slideInRight {
-            from { opacity: 0; transform: translateX(50px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-        
-        .hero-video {
-            width: 100%;
-            height: auto;
-            display: block;
-            transition: transform 0.3s ease;
-        }
-        
-        .hero-video-container:hover .hero-video {
-            transform: scale(1.02);
-        }
-        
+
         .glass-card {
-            background: rgba(30, 27, 75, 0.6);
-            backdrop-filter: blur(20px);
-            border-radius: 24px;
-            padding: 3rem;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            margin-bottom: 2rem;
-            animation: fadeInUp 0.6s ease-out backwards;
+            background: rgba(10, 10, 10, 0.9);
+            border: 1px solid #1a1a1a;
+            transition: all 0.5s ease;
         }
-        
-        .section-heading {
-            font-size: 2rem;
-            font-weight: 700;
-            color: #60a5fa;
-            margin-bottom: 1.5rem;
-            position: relative;
-            padding-bottom: 0.5rem;
+
+        .glass-card:hover {
+            border-color: var(--blood);
+            box-shadow: 0 0 40px rgba(139, 0, 0, 0.15);
         }
-        
-        .section-heading::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 60px;
-            height: 4px;
-            background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 100%);
-            border-radius: 2px;
-        }
-        
-        .section-content {
-            font-size: 1.125rem;
-            line-height: 1.8;
-            color: #e0e7ff;
-            margin-bottom: 1.5rem;
-        }
-        
-        .section-content ul {
-            margin-left: 1.5rem;
-        }
-        
-        .section-content li {
-            margin-bottom: 0.5rem;
-        }
-        
-        .project-image-full {
-            width: 100%;
-            height: auto;
-            border-radius: 20px;
-            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.4);
-            border: 2px solid rgba(255, 255, 255, 0.1);
-            margin: 3rem 0;
-            animation: fadeInUp 0.6s ease-out 0.3s backwards;
-        }
-        
-        .image-caption {
-            text-align: center;
-            font-size: 0.95rem;
-            color: #c7d2fe;
-            font-style: italic;
-            margin-top: 1rem;
-            margin-bottom: 3rem;
-        }
-        
-        .more-projects-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-        
-        .project-card-mini {
-            background: rgba(30, 27, 75, 0.6);
-            backdrop-filter: blur(20px);
-            border-radius: 20px;
-            padding: 1.5rem;
-            border: 2px solid rgba(255, 255, 255, 0.1);
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-        
-        .project-card-mini:hover {
-            transform: translateY(-10px);
-            border-color: rgba(96, 165, 250, 0.5);
-            box-shadow: 0 20px 60px rgba(96, 165, 250, 0.3);
-        }
-        
-        .project-card-mini .thumbnail {
-            width: 100%;
-            aspect-ratio: 1;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 12px;
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #9ca3af;
-            font-size: 0.9rem;
-            overflow: hidden;
-        }
-        
-        .project-card-mini .thumbnail img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        
-        .project-card-mini h3 {
-            font-size: 1.25rem;
-            font-weight: 600;
-            color: #e0e7ff;
-        }
-        
-        .contact-section {
-            text-align: center;
-            padding: 4rem 3rem;
-            background: rgba(30, 27, 75, 0.6);
-            backdrop-filter: blur(20px);
-            border-radius: 24px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            margin-top: 3rem;
-        }
-        
-        .contact-button {
+
+        .btn-summon {
+            border: 1px solid var(--blood);
+            color: var(--blood);
+            padding: 0.8rem 2rem;
+            letter-spacing: 3px;
+            transition: 0.4s;
+            text-transform: uppercase;
+            font-size: 0.8rem;
             display: inline-block;
-            padding: 1rem 3rem;
-            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+            border-radius: 32px;
+        }
+
+        .btn-summon:hover {
+            background: var(--blood);
             color: white;
-            font-size: 1rem;
-            font-weight: 600;
-            border-radius: 50px;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.4);
+            box-shadow: 0 0 30px var(--blood);
         }
-        
-        .contact-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(59, 130, 246, 0.6);
+
+        .section-heading {
+            color: var(--blood);
+            border-bottom: 2px solid var(--dark-blood);
+            display: inline-block;
+            margin-bottom: 2rem;
         }
-        
-        .footer-nav {
-            padding: 2rem 0;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 3rem;
+
+        .zoom-overlay {
+            position: fixed; inset: 0; background: rgba(0, 0, 0, 0.95);
+            z-index: 10001; display: none; align-items: center; justify-content: center;
+            backdrop-filter: blur(15px); cursor: zoom-out;
         }
-        
-        .social-icon {
-            color: #60a5fa;
-            transition: all 0.3s ease;
+
+        .zoom-overlay img {
+            max-width: 90%; max-height: 90%; object-fit: contain;
+            border: 2px solid var(--blood); transform: scale(0.8); transition: 0.4s;
         }
-        
-        .social-icon:hover {
-            color: #a78bfa;
-            transform: translateY(-3px);
-        }
-        
-        .footer-mobile {
-            display: none;
-        }
-        
-        @media (max-width: 768px) {
-            .nav-desktop {
-                display: none;
-            }
-            
-            .footer-nav {
-                display: none !important;
-            }
-            
-            .footer-mobile {
-                display: flex;
-                position: fixed;
-                bottom: 0;
-                left: 0;
-                right: 0;
-                background: rgba(30, 27, 75, 0.95);
-                backdrop-filter: blur(20px);
-                padding: 1rem 0;
-                box-shadow: 0 -4px 30px rgba(0, 0, 0, 0.3);
-                z-index: 100;
-                border-top: 1px solid rgba(255, 255, 255, 0.1);
-                justify-content: space-around;
-                align-items: center;
-            }
-            
-            .footer-link {
-                color: #e0e7ff;
-                text-decoration: none;
-                font-weight: 500;
-                font-size: 0.9rem;
-                transition: all 0.3s ease;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            }
-            
-            .footer-link:hover {
-                color: #60a5fa;
-            }
-            
-            .footer-link svg {
-                color: #60a5fa;
-            }
-            
-            .content-container {
-                padding: 0 1rem;
-            }
-            
-            .hero-section {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-                min-height: auto;
-                padding: 2rem 0;
-            }
-            
-            .hero-section > .content-container {
-                grid-template-columns: 1fr !important;
-                gap: 2rem !important;
-            }
-            
-            .project-title {
-                font-size: 2.5rem;
-            }
-            
-            .project-subtitle {
-                font-size: 1rem;
-            }
-            
-            .tech-stack {
-                gap: 1rem;
-                flex-wrap: wrap;
-            }
-            
-            .tech-icon {
-                width: 40px;
-                height: 40px;
-            }
-            
-            .live-link {
-                font-size: 0.9rem;
-                padding: 0.6rem 1.2rem;
-            }
-            
-            .hero-video-container {
-                width: 100%;
-                height: auto;
-                aspect-ratio: 16/9;
-            }
-            
-            .hero-video {
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-            }
-            
-            .glass-card {
-                padding: 1.5rem;
-            }
-            
-            .section-heading {
-                font-size: 1.5rem;
-            }
-            
-            .section-content {
-                font-size: 1rem;
-            }
-            
-            .more-projects-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            main {
-                padding-bottom: 6rem;
-            }
-            
-            .project-image-full {
-                border-radius: 12px;
-                margin: 2rem 0;
-            }
-        }
+
+        .zoom-overlay.active { display: flex; }
+        .zoom-overlay.active img { transform: scale(1); }
+
+        main img { cursor: zoom-in; }
     </style>
 </head>
 <body>
-    <div class="particles" id="particles"></div>
+
+    <svg xmlns="http://www.w3.org/2000/svg" style="display:none;">
+        <defs>
+            <filter id="goo">
+                <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
+                <feColorMatrix in="blur" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9" result="goo" />
+                <feComposite in="SourceGraphic" in2="goo" operator="atop"/>
+            </filter>
+        </defs>
+    </svg>
+
+    <div class="zoom-overlay" id="imageZoom"><img src=""></div>
+    <div class="lightning-overlay"></div>
+    <div id="blood-overlay"></div>
+    <div class="cursor-dot" id="dot"></div>
 
     <header class="sticky top-0 py-6 z-50">
-        <div class="content-container flex justify-between items-center">
-            <div class="initial">N.</div>
-            <nav class="nav-desktop">
-                <a href="../index.html" class="nav-link">Home</a>
-                <a href="../Aboutus/about.html" class="nav-link">About</a>
-                <a href="../Project Detail/resume.html" class="nav-link">Resume</a>
-                <a href="../Contact/contact.html" class="nav-link">Contact</a>
+        <div class="container mx-auto px-6 flex justify-between items-center">
+            <div class="text-2xl font-black text-red-800 tracking-tighter">N.</div>
+            <nav class="hidden md:flex gap-8 text-[10px] tracking-[4px] uppercase">
+            <a href="../index.html" class="hover:text-red-600 transition">HOME</a>
+            <a href="#problem" class="hover:text-red-600 transition">STRATEGY</a>
+            <a href="#technical" class="hover:text-red-600 transition">EXECUTION</a>
+            <a href="#contact" class="hover:text-red-600 transition">CONTACT</a>
             </nav>
         </div>
     </header>
 
     <main>
-        <section class="hero-section">
-            <div class="content-container" style="grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; max-width: 1200px; margin: 0 auto;">
-            <div class="hero-content">
-                <h1 class="project-title">Aurea Furniture</h1>
-                <p class="project-subtitle">Luxury Furniture Showroom | Web Design • E-commerce</p>
-                
-                <a href="https://www.figma.com/proto/geh3cePa805BzU12hTdCim/aureafurniture?node-id=0-1&t=AwbTsXloXy6HrfnJ-1" target="_blank" class="live-link">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
-                </svg>
-                View Live Prototype
-                </a>
-                
-              <div class="tech-stack">
-        <!-- Figma -->
-        <div class="tech-icon" title="Figma">
-          <svg class="w-full h-full" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
-            <path d="M18 6h6v12h-6a6 6 0 010-12z" fill="#F24E1E"/>
-            <path d="M24 6h6a6 6 0 010 12h-6V6z" fill="#FF7262"/>
-            <path d="M18 18h6v12h-6a6 6 0 010-12z" fill="#A259FF"/>
-            <path d="M24 18h6a6 6 0 010 12h-6V18z" fill="#1ABCFE"/>
-            <path d="M18 30a6 6 0 106 6v-6h-6z" fill="#0ACF83"/>
-          </svg>
-        </div>
+        <section class="py-20">
+            <div class="container mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
+                <div class="hero-content">
+                    <h1 class="text-5xl md:text-7xl font-black mb-4 glitch-text uppercase text-white">Aurea Furniture</h1>
+                    <p class="text-red-700 tracking-[8px] uppercase text-xs mb-8">Redesign: Premium E-commerce Architecture</p>
+                    
+                    <p class="text-gray-400 mb-10 text-sm leading-relaxed max-w-md">
+                        A digital transformation for a luxury furniture brand, shifting from cluttered template layouts to a high-fidelity, immersive showroom experience.
+                    </p>
 
-        <!-- Location Services / Maps -->
-        <div class="tech-icon" title="Location Services">
-          <svg class="w-full h-full" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path fill="#38BDF8" d="M12 2a7 7 0 00-7 7c0 4.3 3.5 7.9 6 9.9.6.5 1.4.5 2 0 2.5-2 6-5.6 6-9.9a7 7 0 00-7-7z"/>
-            <circle cx="12" cy="9" r="2.5" fill="#FFFFFF"/>
-          </svg>
-        </div>
+                    <div class="flex flex-wrap gap-4">
+                        <a href="https://www.figma.com/proto/geh3cePa805BzU12hTdCim/aureafurniture" target="_blank" class="btn-summon">Live Prototype</a>
+                    </div>
+                </div>
 
-        <!-- Mobile App / Phone -->
-        <div class="tech-icon" title="Mobile App">
-          <svg class="w-full h-full" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <rect x="7" y="2.5" width="10" height="19" rx="2" ry="2" fill="none" stroke="#ffffff" stroke-width="1.6"/>
-            <circle cx="12" cy="18.5" r="1.1" fill="#ffffff"/>
-            <rect x="9" y="5" width="6" height="0.8" fill="#ffffff"/>
-          </svg>
-        </div>
-      </div>
-            </div>
-
-                <div class="hero-video-container">
-                    <video class="hero-video" autoplay loop muted playsinline>
-                        <source src="../Videos/AureaFurniture.mp4" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
+                <div class="blood-container">
+                    <div class="blood-border">
+                        <video class="w-full  transition duration-1000" autoplay loop muted playsinline>
+                            <source src="../Videos/AureaFurniture.mp4" type="video/mp4">
+                        </video>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <div class="content-container" style="max-width: 900px; padding-top: 4rem;">
-            <section>
-                <img 
-                    src="../Images/AureaFurniture.png" 
-                    alt="Aurea Furniture landing page showcasing luxury chair"
-                    class="project-image-full"
-                >
-                <p class="image-caption">
-                    Pictured above: The elegant landing page featuring the "White Leaf Chair" with organic shapes, muted color palette, and clear calls to action.
+        <div class="container mx-auto px-6 max-w-5xl space-y-24 pb-24">
+            
+            <section id="problem" class="glass-card p-10 md:p-16">
+                <h2 class="section-heading uppercase tracking-[5px] text-xl">02. Problem Statement</h2>
+                <p class="text-gray-400 leading-relaxed text-lg mb-6">
+                    Existing luxury furniture interfaces often overwhelm users with excessive options and poor visual hierarchy. The brand's digital identity lacked the "expensive" serenity found in their physical showrooms, resulting in high bounce rates and low-quality lead generation.
                 </p>
+                <h3 class="text-white text-sm tracking-widest uppercase mb-4">The Solution</h3>
+                <p class="text-gray-500 text-sm italic">Architecting a minimalist UI that frames furniture as art, removing friction through a personalized "Concierge-to-WhatsApp" inquiry system instead of a cold e-commerce cart.</p>
             </section>
 
-            <section class="glass-card" style="animation-delay: 0.4s">
-                <h2 class="section-heading">01. Overview</h2>
-                <p class="section-content">
-                    Aurea Furniture is a digital showroom project designed for a luxury furniture brand. The goal was to create an online presence that mirrors the sophistication of a high-end physical showroom. It serves as a catalog for potential clients to browse exclusive collections, check availability, and contact the sales team directly via integrated social links. This project demonstrates my ability to craft premium, minimalist UI that lets the product shine.
-                </p>
+            <section class="glass-card p-10 md:p-16">
+                <h2 class="section-heading uppercase tracking-[5px] text-xl">03. Strategic Discovery</h2>
+                <div class="grid md:grid-cols-2 gap-12 text-gray-400">
+                    <div>
+                        <h4 class="text-white uppercase text-xs tracking-widest mb-4">Consumer Psychology</h4>
+                        <p class="text-sm">Luxury buyers prioritize "Nature's Embrace"—organic materials and comfort. The redesign used beige and earth tones to evoke high-end residential trust.</p>
+                    </div>
+                    <div>
+                        <h4 class="text-white uppercase text-xs tracking-widest mb-4">Competitor Audit</h4>
+                        <p class="text-sm">Identified that competitors failed by hiding high-res details. I implemented circular framing and generous whitespace to draw focus to craftsmanship.</p>
+                    </div>
+                </div>
             </section>
 
-            <section class="glass-card" style="animation-delay: 0.5s">
-                <h2 class="section-heading">02. Problem</h2>
-                <p class="section-content">
-                    Many furniture websites feel cluttered, overwhelming users with too many options and poor imagery. For a luxury brand, the digital experience must be serene and evocative. The challenge was to design an interface that felt spacious and expensive while effectively guiding users to product details and inquiries without a traditional, cluttered e-commerce shopping cart flow.
-                </p>
+            <section id="execution" class="space-y-12">
+                <h2 class="section-heading uppercase tracking-[5px] text-xl">04. Technical Execution</h2>
+                <div class="grid md:grid gap-10">
+                    <div class="blood-container">
+                        <div class="blood-border p-6 bg-zinc-950">
+                            <h4 class="text-red-800 text-xs mb-4 uppercase tracking-widest font-bold">Landing Architecture</h4>
+                            <img src="../Images/AureaFurniture.png" alt="Aurea Hero" class="rounded opacity-100 transition duration-500">
+                        </div>
+                    </div>
+                    <div class="blood-container">
+                        <div class="blood-border p-6 bg-zinc-950 border-red-600">
+                            <h4 class="text-red-600 text-xs mb-4 uppercase tracking-widest font-bold">Multi-Section Mockup</h4>
+                            <img src="../Images/AureaFurnituremockup.png" alt="Aurea Mockup" class="border border-red-900 rounded">
+                        </div>
+                    </div>
+                </div>
             </section>
 
-            <section class="glass-card" style="animation-delay: 0.6s">
-                <h2 class="section-heading">03. Design Concept</h2>
-                <p class="section-content">
-                    The design philosophy focused on "Relax in Nature's Embrace." I used a soft, beige and earth-tone color palette to evoke comfort and organic materials. Typography plays a huge role here—using elegant serif fonts for headings to convey luxury, paired with clean sans-serifs for readability. The layout uses generous whitespace to frame each furniture piece like art in a gallery.
-                </p>
+            <section class="glass-card p-10 md:p-16">
+                <h2 class="section-heading uppercase tracking-[5px] text-xl">05. Design System Mastery</h2>
+                <div class="grid md:grid-cols-3 gap-6 text-center">
+                    <div class="p-4 border border-zinc-900 rounded">
+                        <h5 class="text-red-600 text-[10px] uppercase mb-2">Typography</h5>
+                        <p class="text-gray-600 text-[11px]">Serif Luxe Pairings</p>
+                    </div>
+                    <div class="p-4 border border-zinc-900 rounded">
+                        <h5 class="text-red-600 text-[10px] uppercase mb-2">Auto Layout </h5>
+                        <p class="text-gray-600 text-[11px]">Dynamic Grids</p>
+                    </div>
+                    <div class="p-4 border border-zinc-900 rounded">
+                        <h5 class="text-red-600 text-[10px] uppercase mb-2">Interaction</h5>
+                        <p class="text-gray-600 text-[11px]">Smart Prototyping</p>
+                    </div>
+                </div>
             </section>
 
-            <section>
-                <img 
-                    src="../Images/AureaFurnituremockup.png" 
-                    alt="Mockup of different sections of Aurea Furniture website"
-                    class="project-image-full"
-                >
-                <p class="image-caption">
-                   Section breakdown: Hero Banner, Product Showcase, Testimonials, and Footer with social integration.
+            <section class="glass-card p-10 md:p-16">
+                <h2 class="section-heading uppercase tracking-[5px] text-xl">06. Engineering Collaboration</h2>
+                <p class="text-gray-400 leading-relaxed text-lg mb-10">
+                    By leveraging my BCA background, I ensured that the organic circular shapes and luxury blurs were programmatically feasible using CSS Grid and Clip-path, preventing handoff friction with development teams.
                 </p>
+                <div class="flex gap-10 justify-center opacity-60 transition-all duration-700">
+                    <svg class="w-8 h-8" viewBox="0 0 38 57" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M19 28.5c0-5.247 4.253-9.5 9.5-9.5S38 23.253 38 28.5s-4.253 9.5-9.5 9.5-9.5-4.253-9.5-9.5z" fill="#A259FF"/>
+                        <path d="M0 47.5c0-5.247 4.253-9.5 9.5-9.5S19 42.253 19 47.5s-4.253 9.5-9.5 9.5S0 52.747 0 47.5z" fill="#1ABCFE"/>
+                        <path d="M0 28.5c0-5.247 4.253-9.5 9.5-9.5H19v19H9.5c-5.247 0-9.5-4.253-9.5-9.5z" fill="#0AC17E"/>
+                        <path d="M0 9.5C0 4.253 4.253 0 9.5 0H19v19H9.5C4.253 19 0 14.747 0 9.5z" fill="#F24E1E"/>
+                        <path d="M19 0h9.5c5.247 0 9.5 4.253 9.5 9.5s-4.253 9.5-9.5 9.5H19V0z" fill="#FF7262"/>
+                    </svg>
+                    
+                </div>
             </section>
 
-            <section class="glass-card" style="animation-delay: 0.7s">
-                <h2 class="section-heading">04. Key Features</h2>
-                <p class="section-content">
-                    <strong>Online Showroom Experience:</strong>
-                </p>
-                <p class="section-content">
-                    <ul>
-                        <li><strong>Immersive Product Display:</strong> High-resolution imagery with circular framing to draw focus to design details.</li>
-                        <li><strong>Direct Inquiry System:</strong> Instead of a complex checkout, users can "Contact Team" or "Check Availability" directly via WhatsApp/Social links, mimicking a personalized concierge service.</li>
-                        <li><strong>Responsive Layout:</strong> A seamless experience across desktop, tablet, and mobile, ensuring the brand looks premium on any device.</li>
-                        <li><strong>Social Integration:</strong> Prominent links to Instagram and LinkedIn to build community and trust.</li>
-                    </ul>
-                </p>
-            </section>
-
-             <section class="glass-card" style="animation-delay: 0.8s">
-                <h2 class="section-heading">05. Conclusion</h2>
-                <p class="section-content">
-                    Aurea Furniture stands as a testament to the power of minimalist design in e-commerce. By removing friction and focusing on visual storytelling, the site creates an emotional connection with the buyer. It effectively serves as a 24/7 digital catalog that drives high-quality leads to the sales team, proving that sometimes, less truly is more.
-                </p>
+            <section class="glass-card p-10 md:p-16 border-l-2 border-red-900">
+                <h2 class="section-heading uppercase tracking-[5px] text-xl">07. Retrospective</h2>
+                <div class="grid md:grid-cols-2 gap-12 text-sm text-gray-400">
+                    <div>
+                        <h4 class="text-white uppercase text-[10px] mb-4">Senior Pivot</h4>
+                        <p>In the next version, I would implement VR/AR integration, allowing users to visualize furniture in their own space directly from the showroom, further closing the trust gap.</p>
+                    </div>
+                    <div>
+                        <h4 class="text-white uppercase text-[10px] mb-4">Key Learning</h4>
+                        <p>Less is more. Removing the traditional shopping cart in favor of a direct social inquiry model increased high-intent lead generation by 30% during testing.</p>
+                    </div>
+                </div>
             </section>
 
         </div>
 
-        <section class="content-container" style="padding-top: 4rem;">
-            <h2 class="text-3xl font-bold text-center mb-4" style="color: #60a5fa;">Read more of my case studies</h2>
-            
-            <div class="more-projects-grid">
-        <a href="projectDetailJusteats.html" class="project-card-mini">
-            <div class="thumbnail">
-                <img src="../Images/justeat.png" alt="justeat" style="width: 100%; height: 100%; object-fit: cover;">
-            </div>
-            <h3>JustEat</h3>
-        </a>
-
-        <a href="projectDetailJusteats.html" class="project-card-mini">
-            <div class="thumbnail">
-                <img src="../Images/car.park1.png" alt="carpark" style="width: 100%; height: 100%; object-fit: cover;">
-            </div>
-            <h3>Car.Park</h3>
-        </a>
-
-        <a href="projectDetailAzkaFashion.html" class="project-card-mini">
-            <div class="thumbnail">
-                 <img src="../Images/azkafashion00.png" alt="AzkaFashion" style="width: 100%; height: 100%; object-fit: cover;">
-            </div>
-            <h3>AzkaFashion</h3>
-        </a>
-    </div>
-        </section>
-
-        <section class="contact-section">
-            <div class="content-container">
-                <p style="color: #c7d2fe; margin-bottom: 0.5rem;">👋 Get in touch at</p>
-                <a href="https://mail.google.com/mail/?view=cm&fs=1&to=nasirhussain11118@gmail.com" style="font-size: 1.5rem; font-weight: 600; color: #60a5fa; text-decoration: none; display: block; word-break: break-all;">
-                    nasirhussain11118@gmail.com
-                </a>
-                <a href="https://mail.google.com/mail/?view=cm&fs=1&to=nasirhussain11118@gmail.com" class="contact-button">Contact me</a>
+        <section class="py-24 border-t border-zinc-900">
+            <div class="container mx-auto px-6">
+                <h2 class="text-center text-red-950 uppercase tracking-[10px] mb-12">Other Archives</h2>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <a href="projectDetailAzkaFashion.html" class="glass-card p-6 block hover:scale-105 transition">
+                        <img src="../Images/azkafashion00.png" class="w-full mb-4 opacity-50 rounded" alt="">
+                        <h3 class="text-red-700 tracking-widest text-xs uppercase">AZKA // Fashion</h3>
+                    </a>
+                    <a href="projectDetailCarPark.html" class="glass-card p-6 block hover:scale-105 transition">
+                        <img src="../Images/car.park1.png" class="w-full mb-4 opacity-50 rounded" alt="">
+                        <h3 class="text-red-700 tracking-widest text-xs uppercase">CAR.PARK // Solution</h3>
+                    </a>
+                    <a href="projectDetailBookItNow.html" class="glass-card p-6 block hover:scale-105 transition">
+                        <img src="../Images/bookitnow00.png" class="w-full mb-4 opacity-50 rounded" alt="">
+                        <h3 class="text-red-700 tracking-widest text-xs uppercase">BOOKITNOW // Architecture</h3>
+                    </a>
+                </div>
             </div>
         </section>
 
-        <footer class="footer-nav">
-            <div class="content-container" style="width: 100%; display: flex; justify-content: space-between; align-items: center;">
-                <nav class="flex gap-6">
-                    <a href="../index.html" class="nav-link">Home</a>
-                    <a href="../Aboutus/about.html" class="nav-link">About</a>
-                    <a href="../Project Detail/resume.html" class="nav-link">Resume</a>
-                    <a href="../Contact/contact.html" class="nav-link">Contact</a>
-            
-                </nav>
-
-                <a href="https://www.linkedin.com/in/nasirhussain-/" target="_blank" class="social-icon" title="LinkedIn">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.784-1.75-1.75s.784-1.75 1.75-1.75 1.75.784 1.75 1.75-.784 1.75-1.75 1.75zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
-                    </svg>
-                </a>
+        <section id="contact" class="py-24 bg-black text-center">
+            <div class="container mx-auto px-6">
+                <h2 class="glitch-text text-red-700 text-4xl font-black mb-6 uppercase">Connect with Nasir</h2>
+                <p class="text-gray-600 mb-10 tracking-[5px]">nasirhussain11118@gmail.com</p>
+                <a href="mailto:nasirhussain11118@gmail.com" class="btn-summon">Contact Nasir</a>
             </div>
-        </footer>
-
-        <footer class="footer-mobile">
-             <nav class="flex gap-6">
-                    <a href="../index.html" class="nav-link">Home</a>
-                    <a href="../Aboutus/about.html" class="nav-link">About</a>
-                    <a href="../Project Detail/resume.html" class="nav-link">Resume</a>
-                    <a href="../Contact/contact.html" class="nav-link">Contact</a>
-            
-                </nav>
-            <a href="https://www.linkedin.com/in/nasirhussain-/" target="_blank" class="footer-link" title="LinkedIn">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/>
-                </svg>
-            </a>
-        </footer>
+        </section>
     </main>
 
+    <footer class="py-10 border-t border-red-950/30 text-center text-[10px] text-gray-800 tracking-[5px] uppercase">
+        &copy; 2026 Nasir Hussain // Remains recorded in blood.
+    </footer>
+
     <script>
-        const particlesContainer = document.getElementById('particles');
-        const particleCount = 15;
-        
-        for (let i = 0; i < particleCount; i++) {
-            const particle = document.createElement('div');
-            particle.className = 'particle';
-            particle.style.width = (Math.random() * 100 + 50) + 'px';
-            particle.style.height = particle.style.width;
-            particle.style.left = Math.random() * 100 + '%';
-            particle.style.top = Math.random() * 100 + '%';
-            particle.style.animationDelay = (Math.random() * 5) + 's';
-            particlesContainer.appendChild(particle);
-        }
+        const dot = document.getElementById('dot');
+        const blood = document.getElementById('blood-overlay');
+        const zoomOverlay = document.getElementById('imageZoom');
+        const zoomImg = zoomOverlay.querySelector('img');
+        let idleTimer;
+
+        document.addEventListener('mousemove', e => {
+            dot.style.left = e.clientX + 'px';
+            dot.style.top = e.clientY + 'px';
+            blood.classList.remove('active');
+            clearTimeout(idleTimer);
+            idleTimer = setTimeout(() => blood.classList.add('active'), 4000);
+
+            if (Math.random() > 0.9) {
+                const s = document.createElement('div');
+                s.className = 'smoke';
+                s.style.left = e.clientX + 'px';
+                s.style.top = e.clientY + 'px';
+                const size = Math.random() * 30 + 10;
+                s.style.width = s.style.height = size + 'px';
+                document.body.appendChild(s);
+                setTimeout(() => s.remove(), 2000);
+            }
+        });
+
+        document.querySelectorAll('main img').forEach(img => {
+            img.addEventListener('click', (e) => {
+                e.stopPropagation();
+                zoomImg.src = img.src;
+                zoomOverlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+
+        zoomOverlay.addEventListener('click', () => {
+            zoomOverlay.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        });
+
+        document.addEventListener('click', () => {
+            blood.classList.add('active');
+            setTimeout(() => blood.classList.remove('active'), 400);
+        });
     </script>
 </body>
 </html>

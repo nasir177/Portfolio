@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Miral Property | Nasir Hussain | Senior Product Case Study</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Inter:wght@300;400;700&display=swap');
+
+        :root {
+            --blood: #bc0000;
+            --dark-blood: #4a0000;
+            --ghost: #d1d1d1;
+            --void: #050505;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
+
+        body {
+            background-color: var(--void);
+            color: var(--ghost);
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            background: radial-gradient(circle at center, #111 0%, #050505 100%);
+        }
+
+        h1, h2, h3, h4, .initial { font-family: 'Cinzel', serif; }
+
+        /* ---------------- LIGHTBOX ZOOM ---------------- */
+        .zoom-overlay {
+            position: fixed; inset: 0; background: rgba(0, 0, 0, 0.95);
+            z-index: 10001; display: none; align-items: center; justify-content: center;
+            backdrop-filter: blur(15px); cursor: zoom-out;
+        }
+        .zoom-overlay img {
+            max-width: 90%; max-height: 90%; object-fit: contain;
+            border: 2px solid var(--blood); transform: scale(0.8); transition: 0.4s;
+        }
+        .zoom-overlay.active { display: flex; }
+        .zoom-overlay.active img { transform: scale(1); }
+        main img { cursor: zoom-in; }
+
+        /* ---------------- HORROR EFFECTS ---------------- */
+        .lightning-overlay {
+            position: fixed; inset: 0; pointer-events: none; z-index: 9996;
+            animation: lightning 8s infinite;
+        }
+        @keyframes lightning {
+            0%, 95%, 100% { background: transparent; }
+            96% { background: rgba(255, 255, 255, 0.05); }
+            98% { background: rgba(255, 255, 255, 0.1); }
+        }
+        #blood-overlay {
+            position: fixed; inset: 0; pointer-events: none; z-index: 9997;
+            opacity: 0; transition: opacity 2s ease;
+            background: radial-gradient(circle, transparent 40%, rgba(139, 0, 0, 0.3) 100%);
+        }
+        #blood-overlay.active { opacity: 1; animation: heartbeat 1.5s infinite; }
+
+        .blood-container { position: relative; padding: 15px; filter: url(#goo); }
+        .blood-border { border: 4px solid var(--blood); border-radius: 20px; overflow: hidden; background: #000; }
+
+        .cursor-dot {
+            width: 8px; height: 8px; background: #fff; border-radius: 50%;
+            position: fixed; z-index: 10000; pointer-events: none;
+            box-shadow: 0 0 15px #fff, 0 0 30px var(--blood);
+        }
+
+        header { backdrop-filter: blur(10px); background: rgba(0, 0, 0, 0.9); border-bottom: 1px solid var(--dark-blood); }
+        .glitch-text { animation: glitch 5s infinite; }
+        @keyframes glitch {
+            0%, 90%, 100% { transform: none; opacity: 1; }
+            92% { transform: skew(3deg); color: var(--blood); }
+        }
+
+        .glass-card { background: rgba(10, 10, 10, 0.9); border: 1px solid #1a1a1a; transition: 0.4s; }
+        .glass-card:hover { border-color: var(--blood); box-shadow: 0 0 40px rgba(139, 0, 0, 0.15); }
+
+        .btn-summon {
+            border: 1px solid var(--blood); color: var(--blood); padding: 0.8rem 2rem;
+            letter-spacing: 3px; transition: 0.4s; text-transform: uppercase;
+            font-size: 0.8rem; display: inline-block; border-radius: 32px;
+        }
+        .btn-summon:hover { background: var(--blood); color: white; box-shadow: 0 0 30px var(--blood); }
+
+        .section-heading { color: var(--blood); border-bottom: 2px solid var(--dark-blood); display: inline-block; margin-bottom: 2rem; }
+        .metric-card { background: rgba(20, 0, 0, 0.4); border: 1px solid var(--dark-blood); padding: 20px; border-radius: 12px; text-align: center; }
+    </style>
+</head>
+<body>
+
+    <svg xmlns="http://www.w3.org/2000/svg" style="display:none;">
+        <defs>
+            <filter id="goo">
+                <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
+                <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9" result="goo" />
+                <feComposite in="SourceGraphic" in2="goo" operator="atop"/>
+            </filter>
+        </defs>
+    </svg>
+
+    <div class="zoom-overlay" id="imageZoom"><img src=""></div>
+    <div class="lightning-overlay"></div>
+    <div id="blood-overlay"></div>
+    <div class="cursor-dot" id="dot"></div>
+
+    <header class="sticky top-0 py-6 z-50">
+        <div class="container mx-auto px-6 flex justify-between items-center">
+            <div class="text-2xl font-black text-red-800 tracking-tighter uppercase">N./div>
+            <nav class="hidden md:flex gap-8 text-[10px] tracking-[4px] uppercase font-bold">
+                <a href="../index.html" class="hover:text-red-600 transition">Home</a>
+                <a href="#philosophy" class="hover:text-red-600 transition">Problem</a>
+                <a href="#technical" class="hover:text-red-600 transition">Solution</a>
+                <a href="#contact" class="hover:text-red-600 transition">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="py-20">
+            <div class="container mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
+                <div class="hero-content">
+                    <h1 class="text-5xl md:text-7xl font-black mb-4 glitch-text uppercase text-white">Miral Property</h1>
+                    <p class="text-red-700 tracking-[8px] uppercase text-xs mb-8">Luxury Real Estate • UAE High-Value Market</p>
+                    
+                    <div class="grid grid-cols-2 gap-4 mb-10">
+                        <div class="metric-card">
+                            <h4 class="text-3xl font-bold text-red-600 uppercase">Map</h4>
+                            <p class="text-[9px] uppercase tracking-widest text-gray-500">Centric Navigation</p>
+                        </div>
+                        <div class="metric-card">
+                            <h4 class="text-3xl font-bold text-red-600 uppercase">Luxe</h4>
+                            <p class="text-[9px] uppercase tracking-widest text-gray-500">Architectural UI</p>
+                        </div>
+                    </div>
+
+                    <a href="#" class="btn-summon">Live Prototype</a>
+                </div>
+
+                <div class="blood-container">
+                    <div class="blood-border">
+                        <video class="w-full " autoplay loop muted playsinline>
+                            <source src="../Videos/MiralProperty.mp4" type="video/mp4">
+                        </video>                
+                        </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="container mx-auto px-6 max-w-5xl space-y-24 pb-24">
+            
+            <section id="philosophy" class="glass-card p-10 md:p-16">
+                <h2 class="section-heading uppercase tracking-[5px] text-xl">01. Problem Statement</h2>
+                <div class="grid md:grid-cols-2 gap-8 text-sm leading-relaxed">
+                    <div class="border-l-2 border-red-900 pl-6">
+                        <h4 class="text-white uppercase mb-4 tracking-widest font-bold">The Clutter</h4>
+                        <p class="text-gray-400">Luxury real estate decisions are often hampered by choice paralysis and lack of geographical context. High-value buyers face cognitive overload from cluttered interfaces that prioritize ads over architectural clarity.</p>
+                    </div>
+                    <div class="border-l-2 border-red-600 pl-6">
+                        <h4 class="text-white uppercase mb-4 tracking-widest font-bold">The High-Confidence UX</h4>
+                        <p class="text-gray-300">A mobile-first sanctuary that uses clean, architecture-first listings and embedded maps. By reducing noise, we provide users making multi-million-dirham decisions with instant location understanding and trust.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="glass-card p-10 md:p-16">
+                <h2 class="section-heading uppercase tracking-[5px] text-xl">02. Strategic Discovery</h2>
+                <div class="grid md:grid-cols-2 gap-12 text-gray-400">
+                    <div>
+                        <h4 class="text-white uppercase text-xs tracking-widest mb-4">Location Context</h4>
+                        <p class="text-sm">In the UAE market, location is the primary decision-driver. I engineered an embedded map system to provide instant spatial awareness for every listing.</p>
+                    </div>
+                    <div>
+                        <h4 class="text-white uppercase text-xs tracking-widest mb-4">Trust Connectivity</h4>
+                        <p class="text-sm">Integrated high-fidelity agent profiles with frictionless connectivity hooks (Call, WhatsApp, Email) to foster human connection in a digital environment.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="technical" class="glass-card p-10">
+                <h2 class="section-heading uppercase tracking-[5px] text-xl">03. Execution Artefacts</h2>
+                <div class="space-y-16">
+                    <div>
+                        <h4 class="text-white uppercase text-xs tracking-widest mb-6 font-bold">Architecture-First Listings</h4>
+                        <p class="text-gray-400 mb-8 text-sm leading-relaxed">Every property detail is architected for scannability. Primary data points like AED Price and BHK are emphasized to allow for rapid user evaluation without visual fatigue.</p>
+                        <img src="../Images/image_8a70b2.jpg" alt="Miral Property Details and Discovery Screens" class="rounded border border-zinc-900 shadow-2xl">
+                    </div>
+                </div>
+            </section>
+
+            <section class="glass-card p-10">
+                <h2 class="section-heading uppercase tracking-[5px] text-xl">04. Mid-Fi Logical Mapping</h2>
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div class="text-gray-400 space-y-4">
+                        <h4 class="text-white uppercase tracking-widest text-xs font-bold">Validating Hierarchy</h4>
+                        <p class="text-sm leading-relaxed">Before applying the high-luxury aesthetic, I used mid-fi wireframes to validate the map-to-listing interaction flow. This ensured that location data remained the anchor of the user ritual.</p>
+                    </div>
+                    <div class="blood-container">
+                        <div class="blood-border">
+                            <img src="../Images/miral_wireframe.png" alt="Miral Mid-Fidelity Wireframes" class="rounded opacity-80 hover:opacity-100 transition duration-500">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="glass-card p-10">
+                <h2 class="section-heading uppercase tracking-[5px] text-xl">05. Design System Mastery</h2>
+                <div class="grid md:grid-cols-3 gap-6 text-center">
+                    <div class="p-4 border border-zinc-900 rounded">
+                        <h5 class="text-red-600 text-[10px] uppercase mb-2 font-bold">Typography</h5>
+                        <p class="text-gray-600 text-[11px]">Serif & Inter Luxe Pairings</p>
+                    </div>
+                    <div class="p-4 border border-zinc-900 rounded">
+                        <h5 class="text-red-600 text-[10px] uppercase mb-2 font-bold">Map API</h5>
+                        <p class="text-gray-600 text-[11px]">Custom Geo-Json Integration</p>
+                    </div>
+                    <div class="p-4 border border-zinc-900 rounded">
+                        <h5 class="text-red-600 text-[10px] uppercase mb-2 font-bold">Variables</h5>
+                        <p class="text-gray-600 text-[11px]">Dynamic Elevation Tokens</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="glass-card p-10 md:p-16 border-l-2 border-red-900">
+                <h2 class="section-heading uppercase tracking-[5px] text-xl">06. Retrospective</h2>
+                <div class="grid md:grid-cols-2 gap-12 text-sm text-gray-400">
+                    <div>
+                        <h4 class="text-white uppercase text-[10px] mb-4 font-bold">Engineering Edge</h4>
+                        <p>Utilizing my BCA background, I designed the map module to be technically feasible with standard Mapbox/Google Maps API limits, ensuring the high-resolution architectural assets load via lazy-loading rituals to maintain performance.</p>
+                    </div>
+                    <div>
+                        <h4 class="text-white uppercase text-[10px] mb-4 font-bold">The Senior Pivot</h4>
+                        <p>Luxury is defined by what you leave out. By removing traditional "social" fluff, Miral Property focuses entirely on transactional confidence, resulting in a cleaner funnel for high-net-worth individuals.</p>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+
+        <section id="contact" class="py-32 bg-black/60 text-center">
+            <div class="container mx-auto px-6">
+                <h2 class="glitch-text text-red-700 text-5xl font-black mb-10 uppercase">Connect with Nasir</h2>
+                <p class="text-gray-600 mb-12 tracking-[5px] font-bold">nasirhussain11118@gmail.com</p>
+                <a href="mailto:nasirhussain11118@gmail.com" class="btn-summon">Contact Nasir</a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="py-12 border-t border-red-950/30 text-center text-[10px] text-zinc-800 tracking-[10px] uppercase">
+        &copy; 2026 Nasir Hussain // Architectural Integrity Maintained.
+    </footer>
+
+    <script>
+        const dot = document.getElementById('dot');
+        const blood = document.getElementById('blood-overlay');
+        const zoomOverlay = document.getElementById('imageZoom');
+        const zoomImg = zoomOverlay.querySelector('img');
+
+        document.addEventListener('mousemove', e => {
+            dot.style.left = e.clientX + 'px';
+            dot.style.top = e.clientY + 'px';
+            blood.classList.remove('active');
+            clearTimeout(window.idleTimer);
+            window.idleTimer = setTimeout(() => blood.classList.add('active'), 4000);
+
+            if (Math.random() > 0.9) {
+                const s = document.createElement('div');
+                s.className = 'smoke';
+                s.style.left = e.clientX + 'px';
+                s.style.top = e.clientY + 'px';
+                const size = Math.random() * 30 + 10;
+                s.style.width = s.style.height = size + 'px';
+                document.body.appendChild(s);
+                setTimeout(() => s.remove(), 2500);
+            }
+        });
+
+        // ZOOM LOGIC
+        document.querySelectorAll('main img').forEach(img => {
+            img.addEventListener('click', (e) => {
+                e.stopPropagation();
+                zoomImg.src = img.src;
+                zoomOverlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+
+        zoomOverlay.addEventListener('click', () => {
+            zoomOverlay.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        });
+
+        document.addEventListener('click', () => {
+            blood.classList.add('active');
+            setTimeout(() => blood.classList.remove('active'), 400);
+        });
+    </script>
+</body>
+</html>
