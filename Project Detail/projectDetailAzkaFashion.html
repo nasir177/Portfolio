@@ -41,7 +41,7 @@
             z-index: 1;
         }
 
-        nav, main { position: relative; z-index: 2; }
+        main { position: relative; z-index: 2; }
 
         .glass-panel {
             background: var(--glass);
@@ -50,8 +50,32 @@
             border-radius: 32px;
         }
 
+        /* Bottom Nav Styling */
+        .bottom-nav {
+            position: fixed;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 100;
+            width: 90%;
+            max-width: 450px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 100px;
+            padding: 12px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        }
+
+        .nav-link {
+            font-[10px] font-bold tracking-[2px] uppercase text-slate-400 hover:text-green-400 transition-all duration-300;
+        }
+
         .cta-btn {
-            padding: 16px 45px;
+            padding: 14px 32px;
             background: var(--primary);
             color: var(--bg-dark);
             text-decoration: none;
@@ -59,6 +83,7 @@
             font-weight: 800;
             transition: 0.4s;
             display: inline-block;
+            font-size: 14px;
         }
 
         .cta-btn:hover { background: var(--accent); transform: translateY(-5px); }
@@ -87,43 +112,46 @@
             z-index: 10001; transition: transform 0.1s ease-out;
             box-shadow: 0 0 15px rgba(74, 222, 128, 0.2);
         }
+
+        @media (max-width: 768px) {
+            #cursor { display: none; }
+            .cta-btn { width: 100%; text-align: center; }
+        }
     </style>
 </head>
-<body>
+<body class="pb-32">
 
     <div id="cursor"></div>
 
-    <nav class="fixed top-0 w-full z-50 py-6 px-8 flex justify-between items-center bg-black/40 backdrop-blur-xl border-b border-white/10">
-        <div class="font-extrabold text-xl tracking-tighter">NASIR<span>.</span>HUSSAIN</div>
-        <div class="flex gap-8 text-[10px] font-bold tracking-[3px] uppercase">
-            <a href="../index.html" class="hover:text-green-400 transition">Portfolio</a>
-            <a href="#strategy" class="hover:text-green-400 transition">Strategy</a>
-            <a href="#evolution" class="hover:text-green-400 transition">Transformation</a>
-        </div>
+    <nav class="bottom-nav">
+        <a href="../index.html" class="text-[10px] font-bold tracking-[2px] uppercase hover:text-green-400 transition">Work</a>
+        <a href="#strategy" class="text-[10px] font-bold tracking-[2px] uppercase hover:text-green-400 transition">Strategy</a>
+        <a href="#evolution" class="text-[10px] font-bold tracking-[2px] uppercase hover:text-green-400 transition">Evolution</a>
+        <a href="mailto:nasirhussain11118@gmail.com" class="text-[10px] font-bold tracking-[2px] uppercase hover:text-green-400 transition">Hire</a>
     </nav>
 
-    <main class="pt-32">
-        <section class="container mx-auto px-6 mb-24">
-            <div class="grid lg:grid-cols-2 gap-16 items-center">
-                <div>
+    <main class="pt-16 md:pt-32">
+        <section class="container mx-auto px-6 mb-16 md:mb-24">
+            <div class="grid lg:grid-cols-2 gap-12 md:gap-16 items-center">
+                <div class="order-2 lg:order-1">
                     <span class="section-label">High-Fidelity Showcase</span>
-                    <h1 class="text-6xl md:text-8xl font-extrabold mb-6 tracking-tighter uppercase">Azka <br> Fashion</h1>
-                    <p class="text-xl text-slate-400 mb-8 max-w-lg">
+                    <h1 class="text-5xl md:text-8xl font-extrabold mb-6 tracking-tighter uppercase leading-none text-white">Azka <br> Fashion</h1>
+                    <p class="text-lg md:text-xl text-slate-400 mb-8 max-w-lg leading-relaxed">
                         Transforming social chaos into a premium digital showroom. A strategic freelance redesign that led to 4x brand growth.
                     </p>
                     <div class="flex gap-4">
-                        <div class="glass-panel p-4 px-8">
-                            <span class="block text-green-400 font-bold text-2xl">4x</span>
-                            <span class="text-[10px] text-slate-500 uppercase tracking-widest">Growth Result</span>
+                        <div class="glass-panel p-4 px-6 md:px-8">
+                            <span class="block text-green-400 font-bold text-xl md:text-2xl">4x</span>
+                            <span class="text-[8px] md:text-[10px] text-slate-500 uppercase tracking-widest">Growth</span>
                         </div>
-                        <div class="glass-panel p-4 px-8">
-                            <span class="block text-green-400 font-bold text-2xl">D2C</span>
-                            <span class="text-[10px] text-slate-500 uppercase tracking-widest">WhatsApp Funnel</span>
+                        <div class="glass-panel p-4 px-6 md:px-8">
+                            <span class="block text-green-400 font-bold text-xl md:text-2xl">D2C</span>
+                            <span class="text-[8px] md:text-[10px] text-slate-500 uppercase tracking-widest">Funnel</span>
                         </div>
                     </div>
                 </div>
-                <div class="glass-panel p-4">
-                    <div class="rounded-[24px] overflow-hidden">
+                <div class="glass-panel p-3 md:p-4 order-1 lg:order-2">
+                    <div class="rounded-[20px] md:rounded-[24px] overflow-hidden">
                         <video class="w-full opacity-80" autoplay loop muted playsinline>
                             <source src="../Videos/AzkaFashionfigma.mp4" type="video/mp4">
                         </video>
@@ -132,12 +160,12 @@
             </div>
         </section>
 
-        <section id="strategy" class="container mx-auto px-6 mb-32">
-            <div class="glass-panel p-12 lg:p-20">
+        <section id="strategy" class="container mx-auto px-6 mb-20 md:mb-32">
+            <div class="glass-panel p-8 md:p-20">
                 <div class="max-w-4xl">
                     <span class="section-label">The Problem Statement</span>
-                    <h2 class="text-4xl font-bold mt-4 mb-8">Discovery Gap & Credibility Loss</h2>
-                    <div class="grid md:grid-cols-2 gap-12 text-slate-400 leading-relaxed">
+                    <h2 class="text-3xl md:text-4xl font-bold mt-4 mb-8">Discovery Gap & Credibility Loss</h2>
+                    <div class="grid md:grid-cols-2 gap-8 md:gap-12 text-slate-400 leading-relaxed">
                         <div>
                             <h4 class="text-white font-bold mb-2 uppercase text-xs">User Research</h4>
                             <p>Interviews revealed that "anonymous" social storefronts lacked credibility. Users demanded a professional catalog to validate quality before bargaining.</p>
@@ -153,91 +181,73 @@
 
         <div class="relative">
             <div class="hidden lg:block absolute left-1/2 -translate-x-1/2 h-full top-0 -z-10">
-                <svg width="100" height="3000">
-                    <path class="flow-line" d="M50,0 Q100,500 50,1000 T50,2000 T50,3000" />
+                <svg width="100" height="2000">
+                    <path class="flow-line" d="M50,0 Q100,500 50,1000 T50,2000" />
                 </svg>
             </div>
 
-            <section class="container mx-auto px-6 space-y-32 mb-32">
-                <div class="grid lg:grid-cols-2 gap-16 items-center">
-                    <div class="glass-panel p-10">
+            <section class="container mx-auto px-6 space-y-16 md:space-y-32 mb-20 md:mb-32">
+                <div class="grid lg:grid-cols-2 gap-8 md:gap-16 items-center">
+                    <div class="glass-panel p-8 md:p-10">
                         <h3 class="text-2xl font-bold mb-4 uppercase tracking-tighter">Information Architecture</h3>
-                        <p class="text-slate-400 mb-6">Designed a zero-friction path from discovery to inquiry. The flow specifically optimizes for a D2C model where sales occur through personal communication rather than a cart.</p>
+                        <p class="text-slate-400 mb-6 leading-relaxed">Designed a zero-friction path from discovery to inquiry. The flow specifically optimizes for a D2C model where sales occur through personal communication.</p>
                         <div class="text-[10px] font-bold text-green-400 uppercase tracking-widest">Logic: Social-to-WhatsApp Flow</div>
                     </div>
-                    <div class="glass-panel p-4">
+                    <div class="glass-panel p-3 md:p-4">
                         <img src="../Images/azkafashion-userflow.png" class="w-full h-full object-cover rounded-xl" loading="lazy">
                     </div>
                 </div>
 
-                <div class="grid lg:grid-cols-2 gap-16 items-center">
-                    <div class="glass-panel p-4 order-2 lg:order-1">
+                <div class="grid lg:grid-cols-2 gap-8 md:gap-16 items-center">
+                    <div class="glass-panel p-3 md:p-4 order-2 lg:order-1">
                         <img src="../Images/azkafashion-wireframe.png" class="w-full h-full object-cover rounded-xl" loading="lazy">
                     </div>
-                    <div class="glass-panel p-10 order-1 lg:order-2">
+                    <div class="glass-panel p-8 md:p-10 order-1 lg:order-2">
                         <h3 class="text-2xl font-bold mb-4 uppercase tracking-tighter">Wireframe Origins</h3>
-                        <p class="text-slate-400 mb-6">Lo-fi wireframes focused on mobile "thumb-friendly" grid layouts. Mid-fi testing validated that users preferred a high-quality "Brand Story" approach over generic shopping lists.</p>
-                    </div>
-                </div>
-
-                <div class="grid lg:grid-cols-2 gap-16 items-center">
-                    <div class="glass-panel p-10">
-                        <h3 class="text-2xl font-bold mb-4 uppercase tracking-tighter">High-Fidelity Vision</h3>
-                        <p class="text-slate-400 mb-6">Implemented a modular Design System in Figma. Focused on high-contrast visual cues that guide the user to the "Inquire via WhatsApp" primary call to action.</p>
-                    </div>
-                    <div class="glass-panel p-4">
-                        <img src="../Images/Frame 2147223332.png" class="w-full h-full object-cover rounded-xl" loading="lazy">
-                    </div>
-                </div>
-            </section>
-
-            <section id="evolution" class="container mx-auto px-6 mb-40">
-                <div class="glass-panel p-12 lg:p-20 border-dashed border-2 border-accent">
-                    <h2 class="text-4xl font-extrabold text-center mb-12 uppercase">Evolution: V1 to Azka Brand Design</h2>
-                    <div class="grid lg:grid-cols-2 gap-12 items-start">
-                        <div class="space-y-6">
-                            <h4 class="text-slate-500 font-bold uppercase text-[10px] tracking-[4px]">Legacy V1: The Foundation</h4>
-                            <p class="text-sm text-slate-400">Hand-coded with HTML/CSS/JS. Proved technical feasibility but lacked the high-trust UI needed for luxury growth.</p>
-                            <a href="https://nasir177.github.io/Azka-fashion/" target="_blank" class="text-green-400 text-xs hover:underline uppercase">View Legacy Website</a>
-                            <div class="glass-panel p-2">
-                                <img src="../Images/old version azkafashion00.png" class="rounded-xl " alt="Old Version">
-                            </div>
-                        </div>
-                        <div class="space-y-6">
-                            <h4 class="text-green-400 font-bold uppercase text-[10px] tracking-[4px]">Modern Design: The Ecosystem</h4>
-                            <p class="text-sm text-white">Full Figma overhaul focusing on brand authority and conversion architecture. Designed as a "Digital Showroom" for elite clients.</p>
-                            <a href="https://www.figma.com/proto/geh3cePa805BzU12hTdCim/azkafashion" target="_blank" class="text-green-400 text-xs hover:underline uppercase">View Figma Prototype</a>
-                            <div class="glass-panel p-2">
-                                <img src="../Images/Frame 2147223332.png" class="rounded-xl" alt="New Version">
-                            </div>
-                        </div>
+                        <p class="text-slate-400 mb-6 leading-relaxed">Lo-fi wireframes focused on mobile "thumb-friendly" grid layouts. Testing validated that users preferred a high-quality "Brand Story" approach.</p>
                     </div>
                 </div>
             </section>
         </div>
 
-        <section class="py-32 text-center">
-            <div class="glass-panel p-12 lg:p-20 mx-auto max-w-4xl border-t-2 border-green-400">
-                <span class="section-label">Available for UI/UX Opportunities</span>
-                <h2 class="text-5xl font-extrabold mt-6 mb-8 tracking-tighter">
-                    Let's Design Your Next <br> High-Impact Product.
+        <section id="evolution" class="container mx-auto px-6 mb-20 md:mb-40">
+            <div class="glass-panel p-8 md:p-20 border-dashed border-2 border-accent/30">
+                <h2 class="text-3xl md:text-4xl font-extrabold text-center mb-12 uppercase tracking-tighter">Evolution: V1 to V2</h2>
+                <div class="grid lg:grid-cols-2 gap-12 items-start">
+                    <div class="space-y-6">
+                        <h4 class="text-slate-500 font-bold uppercase text-[10px] tracking-[4px]">Legacy V1: Foundation</h4>
+                        <p class="text-sm text-slate-400">Hand-coded HTML/CSS/JS. Technical proof of concept that lacked luxury visual authority.</p>
+                        <div class="glass-panel p-2">
+                            <img src="../Images/old version azkafashion00.png" class="rounded-xl w-full" alt="Old Version">
+                        </div>
+                    </div>
+                    <div class="space-y-6">
+                        <h4 class="text-green-400 font-bold uppercase text-[10px] tracking-[4px]">Modern: The Ecosystem</h4>
+                        <p class="text-sm text-white">Full Figma overhaul focusing on brand authority and D2C conversion architecture.</p>
+                        <div class="glass-panel p-2">
+                            <img src="../Images/Frame 2147223332.png" class="rounded-xl w-full" alt="New Version">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="pb-24 text-center">
+            <div class="glass-panel p-10 md:p-20 mx-auto max-w-4xl border-t-2 border-green-400 mx-6 md:mx-auto">
+                <span class="section-label">Collaboration</span>
+                <h2 class="text-4xl md:text-5xl font-extrabold mt-6 mb-8 tracking-tighter leading-tight text-white">
+                    Let's Design Your Next <br class="hidden md:block"> High-Impact Product.
                 </h2>
-                <p class="text-slate-400 text-lg mb-12 max-w-2xl mx-auto">
-                    Currently looking for high-impact roles where I can combine 
-                    <strong>Systematic Design</strong> and <strong>Interactive Logic</strong> 
-                    to solve complex user problems.
-                </p>
-                <div class="flex flex-wrap justify-center gap-6">
+                <div class="flex flex-col md:flex-row justify-center gap-4">
                     <a href="mailto:nasirhussain11118@gmail.com" class="cta-btn">HIRE NASIR HUSSAIN</a>
                     <a href="../Nasir_Hussain_Resume.pdf" download class="cta-btn" style="background: transparent; color: white; border: 1px solid var(--accent);">DOWNLOAD RESUME</a>
                 </div>
-                <p class="mt-10 text-[10px] uppercase tracking-[4px] text-slate-500">Focused on UI/UX, Product Design & UX Research</p>
             </div>
         </section>
     </main>
 
-    <footer class="py-12 border-t border-white/10 text-center text-[10px] text-slate-500 uppercase tracking-[10px]">
-        &copy; 2026 Nasir Hussain // Digital Experience Design // UI/UX
+    <footer class="py-12 border-t border-white/10 text-center text-[10px] text-slate-500 uppercase tracking-[5px] md:tracking-[10px]">
+        &copy; 2026 Nasir Hussain // LUXURY UI/UX DESIGN
     </footer>
 
     <script>

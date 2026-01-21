@@ -50,6 +50,38 @@
             border-radius: 32px;
         }
 
+        /* Luxury Bottom Nav Styling */
+        .bottom-nav {
+            position: fixed;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 450px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 100px;
+            padding: 12px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        }
+
+        .nav-link {
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            transition: 0.3s;
+        }
+
+        .nav-link:hover { color: var(--accent); }
+
         .cta-btn {
             padding: 16px 45px;
             background: var(--primary);
@@ -95,45 +127,47 @@
             z-index: 10001; transition: transform 0.1s ease-out;
             box-shadow: 0 0 15px rgba(74, 222, 128, 0.2);
         }
+
+        @media (max-width: 768px) {
+            #cursor { display: none; }
+            .cta-btn { width: 100%; text-align: center; }
+        }
     </style>
 </head>
-<body>
+<body class="pb-24">
 
     <div id="cursor"></div>
     <div id="lightbox"><img src="" alt="Zoomed View"></div>
 
-    <nav class="fixed top-0 w-full z-50 py-6 px-8 flex justify-between items-center bg-black/40 backdrop-blur-xl border-b border-white/10">
-        <div class="font-extrabold text-xl tracking-tighter">NASIR<span>.</span>HUSSAIN</div>
-        <div class="flex gap-8 text-[10px] font-bold tracking-[3px] uppercase">
-            <a href="../index.html" class="hover:text-green-400 transition">Portfolio</a>
-            <a href="#problem" class="hover:text-green-400 transition">Problem</a>
-            <a href="#driver" class="hover:text-green-400 transition">Driver Flow</a>
-            <a href="#host" class="hover:text-green-400 transition">Host Flow</a>
-        </div>
+    <nav class="bottom-nav">
+        <a href="../index.html" class="nav-link">Work</a>
+        <a href="#problem" class="nav-link">Problem</a>
+        <a href="#driver" class="nav-link">Driver</a>
+        <a href="#host" class="nav-link">Host</a>
     </nav>
 
-    <main class="pt-32">
-        <section class="container mx-auto px-6 mb-24">
-            <div class="grid lg:grid-cols-2 gap-16 items-center">
-                <div>
+    <main class="pt-16 md:pt-32">
+        <section class="container mx-auto px-6 mb-16 md:mb-24">
+            <div class="grid lg:grid-cols-2 gap-12 md:gap-16 items-center">
+                <div class="order-2 lg:order-1">
                     <span class="section-label">Disrupting Urban Stasis</span>
-                    <h1 class="text-6xl md:text-8xl font-extrabold mb-6 tracking-tighter uppercase">Parkkaro</h1>
-                    <p class="text-xl text-slate-400 mb-8 max-w-lg">
+                    <h1 class="text-5xl md:text-8xl font-extrabold mb-6 tracking-tighter uppercase leading-tight text-white">Parkkaro</h1>
+                    <p class="text-lg md:text-xl text-slate-400 mb-8 max-w-lg leading-relaxed">
                         A 2D Japanese Neobrutalist approach to turning idle urban spaces into passive income.
                     </p>
                     <div class="flex gap-4">
-                        <div class="glass-panel p-4 px-8">
-                            <span class="block text-green-400 font-bold text-2xl">P2P</span>
-                            <span class="text-[10px] text-slate-500 uppercase tracking-widest">Business Model</span>
+                        <div class="glass-panel p-4 px-6 md:px-8">
+                            <span class="block text-green-400 font-bold text-xl md:text-2xl">P2P</span>
+                            <span class="text-[8px] md:text-[10px] text-slate-500 uppercase tracking-widest">Market</span>
                         </div>
-                        <div class="glass-panel p-4 px-8">
-                            <span class="block text-green-400 font-bold text-2xl">Real-time</span>
-                            <span class="text-[10px] text-slate-500 uppercase tracking-widest">Firebase Sync</span>
+                        <div class="glass-panel p-4 px-6 md:px-8">
+                            <span class="block text-green-400 font-bold text-xl md:text-2xl">Live</span>
+                            <span class="text-[8px] md:text-[10px] text-slate-500 uppercase tracking-widest">Firebase</span>
                         </div>
                     </div>
                 </div>
-                <div class="glass-panel p-4">
-                    <div class="rounded-[24px] overflow-hidden">
+                <div class="glass-panel p-3 md:p-4 order-1 lg:order-2">
+                    <div class="rounded-[20px] md:rounded-[24px] overflow-hidden">
                         <video class="w-full opacity-80" autoplay loop muted playsinline>
                             <source src="../Videos/parkkaro (2).mp4" type="video/mp4">
                         </video>
@@ -142,12 +176,12 @@
             </div>
         </section>
 
-        <section id="problem" class="container mx-auto px-6 mb-32">
-            <div class="glass-panel p-12 lg:p-20">
+        <section id="problem" class="container mx-auto px-6 mb-20 md:mb-32">
+            <div class="glass-panel p-8 md:p-20">
                 <div class="max-w-4xl">
                     <span class="section-label">Problem Statement</span>
-                    <h2 class="text-4xl font-bold mt-4 mb-8">The High Cost of Idle Space</h2>
-                    <div class="grid md:grid-cols-2 gap-12 text-slate-400 leading-relaxed">
+                    <h2 class="text-3xl md:text-4xl font-bold mt-4 mb-8">The High Cost of Idle Space</h2>
+                    <div class="grid md:grid-cols-2 gap-8 md:gap-12 text-slate-400 leading-relaxed">
                         <div>
                             <h4 class="text-white font-bold mb-2 uppercase text-xs tracking-widest">Driver Anxiety</h4>
                             <p>Urban drivers spend an average of 15 minutes searching for spots, increasing traffic congestion and stress levels.</p>
@@ -168,155 +202,136 @@
                 </svg>
             </div>
 
-            <section id="driver" class="container mx-auto px-6 space-y-24 mb-40">
-                <span class="section-label block text-center mb-12">UI Flow: The Driver Journey</span>
+            <section id="driver" class="container mx-auto px-6 space-y-16 md:space-y-32 mb-20 md:mb-40">
+                <span class="section-label block text-center mb-6 md:mb-12">UI Flow: The Driver Journey</span>
 
-                <div class="grid lg:grid-cols-2 gap-16 items-center">
-                    <div class="glass-panel p-10">
-                        <h3 class="text-2xl font-bold mb-4 uppercase tracking-tighter">Splash & Neobrutalist Auth</h3>
-                        <p class="text-slate-400 mb-6">A high-fidelity video intro sets the 2D aesthetic tone. The Auth gate uses Neobrutalist high-contrast borders to ensure maximum legibility for users on the go.</p>
-                        <div class="p-4 border-l-2 border-green-400 bg-white/5 text-xs text-slate-300 italic">
-                            Business Edge: Branding consistency starts at T-minus 0 seconds.
-                        </div>
+                <div class="grid lg:grid-cols-2 gap-8 md:gap-16 items-center">
+                    <div class="glass-panel p-8 md:p-10">
+                        <h3 class="text-xl md:text-2xl font-bold mb-4 uppercase tracking-tighter">Splash & Neobrutalist Auth</h3>
+                        <p class="text-slate-400 mb-6 leading-relaxed">A high-fidelity video intro sets the 2D aesthetic tone. The Auth gate uses Neobrutalist high-contrast borders for maximum legibility on the go.</p>
+                        <div class="p-4 border-l-2 border-green-400 bg-white/5 text-xs text-slate-300 italic">Branding consistency starts at T-minus 0 seconds.</div>
                     </div>
-                    <div class="rounded-[24px] overflow-hidden">
-                        <video class="w-full opacity-80" autoplay loop muted playsinline>
-                            <source src="../Videos/splash & auth.mp4" type="video/mp4">
-                        </video>
-                    </div>
-                </div>
-
-                <div class="grid lg:grid-cols-2 gap-16 items-center">
-                    <div class="rounded-[24px] overflow-hidden">
-                        <video class="w-full opacity-80" autoplay loop muted playsinline>
-                            <source src="../Videos/discovery page parkkaro.mp4" type="video/mp4">
-                        </video>
-                    </div>
-                    <div class="glass-panel p-10 order-1 lg:order-2">
-                        <h3 class="text-2xl font-bold mb-4 uppercase tracking-tighter">Real-Time Discovery</h3>
-                        <p class="text-slate-400 mb-6">Powered by Geoapify, the dashboard provides a "Driving-First" UI. High-contrast slot markers ensure users can find nearby spots with a single glance while operating a vehicle.</p>
-                        <div class="p-4 border-l-2 border-green-400 bg-white/5 text-xs text-slate-300 italic">
-                            UX Logic: Reducing cognitive load via color-coded occupancy.
+                    <div class="glass-panel p-3 md:p-4">
+                        <div class="rounded-[20px] md:rounded-[24px] overflow-hidden">
+                            <video class="w-full opacity-80" autoplay loop muted playsinline>
+                                <source src="../Videos/splash & auth.mp4" type="video/mp4">
+                            </video>
                         </div>
                     </div>
                 </div>
 
-                <div class="grid lg:grid-cols-2 gap-16 items-center">
-                    <div class="glass-panel p-10">
-                        <h3 class="text-2xl font-bold mb-4 uppercase tracking-tighter">Booking & Secure QR</h3>
-                        <p class="text-slate-400 mb-6">Instant price calculation based on duration. The flow ends in a unique QR code, acting as a digital "Key" for the host’s gate scanner.</p>
+                <div class="grid lg:grid-cols-2 gap-8 md:gap-16 items-center">
+                    <div class="glass-panel p-3 md:p-4 order-2 lg:order-1">
+                        <div class="rounded-[20px] md:rounded-[24px] overflow-hidden">
+                            <video class="w-full opacity-80" autoplay loop muted playsinline>
+                                <source src="../Videos/discovery page parkkaro.mp4" type="video/mp4">
+                            </video>
+                        </div>
                     </div>
-                    <div class="rounded-[24px] overflow-hidden">
-                        <video class="w-full opacity-80" autoplay loop muted playsinline>
-                            <source src="../Videos/booking and secure exit parkkaro.mp4" type="video/mp4">
-                        </video>
+                    <div class="glass-panel p-8 md:p-10 order-1 lg:order-2">
+                        <h3 class="text-xl md:text-2xl font-bold mb-4 uppercase tracking-tighter">Real-Time Discovery</h3>
+                        <p class="text-slate-400 mb-6 leading-relaxed">Powered by Geoapify, the dashboard provides a "Driving-First" UI. High-contrast slot markers ensure users find spots with a single glance.</p>
+                        <div class="p-4 border-l-2 border-green-400 bg-white/5 text-xs text-slate-300 italic">UX Logic: Reducing cognitive load via color-coded occupancy.</div>
                     </div>
                 </div>
             </section>
 
-            <section class="container mx-auto px-6 mb-40">
-                <div class="glass-panel p-12 text-center border-dashed border-2 border-accent">
+            <section class="container mx-auto px-6 mb-20 md:mb-40">
+                <div class="glass-panel p-8 md:p-12 text-center border-dashed border-2 border-accent/40">
                     <span class="section-label">Strategic Evolution</span>
-                    <h2 class="text-4xl font-extrabold mt-4 mb-6">Car.Park V1 to Parkkaro V2</h2>
-                    <div class="grid md:grid-cols-2 gap-10 text-left max-w-4xl mx-auto">
+                    <h2 class="text-3xl md:text-4xl font-extrabold mt-4 mb-6 uppercase tracking-tight">V1 Prototype to V2 Ecosystem</h2>
+                    <div class="grid md:grid-cols-2 gap-6 text-left max-w-4xl mx-auto">
                         <div class="p-6 bg-white/5 rounded-2xl">
-                            <h4 class="text-slate-500 font-bold mb-2 uppercase text-[10px]">V1: The Prototype</h4>
-                            <p class="text-sm">A foundational tool focused on simple discovery and basic booking logic. It solved "Where can I park?"</p>
+                            <h4 class="text-slate-500 font-bold mb-2 uppercase text-[10px]">V1: Car.Park</h4>
+                            <p class="text-sm">Foundational tool focused on discovery and basic booking. Solved "Where can I park?"</p>
                         </div>
                         <div class="p-6 bg-green-400/10 rounded-2xl">
-                            <h4 class="text-green-400 font-bold mb-2 uppercase text-[10px]">V2: The Passive Income Ecosystem</h4>
-                            <p class="text-sm text-white">Introduces peer-to-peer hosting. Any homeowner can now list their space. It solves "How can I earn?"</p>
+                            <h4 class="text-green-400 font-bold mb-2 uppercase text-[10px]">V2: Parkkaro</h4>
+                            <p class="text-sm text-white font-medium">Introduces P2P hosting. home owners list idle space to earn passive income.</p>
                         </div>
-                    </div>
-                    <div class="mt-10 p-6 glass-panel inline-block">
-                        <h4 class="text-white font-bold mb-2 uppercase text-xs">The Identity Switch</h4>
-                        <p class="text-xs text-slate-400">Inside the Profile, a high-contrast toggle flips the identity from "Driver" to "Host," triggering an atomic Navbar swap and database pivot.</p>
                     </div>
                 </div>
             </section>
 
-            <section id="host" class="container mx-auto px-6 space-y-24 mb-32">
-                <span class="section-label block text-center mb-12">UI Flow: The Host Journey</span>
+            <section id="host" class="container mx-auto px-6 space-y-16 md:space-y-32 mb-20 md:mb-32">
+                <span class="section-label block text-center mb-6 md:mb-12">UI Flow: The Host Journey</span>
 
-                <div class="grid lg:grid-cols-2 gap-16 items-center">
-                    <div class="glass-panel p-10">
-                        <h3 class="text-2xl font-bold mb-4 uppercase tracking-tighter">Analytical Dashboard</h3>
-                        <p class="text-slate-400 mb-6">Real-time business tracking using Firebase listeners. Hosts see "Active Parkers" and "Daily Revenue" live, transforming their space into a managed asset.</p>
-                        <div class="p-4 border-l-2 border-green-400 bg-white/5 text-xs text-slate-300 italic">
-                            Business Value: Immediate feedback on asset performance.
+                <div class="grid lg:grid-cols-2 gap-8 md:gap-16 items-center">
+                    <div class="glass-panel p-8 md:p-10">
+                        <h3 class="text-xl md:text-2xl font-bold mb-4 uppercase tracking-tighter">Analytical Dashboard</h3>
+                        <p class="text-slate-400 mb-6 leading-relaxed">Real-time business tracking using Firebase listeners. Hosts see "Active Parkers" and "Daily Revenue" live in a clean dashboard.</p>
+                    </div>
+                    <div class="glass-panel p-3 md:p-4">
+                        <div class="rounded-[20px] md:rounded-[24px] overflow-hidden">
+                            <video class="w-full opacity-80" autoplay loop muted playsinline>
+                                <source src="../Videos/host dashboard parkkaro.mp4" type="video/mp4">
+                            </video>
                         </div>
                     </div>
-                    <div class="rounded-[24px] overflow-hidden">
-                        <video class="w-full opacity-80" autoplay loop muted playsinline>
-                            <source src="../Videos/host dashboard parkkaro.mp4" type="video/mp4">
-                        </video>
+                </div>
+
+                <div class="grid lg:grid-cols-2 gap-8 md:gap-16 items-center">
+                    <div class="glass-panel p-3 md:p-4 order-2 lg:order-1">
+                        <div class="rounded-[20px] md:rounded-[24px] overflow-hidden">
+                            <video class="w-full opacity-80" autoplay loop muted playsinline>
+                                <source src="../Videos/parking listing parkkaro.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                    </div>
+                    <div class="glass-panel p-8 md:p-10 order-1 lg:order-2">
+                        <h3 class="text-xl md:text-2xl font-bold mb-4 uppercase tracking-tighter">3-Step Space Hosting</h3>
+                        <p class="text-slate-400 mb-6 leading-relaxed">Designed to remove "Business Fear." Homeowners list spots by providing a Pincode, Image, and Amenities in under 60 seconds.</p>
                     </div>
                 </div>
 
-                <div class="grid lg:grid-cols-2 gap-16 items-center">
-                    <div class="rounded-[24px] overflow-hidden">
-                        <video class="w-full opacity-80" autoplay loop muted playsinline>
-                            <source src="../Videos/parking listing parkkaro.mp4" type="video/mp4">
-                        </video>
+                <div class="grid lg:grid-cols-2 gap-8 md:gap-16 items-center">
+                    <div class="glass-panel p-8 md:p-10">
+                        <h3 class="text-xl md:text-2xl font-bold mb-4 uppercase tracking-tighter">Gatekeeper Scanner</h3>
+                        <p class="text-slate-400 mb-6 leading-relaxed">A specialized QR scanner allows hosts to verify vehicles, ensuring site security and automating the checkout process.</p>
                     </div>
-                    <div class="glass-panel p-10 order-1 lg:order-2">
-                        <h3 class="text-2xl font-bold mb-4 uppercase tracking-tighter">3-Step Space Hosting</h3>
-                        <p class="text-slate-400 mb-6">A multi-step experience designed to remove "Business Fear." Homeowners list spots by providing a Nickname, Pincode, Image, and Amenities (EV/CCTV) in under 60 seconds.</p>
-                    </div>
-                </div>
-
-                <div class="grid lg:grid-cols-2 gap-16 items-center">
-                    <div class="glass-panel p-10">
-                        <h3 class="text-2xl font-bold mb-4 uppercase tracking-tighter">The Gatekeeper Scanner</h3>
-                        <p class="text-slate-400 mb-6">A specialized QR scanner allows hosts to verify vehicles, ensuring site security and automating the checkout process for precise revenue calculation.</p>
-                    </div>
-                    <div class="glass-panel p-4">
+                    <div class="glass-panel p-3 md:p-4">
                         <img src="../Images/parkkaro host scanner.png" class="w-full h-full object-cover rounded-xl cursor-zoom-in">
                     </div>
                 </div>
             </section>
         </div>
 
-        <section class="container mx-auto px-6 mb-32">
-            <div class="glass-panel p-12 lg:p-20 border-l-4 border-green-400">
-                <h2 class="text-3xl font-bold mb-8 uppercase">The Parkkaro Solution</h2>
-                <div class="grid md:grid-cols-2 gap-12 text-sm text-slate-400 leading-relaxed">
-                    <p>Parkkaro democratizes urban space. By integrating Geoapify for precision and Firebase for real-time logic, we have turned a daily liability—parking anxiety—into a shared asset class for urban dwellers.</p>
-                    <p>This ecosystem doesn't just find slots; it provides a comprehensive passive income ritual for space owners while maintaining the speed and safety requirements of active drivers.</p>
+        <section class="container mx-auto px-6 mb-24 md:mb-32">
+            <div class="glass-panel p-8 md:p-20 border-l-4 border-green-400">
+                <h2 class="text-2xl md:text-3xl font-bold mb-8 uppercase text-white">The Parkkaro Solution</h2>
+                <div class="grid md:grid-cols-2 gap-8 md:gap-12 text-slate-400 leading-relaxed text-sm">
+                    <p>Parkkaro democratizes urban space. By integrating Geoapify for precision and Firebase for real-time logic, we have turned a daily liability into a shared asset class for urban dwellers.</p>
+                    <p>This ecosystem provides a comprehensive passive income ritual for owners while maintaining the speed and safety requirements of active drivers.</p>
                 </div>
             </div>
         </section>
 
-        <section class="py-32 text-center">
-            <div class="glass-panel p-12 lg:p-20 mx-auto max-w-4xl border-t-2 border-green-400">
-                <span class="section-label">Available for UI/UX Opportunities</span>
-                <h2 class="text-5xl font-extrabold mt-6 mb-8 tracking-tighter">
-                    Let's Design Your Next <br> High-Impact Product.
+        <section class="pb-16 text-center">
+            <div class="glass-panel p-10 md:p-20 mx-6 md:mx-auto max-w-4xl border-t-2 border-green-400">
+                <span class="section-label">Collaboration</span>
+                <h2 class="text-4xl md:text-5xl font-extrabold mt-6 mb-8 tracking-tighter leading-tight text-white">
+                    Let's Design Your Next <br class="hidden md:block"> High-Impact Product.
                 </h2>
-                <p class="text-slate-400 text-lg mb-12 max-w-2xl mx-auto">
-                    Currently looking for high-impact roles where I can combine 
-                    <strong>Systematic Design</strong> and <strong>Interactive Logic</strong> 
-                    to solve complex user problems.
-                </p>
-                <div class="flex flex-wrap justify-center gap-6">
-                    <a href="mailto:nasirhussain11118@gmail.com" class="cta-btn">HIRE NASIR HUSSAIN</a>
-                    <a href="../Nasir_Hussain_Resume.pdf" download class="cta-btn" style="background: transparent; color: white; border: 1px solid var(--accent);">DOWNLOAD RESUME</a>
+                <div class="flex flex-col md:flex-row justify-center gap-4">
+                    <a href="mailto:nasirhussain11118@gmail.com" class="cta-btn uppercase">Hire Nasir</a>
+                    <a href="../Nasir_Hussain_Resume.pdf" download class="cta-btn uppercase" style="background: transparent; color: white; border: 1px solid var(--accent);">Resume</a>
                 </div>
-                <p class="mt-10 text-[10px] uppercase tracking-[4px] text-slate-500">Focused on UI/UX, Product Design & UX Research</p>
             </div>
         </section>
     </main>
 
-    <footer class="py-12 border-t border-white/10 text-center text-[10px] text-slate-500 uppercase tracking-[10px]">
-        &copy; 2026 Nasir Hussain // Digital Experience Design // UI/UX
+    <footer class="py-12 border-t border-white/10 text-center text-[10px] text-slate-500 uppercase tracking-[5px] md:tracking-[10px]">
+        &copy; 2026 Nasir Hussain // PARKKARO CASE STUDY // UI/UX
     </footer>
 
     <script>
         const cursor = document.getElementById('cursor');
-        document.addEventListener('mousemove', e => {
-            cursor.style.left = e.clientX - 12 + 'px';
-            cursor.style.top = e.clientY - 12 + 'px';
-        });
+        if(window.innerWidth > 768) {
+            document.addEventListener('mousemove', e => {
+                cursor.style.left = e.clientX - 12 + 'px';
+                cursor.style.top = e.clientY - 12 + 'px';
+            });
+        }
 
         const lightbox = document.getElementById('lightbox');
         const lbImg = lightbox.querySelector('img');
@@ -324,7 +339,7 @@
             img.addEventListener('click', () => {
                 lbImg.src = img.src;
                 lightbox.classList.add('active');
-            });                 
+            }); 
         });
         lightbox.addEventListener('click', () => lightbox.classList.remove('active'));
     </script>

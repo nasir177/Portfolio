@@ -50,6 +50,38 @@
             border-radius: 32px;
         }
 
+        /* Bottom Nav Styling */
+        .bottom-nav {
+            position: fixed;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 450px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 100px;
+            padding: 12px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        }
+
+        .nav-link {
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            transition: 0.3s;
+        }
+
+        .nav-link:hover { color: var(--accent); }
+
         .cta-btn {
             padding: 16px 45px;
             background: var(--primary);
@@ -71,7 +103,6 @@
             text-transform: uppercase;
         }
 
-        /* Flow SVG Styling */
         .flow-line {
             stroke: var(--accent);
             stroke-width: 2;
@@ -96,34 +127,38 @@
             z-index: 10001; transition: transform 0.1s ease-out;
             box-shadow: 0 0 15px rgba(74, 222, 128, 0.2);
         }
+
+        @media (max-width: 768px) {
+            #cursor { display: none; }
+            .cta-btn { width: 100%; text-align: center; }
+        }
     </style>
 </head>
-<body>
+<body class="pb-24">
 
     <div id="cursor"></div>
     <div id="lightbox"><img src="" alt="Zoomed View"></div>
 
-    <nav class="fixed top-0 w-full z-50 py-6 px-8 flex justify-between items-center bg-black/40 backdrop-blur-xl border-b border-white/10">
-        <div class="font-extrabold text-xl tracking-tighter">NASIR<span>.</span>HUSSAIN</div>
-        <div class="flex gap-8 text-[10px] font-bold tracking-[3px] uppercase">
-            <a href="../index.html" class="hover:text-green-400 transition">Portfolio</a>
-            <a href="https://nekyo.vercel.app/" target="_blank" class="text-green-400">Live App</a>
-        </div>
+    <nav class="bottom-nav">
+        <a href="../index.html" class="nav-link">Work</a>
+        <a href="#research" class="nav-link">Research</a>
+        <a href="#solutions" class="nav-link">Solutions</a>
+        <a href="https://nekyo.vercel.app/" target="_blank" class="nav-link text-green-400">Live</a>
     </nav>
 
-    <main class="pt-32">
-        <section class="container mx-auto px-6 mb-24">
-            <div class="grid lg:grid-cols-2 gap-16 items-center">
-                <div>
+    <main class="pt-16 md:pt-32">
+        <section class="container mx-auto px-6 mb-16 md:mb-24">
+            <div class="grid lg:grid-cols-2 gap-12 md:gap-16 items-center">
+                <div class="order-2 lg:order-1">
                     <span class="section-label">Case Study: Nekyo</span>
-                    <h1 class="text-6xl md:text-8xl font-extrabold mb-6 tracking-tighter">Humanizing <br> Japanese.</h1>
-                    <p class="text-xl text-slate-400 mb-8 max-w-lg">
+                    <h1 class="text-5xl md:text-8xl font-extrabold mb-6 tracking-tighter leading-none text-white">Humanizing <br class="hidden md:block"> Japanese.</h1>
+                    <p class="text-lg md:text-xl text-slate-400 mb-8 max-w-lg leading-relaxed">
                         Designed and coded a multi-sensory Japanese learning ecosystem that solves the "Dull UI" barrier for beginners.
                     </p>
                     <a href="https://nekyo.vercel.app/" target="_blank" class="cta-btn">LAUNCH LIVE SITE</a>
                 </div>
-                <div class="glass-panel p-4">
-                    <div class="rounded-[24px] overflow-hidden">
+                <div class="glass-panel p-3 md:p-4 order-1 lg:order-2">
+                    <div class="rounded-[20px] md:rounded-[24px] overflow-hidden">
                         <video class="w-full opacity-80" autoplay loop muted playsinline>
                             <source src="../Videos/nekyo.mp4" type="video/mp4">
                         </video>
@@ -133,17 +168,17 @@
         </section>
 
         <div class="relative">
-            <section class="container mx-auto px-6 mb-32">
-                <div class="glass-panel p-12 lg:p-20">
+            <section id="research" class="container mx-auto px-6 mb-20 md:mb-32">
+                <div class="glass-panel p-8 md:p-20">
                     <div class="max-w-4xl">
                         <span class="section-label">Phase 01: Research</span>
-                        <h2 class="text-4xl font-bold mt-4 mb-8">User Problem & Research</h2>
-                        <div class="grid md:grid-cols-2 gap-12 text-slate-400 leading-relaxed">
+                        <h2 class="text-3xl md:text-4xl font-bold mt-4 mb-8">User Problem & Research</h2>
+                        <div class="grid md:grid-cols-2 gap-8 md:gap-12 text-slate-400 leading-relaxed">
                             <p>
-                                Japanese learning is often gated by intimidating 90s-style interfaces. As a JLPT N4 proficiency student, I identified that learners stall because current tools offer dry static tables without sensory feedback.
+                                Japanese learning is often gated by intimidating 90s-style interfaces. As a JLPT N4 student, I identified learners stall because current tools offer dry static tables without sensory feedback.
                             </p>
                             <p>
-                                The goal was to solve ocular fatigue and boost retention by bridging the gap between visual character recognition, auditory memory, and physical stroke practice.
+                                The goal was to solve ocular fatigue and boost retention by bridging visual recognition, auditory memory, and physical stroke practice.
                             </p>
                         </div>
                     </div>
@@ -151,88 +186,104 @@
             </section>
 
             <div class="hidden lg:block absolute left-1/2 -translate-x-1/2 h-full top-0 -z-10">
-                <svg width="100" height="1200">
-                    <path class="flow-line" d="M50,0 Q100,200 50,400 T50,800 T50,1200" />
+                <svg width="100" height="2500">
+                    <path class="flow-line" d="M50,0 Q100,300 50,600 T50,1200 T50,2500" />
                 </svg>
             </div>
 
-            <section class="container mx-auto px-6 space-y-12 mb-32">
-                <span class="section-label block text-center mb-12">Phase 02: Design & Engineering Solution</span>
+            <section id="solutions" class="container mx-auto px-6 space-y-12 md:space-y-24 mb-20 md:mb-32">
+                <span class="section-label block text-center mb-6 md:mb-12">Phase 02: Engineering Solution</span>
                 
                 <div class="grid lg:grid-cols-2 gap-8 items-center">
-                    <div class="glass-panel p-10">
-                        <h3 class="text-2xl font-bold mb-4 uppercase tracking-tighter">01 // Audio Script Mastery</h3>
-                        <p class="text-slate-400 mb-6">Designed a unified module for Hiragana, Katakana, and Kanji. Native pronunciation is triggered on-click using custom Audio API integration, ensuring correct phonetics from the start.</p>
+                    <div class="glass-panel p-8 md:p-10">
+                        <h3 class="text-xl md:text-2xl font-bold mb-4 uppercase tracking-tighter text-white">01 // Audio Script Mastery</h3>
+                        <p class="text-slate-400 mb-6 leading-relaxed">Designed a unified module for Hiragana, Katakana, and Kanji. Native pronunciation is triggered on-click using custom Audio API integration.</p>
                         <div class="text-[10px] font-bold text-green-400 uppercase tracking-widest">UI/UX + Frontend Implementation</div>
                     </div>
-                    <div class="glass-panel overflow-hidden p-4">
-                        <img src="../Images/nekyo00.png" class="w-full h-full object-cover rounded-xl cursor-zoom-in">
+                    <div class="glass-panel p-3 md:p-4">
+                        <img src="../Images/nekyo00.png" class="w-full h-full object-cover rounded-xl cursor-zoom-in" alt="Script Mastery">
                     </div>
                 </div>
 
                 <div class="grid lg:grid-cols-2 gap-8 items-center">
-                    <div class="glass-panel overflow-hidden p-4 order-2 lg:order-1">
-                        <img src="../Images/conversation and keyboard nekyo.png" class="w-full h-full object-cover rounded-xl cursor-zoom-in">
+                    <div class="glass-panel p-3 md:p-4 order-2 lg:order-1">
+                        <img src="../Images/conversation and keyboard nekyo.png" class="w-full h-full object-cover rounded-xl cursor-zoom-in" alt="Chat Bot">
                     </div>
-                    <div class="glass-panel p-10 order-1 lg:order-2">
-                        <h3 class="text-2xl font-bold mb-4 uppercase tracking-tighter">02 // Chat Bot & Custom Keyboard</h3>
-                        <p class="text-slate-400 mb-6">Built a JSON-driven bot conversation page paired with an on-screen Japanese keyboard. This removes the friction of installing language packs while allowing users to practice real-time sentence construction.</p>
+                    <div class="glass-panel p-8 md:p-10 order-1 lg:order-2">
+                        <h3 class="text-xl md:text-2xl font-bold mb-4 uppercase tracking-tighter text-white">02 // Chat Bot & Custom Keyboard</h3>
+                        <p class="text-slate-400 mb-6 leading-relaxed">Built a JSON-driven bot conversation page paired with an on-screen Japanese keyboard. Removes the friction of installing language packs.</p>
                         <div class="text-[10px] font-bold text-green-400 uppercase tracking-widest">Logic Flow Design</div>
                     </div>
                 </div>
 
                 <div class="grid lg:grid-cols-2 gap-8 items-center">
-                    <div class="glass-panel p-10">
-                        <h3 class="text-2xl font-bold mb-4 uppercase tracking-tighter">03 // Structured Learning Hub</h3>
-                        <p class="text-slate-400 mb-6">Divided the curriculum into 9 progressive chapters. Implemented data-driven interactive quizzes that validate retention before the user advances to the next stage.</p>
+                    <div class="glass-panel p-8 md:p-10">
+                        <h3 class="text-xl md:text-2xl font-bold mb-4 uppercase tracking-tighter text-white">03 // Structured Learning Hub</h3>
+                        <p class="text-slate-400 mb-6 leading-relaxed">Divided curriculum into 9 chapters. Implemented data-driven interactive quizzes that validate retention before advancing.</p>
                         <div class="text-[10px] font-bold text-green-400 uppercase tracking-widest">Information Architecture</div>
                     </div>
-                    <div class="glass-panel overflow-hidden p-4">
-                        <img src="../Images/learnpagenekyo.png" class="w-full h-full object-cover rounded-xl cursor-zoom-in">
+                    <div class="glass-panel p-3 md:p-4">
+                        <img src="../Images/learnpagenekyo.png" class="w-full h-full object-cover rounded-xl cursor-zoom-in" alt="Learning Hub">
                     </div>
                 </div>
 
                 <div class="grid lg:grid-cols-2 gap-8 items-center">
-                    <div class="glass-panel overflow-hidden p-4 order-2 lg:order-1">
-                        <img src="../Images/practiceboardnekyo.png" class="w-full h-full object-cover rounded-xl cursor-zoom-in">
+                    <div class="glass-panel p-3 md:p-4 order-2 lg:order-1">
+                        <img src="../Images/practiceboardnekyo.png" class="w-full h-full object-cover rounded-xl cursor-zoom-in" alt="Practice Board">
                     </div>
-                    <div class="glass-panel p-10 order-1 lg:order-2">
-                        <h3 class="text-2xl font-bold mb-4 uppercase tracking-tighter">04 // Virtual Practice Board</h3>
-                        <p class="text-slate-400 mb-6">Designed a "Virtual Green Board" using HTML5 Canvas. It allows for free-hand stroke practice via mobile touch or mouse, mimicking the muscle memory of a physical classroom.</p>
+                    <div class="glass-panel p-8 md:p-10 order-1 lg:order-2">
+                        <h3 class="text-xl md:text-2xl font-bold mb-4 uppercase tracking-tighter text-white">04 // Virtual Practice Board</h3>
+                        <p class="text-slate-400 mb-6 leading-relaxed">Designed a "Virtual Green Board" using HTML5 Canvas for free-hand stroke practice, mimicking physical muscle memory.</p>
                         <div class="text-[10px] font-bold text-green-400 uppercase tracking-widest">Gesture-Based UX</div>
                     </div>
                 </div>
             </section>
         </div>
 
-        <section class="container mx-auto px-6 mb-32">
-            <div class="glass-panel p-12 lg:p-20 border-l-4 border-green-400">
-                <h2 class="text-3xl font-bold mb-8 uppercase">Retrospective & Logic</h2>
-                <div class="grid md:grid-cols-2 gap-12 text-sm">
+        <section class="container mx-auto px-6 mb-20 md:mb-32">
+            <div class="glass-panel p-8 md:p-20 border-l-4 border-green-400">
+                <h2 class="text-2xl md:text-3xl font-bold mb-8 uppercase text-white">Retrospective & Logic</h2>
+                <div class="grid md:grid-cols-2 gap-8 md:gap-12">
                     <div class="space-y-4">
-                        <h4 class="text-white font-bold uppercase tracking-widest text-[10px]">Coding Implementation</h4>
-                        <p class="text-slate-400">Developed with React and TypeScript to ensure scalable data models. Optimized the Audio API and canvas logic for ultra-low latency interaction on mobile devices.</p>
+                        <h4 class="text-green-400 font-bold uppercase tracking-widest text-[10px]">Coding Implementation</h4>
+                        <p class="text-slate-400 text-sm leading-relaxed">Developed with React and TypeScript. Optimized the Audio API and canvas logic for ultra-low latency interaction on mobile devices.</p>
                     </div>
                     <div class="space-y-4">
-                        <h4 class="text-white font-bold uppercase tracking-widest text-[10px]">Design Impact</h4>
-                        <p class="text-slate-400">By replacing standard learning hurdles with sensory feedback, Nekyo created a ritual-based learning experience that reduces beginner bounce rates.</p>
+                        <h4 class="text-green-400 font-bold uppercase tracking-widest text-[10px]">Design Impact</h4>
+                        <p class="text-slate-400 text-sm leading-relaxed">By replacing standard learning hurdles with sensory feedback, Nekyo created a ritual-based experience that reduces beginner bounce rates.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class="py-32 text-center">
-            <span class="section-label">Interested in the logic behind Nekyo?</span>
-            <h2 class="text-5xl font-extrabold mt-6 mb-12">Let's build success.</h2>
-            <a href="mailto:nasirhussain11118@gmail.com" class="cta-btn">GET IN TOUCH</a>
+        <section class="py-24 text-center">
+            <div class="mx-auto max-w-4xl px-6">
+                <span class="section-label">Collaboration</span>
+                <h2 class="text-4xl md:text-5xl font-extrabold mt-6 mb-12 tracking-tighter text-white leading-tight">
+                    Let's Build <br class="hidden md:block"> Success.
+                </h2>
+                <div class="flex flex-col md:flex-row justify-center gap-4">
+                    <a href="mailto:nasirhussain11118@gmail.com" class="cta-btn uppercase">Get In Touch</a>
+                    <a href="../Nasir_Hussain_Resume.pdf" download class="cta-btn uppercase" style="background: transparent; color: white; border: 1px solid var(--accent);">Resume</a>
+                </div>
+            </div>
         </section>
     </main>
 
-   <footer class="py-12 border-t border-white/10 text-center text-[10px] text-slate-500 uppercase tracking-[10px]">
-    &copy; 2026 Nasir Hussain // Digital Experience Design // UI/UX
-</footer>
+    <footer class="py-12 border-t border-white/10 text-center text-[10px] text-slate-500 uppercase tracking-[5px] md:tracking-[10px]">
+        &copy; 2026 Nasir Hussain // ED-TECH UX // NEKYO
+    </footer>
 
     <script>
+        // Custom Cursor
+        const cursor = document.getElementById('cursor');
+        if(window.innerWidth > 768) {
+            document.addEventListener('mousemove', e => {
+                cursor.style.left = e.clientX - 12 + 'px';
+                cursor.style.top = e.clientY - 12 + 'px';
+            });
+        }
+
         // Lightbox
         const lightbox = document.getElementById('lightbox');
         const lbImg = lightbox.querySelector('img');
@@ -243,13 +294,6 @@
             });
         });
         lightbox.addEventListener('click', () => lightbox.classList.remove('active'));
-
-        // Custom Cursor
-        const cursor = document.getElementById('cursor');
-        document.addEventListener('mousemove', e => {
-            cursor.style.left = e.clientX - 12 + 'px';
-            cursor.style.top = e.clientY - 12 + 'px';
-        });
     </script>
 </body>
 </html>

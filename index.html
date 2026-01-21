@@ -21,7 +21,6 @@
 
         body {
             background-color: var(--bg-dark);
-            /* AMBIENT MESH GRADIENT - Blue to Green transition matching provided image */
             background-image: 
                 radial-gradient(at 0% 0%, rgba(29, 78, 216, 0.35) 0px, transparent 50%),
                 radial-gradient(at 100% 0%, rgba(20, 83, 45, 0.3) 0px, transparent 50%),
@@ -33,7 +32,6 @@
             position: relative;
         }
 
-        /* GRAIN OVERLAY */
         body::before {
             content: "";
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
@@ -55,83 +53,105 @@
         }
 
         /* ---------------- NAVIGATION ---------------- */
-       /* --- ENHANCED GLASS NAVIGATION --- */
-nav {
-    position: fixed; 
-    top: 0; 
-    width: 100%;
-    padding: 20px 8%;
-    display: flex; 
-    justify-content: space-between; 
-    align-items: center;
-    /* High-end Glassmorphism */
-    background: rgba(255, 255, 255, 0.03); 
-    backdrop-filter: blur(15px) saturate(180%);
-    -webkit-backdrop-filter: blur(15px) saturate(180%);
-    z-index: 9999;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
+        nav {
+            position: fixed; 
+            top: 0; 
+            width: 100%;
+            padding: 20px 8%;
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center;
+            background: rgba(3, 7, 18, 0.6); 
+            backdrop-filter: blur(15px) saturate(180%);
+            -webkit-backdrop-filter: blur(15px) saturate(180%);
+            z-index: 9999;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
 
-.logo { 
-    font-weight: 800; 
-    font-size: 1.1rem; 
-    letter-spacing: -1px; 
-    color: var(--primary);
-}
+        .logo { font-weight: 800; font-size: 1.1rem; letter-spacing: -1px; color: var(--primary); }
+        .logo span { color: var(--accent); }
 
-.logo span { color: var(--accent); }
+        .links { display: flex; align-items: center; }
+        .links a {
+            color: var(--text-muted); 
+            text-decoration: none;
+            font-size: 0.75rem; 
+            font-weight: 700; 
+            margin-left: 35px;
+            position: relative;
+            transition: color 0.3s ease;
+            text-transform: uppercase; 
+            letter-spacing: 1.5px;
+            padding: 5px 0;
+        }
 
-.links { display: flex; align-items: center; }
+        .links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--accent);
+            transition: width 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
 
-.links a {
-    color: var(--text-muted); 
-    text-decoration: none;
-    font-size: 0.75rem; 
-    font-weight: 700; 
-    margin-left: 35px;
-    position: relative; /* Necessary for the underline animation */
-    transition: color 0.3s ease;
-    text-transform: uppercase; 
-    letter-spacing: 1.5px;
-    padding: 5px 0;
-}
+        .links a:hover { color: var(--primary); }
+        .links a:hover::after { width: 100%; }
 
-/* --- ANIMATED TEXT HOVER (Sliding Underline) --- */
-.links a::after {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 2px;
-    bottom: 0;
-    left: 0;
-    background-color: var(--accent);
-    transition: width 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
+        /* BOTTOM NAV BAR (Mobile Only) */
+        .bottom-nav {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 400px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px) saturate(150%);
+            -webkit-backdrop-filter: blur(20px) saturate(150%);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 100px;
+            padding: 12px 25px;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 10000;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
 
-.links a:hover {
-    color: var(--primary);
-}
+        .bottom-nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 10px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: 0.3s;
+        }
 
-.links a:hover::after {
-    width: 100%;
-}
+        .bottom-nav a.active, .bottom-nav a:hover {
+            color: var(--accent);
+        }
+
         /* ---------------- HERO ---------------- */
-        .hero { min-height: 90vh; display: flex; flex-direction: column; justify-content: center; padding: 0 8%; }
+        .hero { min-height: 90vh; display: flex; flex-direction: column; justify-content: center; padding: 0 8%; padding-top: 100px; }
         .hero span { color: var(--accent); font-weight: 800; letter-spacing: 4px; font-size: 0.7rem; margin-bottom: 20px; }
-        .hero h1 { font-size: clamp(3rem, 10vw, 6.5rem); font-weight: 800; line-height: 1; letter-spacing: -4px; margin-bottom: 25px; }
+        .hero h1 { font-size: clamp(2.5rem, 10vw, 6.5rem); font-weight: 800; line-height: 1; letter-spacing: -4px; margin-bottom: 25px; }
         .hero p { font-size: 1.1rem; color: var(--text-muted); max-width: 550px; margin-bottom: 40px; }
 
         .cta-btn {
             padding: 16px 45px; background: var(--primary); color: var(--bg-dark);
             text-decoration: none; border-radius: 50px; font-weight: 800;
             width: fit-content; transition: 0.4s; font-size: 0.85rem;
+            text-align: center;
         }
         .cta-btn:hover { background: var(--accent); transform: scale(1.05); }
 
         /* ---------------- PROJECTS ---------------- */
         section { padding: 100px 8%; }
         .section-tag { color: var(--accent); font-weight: 800; font-size: 0.7rem; letter-spacing: 3px; display: block; margin-bottom: 10px; }
-        .section-title { font-size: 2.5rem; font-weight: 800; margin-bottom: 60px; }
+        .section-title { font-size: clamp(2rem, 5vw, 2.5rem); font-weight: 800; margin-bottom: 60px; }
 
         .project-grid { display: flex; flex-direction: column; gap: 40px; }
 
@@ -153,26 +173,60 @@ nav {
         .project-video-wrap video { width: 100%; height: 100%; object-fit: cover; opacity: 0.7; transition: 0.6s; }
         
         .project-content { padding: 50px; display: flex; flex-direction: column; justify-content: center; }
-        .project-content h3 { font-size: 2.2rem; margin-bottom: 15px; font-weight: 800; }
+        .project-content h3 { font-size: clamp(1.5rem, 4vw, 2.2rem); margin-bottom: 15px; font-weight: 800; }
         .project-content p { color: var(--text-muted); margin-bottom: 30px; font-size: 0.95rem; line-height: 1.6; }
 
         .project-card:hover { border-color: var(--accent); transform: translateY(-10px); background: rgba(255,255,255,0.05); }
         .project-card:hover video { opacity: 1; transform: scale(1.08); }
 
-        /* ---------------- EXPERTISE (Product Lifecycle) ---------------- */
+        /* ---------------- EXPERTISE ---------------- */
         .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
         .skill-box { padding: 40px; background: var(--glass); border: 1px solid var(--glass-border); border-radius: 28px; backdrop-filter: blur(5px); }
         .skill-box h4 { color: var(--accent); margin-bottom: 25px; font-size: 0.8rem; letter-spacing: 2px; }
         .skill-list { list-style: none; }
         .skill-list li { padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; justify-content: space-between; font-weight: 600; font-size: 0.85rem; }
-        .skill-list li span { color: var(--text-muted); font-weight: 400; font-size: 0.75rem; text-align: right; }
+        .skill-list li span { color: var(--text-muted); font-weight: 400; font-size: 0.75rem; text-align: right; margin-left: 10px; }
 
         /* ---------------- TIMELINE ---------------- */
-        .timeline-container { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+        .timeline-container { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; }
         .timeline-card { padding: 35px; background: var(--glass); border: 1px solid var(--glass-border); border-radius: 28px; margin-bottom: 20px; position: relative; }
-        .timeline-card::before { content: ''; position: absolute; left: 0; top: 40px; width: 4px; height: 30px; background: var(--accent); border-radius: 0 4px 4px 0; }
         
-        @media (max-width: 1024px) { .project-card, .timeline-container, .skills-grid { grid-template-columns: 1fr; } }
+        /* ---------------- CONTACT ---------------- */
+        .contact-box { text-align: center; }
+
+        /* ---------------- MOBILE RESPONSIVE ---------------- */
+        @media (max-width: 1024px) {
+            .timeline-container { grid-template-columns: 1fr; gap: 40px; }
+            .project-card { grid-template-columns: 1fr; }
+            .project-content { padding: 30px; }
+            .skills-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            #cursor { display: none; }
+            nav { padding: 15px 5%; }
+            nav .links { display: none; } /* Hide top links */
+            .bottom-nav { display: flex; } /* Show bottom bar */
+            
+            section { padding: 60px 5%; }
+            .hero { padding: 0 5%; padding-top: 120px; }
+            
+            .hero h1 { letter-spacing: -2px; }
+            .hero div { flex-direction: column; width: 100%; gap: 10px; }
+            .cta-btn, .hero div a { width: 100%; text-align: center; }
+
+            .timeline-card { padding: 25px; }
+            .timeline-card h3 { font-size: 1.3rem; }
+            
+            .project-video-wrap { height: 250px; padding: 10px; }
+            .project-content { padding: 25px; }
+        }
+
+        @media (max-width: 480px) {
+            .skill-list li { flex-direction: column; align-items: flex-start; gap: 5px; }
+            .skill-list li span { text-align: left; margin-left: 0; }
+            .section-title { font-size: 1.8rem; }
+        }
     </style>
 </head>
 
@@ -190,28 +244,33 @@ nav {
         </div>
     </nav>
 
-    <header class="hero">
-    <span style="color: var(--accent); font-weight: 800; letter-spacing: 4px; font-size: 0.7rem; text-transform: uppercase; margin-bottom: 15px; display: block;">
-        UI/UX Designer
-    </span>
-    
-    <h1 style="font-size: clamp(3rem, 10vw, 6.5rem); font-weight: 800; line-height: 1.1; letter-spacing: -3px; margin-bottom: 20px;">
-        Nasir Hussain
-    </h1>
-
-    <p style="font-size: 1.1rem; color: var(--text-muted); max-width: 600px; margin-bottom: 35px; line-height: 1.6;">
-        Specializing in <strong>Advanced Figma Systems</strong>, <strong>Atomic Design</strong>, and <strong>User Research</strong> to build seamless digital products that bridge the gap between design and development.
-    </p>
-
-    <div style="display: flex; gap: 15px;">
-        <a href="#projects" class="cta-btn" style="background: var(--primary); color: var(--bg-dark); padding: 16px 40px; border-radius: 50px; text-decoration: none; font-weight: 800; font-size: 0.85rem; transition: 0.4s;">
-            EXPLORE PROJECTS
-        </a>
-        <a href="#about" style="border: 1px solid var(--glass-border); color: var(--primary); padding: 16px 40px; border-radius: 50px; text-decoration: none; font-weight: 800; font-size: 0.85rem; transition: 0.4s; backdrop-filter: blur(10px);">
-            MY EXPERTISE
-        </a>
+    <div class="bottom-nav">
+        <a href="#projects" class="active">Work</a>
+        <a href="#about">Expertise</a>
+        <a href="#journey">History</a>
+        <a href="#contact">Contact</a>
     </div>
-</header>
+
+    <header class="hero" id="home">
+        <span style="color: var(--accent); font-weight: 800; letter-spacing: 4px; font-size: 0.7rem; text-transform: uppercase; margin-bottom: 15px; display: block;">
+            UI/UX Designer
+        </span>
+        
+        <h1>Nasir Hussain</h1>
+
+        <p>
+            Specializing in <strong>Advanced Figma Systems</strong>, <strong>Atomic Design</strong>, and <strong>User Research</strong> to build seamless digital products that bridge the gap between design and development.
+        </p>
+
+        <div style="display: flex; gap: 15px;">
+            <a href="#projects" class="cta-btn">
+                EXPLORE PROJECTS
+            </a>
+            <a href="#about" style="border: 1px solid var(--glass-border); color: var(--primary); padding: 16px 40px; border-radius: 50px; text-decoration: none; font-weight: 800; font-size: 0.85rem; transition: 0.4s; backdrop-filter: blur(10px); text-align: center;">
+                MY EXPERTISE
+            </a>
+        </div>
+    </header>
 
     <section id="projects">
         <span class="section-tag">SELECTED CASE STUDIES</span>
@@ -298,120 +357,120 @@ nav {
         </div>
     </section>
 
-  <section id="about" style="background: rgba(255,255,255,0.01);">
-    <span class="section-tag">CAPABILITIES</span>
-    <h2 class="section-title">Design, Strategy & Logic</h2>
+    <section id="about" style="background: rgba(255,255,255,0.01);">
+        <span class="section-tag">CAPABILITIES</span>
+        <h2 class="section-title">Design, Strategy & Logic</h2>
 
-    <div class="skills-grid">
-        <div class="skill-box">
-            <h4>01 RESEARCH & STRATEGY</h4>
-            <ul class="skill-list">
-                <li>User Research <span>Persona Mapping & Usability Testing</span></li>
-                <li>Information Architecture <span>Sitemaps & Logic Flows</span></li>
-                <li>Strategic SEO <span>Organic Reach & Search Strategy</span></li>
-                <li>Accessibility <span>WCAG 2.1 Compliance</span></li>
-            </ul>
-        </div>
-
-        <div class="skill-box">
-            <h4>02 VISUAL & SYSTEM DESIGN</h4>
-            <ul class="skill-list">
-                <li>Figma Mastery <span>Auto Layout 5.0, Variables & Tokens</span></li>
-                <li>Atomic Design <span>Scalable Component Systems</span></li>
-                <li>High-Fidelity UI <span>Pixel-Perfect Execution</span></li>
-                <li>Creative Tools <span>Adobe Creative Suite & Canva</span></li>
-            </ul>
-        </div>
-
-        <div class="skill-box">
-            <h4>03 INTERACTION & BRANDING</h4>
-            <ul class="skill-list">
-                <li>Advanced Prototyping <span>Interactive User Flows & Smart Animate</span></li>
-                <li>Brand Management <span>Identity Transformation & Storytelling</span></li>
-                <li>Content Creation <span>Social Media Design & Marketing Assets</span></li>
-                <li>AI Workflow <span>Midjourney, Chatgpt, Gemini & Prompt Engineering</span></li>
-            </ul>
-        </div>
-
-        <div class="skill-box">
-            <h4>04 TECHNICAL IMPLEMENTATION</h4>
-            <ul class="skill-list">
-                <li>Frontend Logic <span>React.js & Component Architecture</span></li>
-                <li>Modern Styling <span>Tailwind CSS & Responsive UI</span></li>
-                <li>Interactivity <span>JavaScript (ES6+) & GSAP Animations</span></li>
-                <li>Design Handoff <span>Clean Documentation & Production Specs</span></li>
-            </ul>
-        </div>
-    </div>
-</section>
-<section id="journey">
-    <span class="section-tag" style="color: var(--accent); font-weight: 800; font-size: 0.75rem; letter-spacing: 2px;">THE JOURNEY</span>
-    <h2 class="section-title" style="font-size: 3rem; margin-bottom: 60px;">Experience & Education</h2>
-
-    <div class="timeline-container" style="display: grid; grid-template-columns: 1fr 1fr; gap: 50px;">
-        
-        <div>
-            <h4 style="color: rgba(255,255,255,0.4); font-size: 0.8rem; letter-spacing: 3px; margin-bottom: 30px; text-transform: uppercase;">Experience</h4>
-            
-            <div class="timeline-card" style="margin-bottom: 40px; padding-left: 25px; border-left: 2px solid var(--accent);">
-                <span class="date" style="color: var(--accent); font-weight: 800; font-size: 0.75rem;">JUNE 2025 — DEC 2025</span>
-                <h3 style="color: #fff; font-size: 1.6rem; margin: 10px 0;">Freelance Brand Strategist & Designer</h3>
-                <span class="sub" style="color: var(--text-muted); font-weight: 600; display: block; margin-bottom: 15px;">Azka Fashion (Women's Clothing)</span>
-                
-                <p style="color: #d1d1d1; font-size: 0.9rem; line-height: 1.7; margin-bottom: 20px;">
-                    Managed the complete digital presence for a fashion brand. I designed their e-commerce website and executed a social media strategy that led to direct sales.
-                </p>
-                
-                <ul style="list-style: none; padding: 0;">
-                    <li style="color: var(--accent); font-size: 0.85rem; margin-bottom: 8px;">• Built a mobile-friendly digital showroom to centralize their online presence.</li>
-                    <li style="color: var(--accent); font-size: 0.85rem; margin-bottom: 8px;">• Grew organic reach and social following by 4x through design-led SEO.</li>
-                    <li style="color: var(--accent); font-size: 0.85rem;">• Converted social engagement into actual brand sales via WhatsApp & Web.</li>
+        <div class="skills-grid">
+            <div class="skill-box">
+                <h4>01 RESEARCH & STRATEGY</h4>
+                <ul class="skill-list">
+                    <li>User Research <span>Persona Mapping & Usability Testing</span></li>
+                    <li>Information Architecture <span>Sitemaps & Logic Flows</span></li>
+                    <li>Strategic SEO <span>Organic Reach & Search Strategy</span></li>
+                    <li>Accessibility <span>WCAG 2.1 Compliance</span></li>
                 </ul>
             </div>
 
-            <div class="timeline-card" style="padding-left: 25px; border-left: 2px solid rgba(255,255,255,0.1);">
-                <span class="date" style="color: var(--accent); font-weight: 800; font-size: 0.75rem;">JAN 2024 — PRESENT</span>
-                <h3 style="color: #fff; font-size: 1.6rem; margin: 10px 0;">Self-Employed (Product Design)</h3>
-                <p style="color: #d1d1d1; font-size: 0.9rem; line-height: 1.6;">
-                    Focusing on creating high-fidelity, user-centered prototypes for complex problems. Notable work includes <strong>Parkkaro</strong> (Smart Parking) and <strong>Nekyo</strong> (Education Tech), specializing in bridging the gap between design and technical implementation.
-                </p>
+            <div class="skill-box">
+                <h4>02 VISUAL & SYSTEM DESIGN</h4>
+                <ul class="skill-list">
+                    <li>Figma Mastery <span>Auto Layout 5.0, Variables & Tokens</span></li>
+                    <li>Atomic Design <span>Scalable Component Systems</span></li>
+                    <li>High-Fidelity UI <span>Pixel-Perfect Execution</span></li>
+                    <li>Creative Tools <span>Adobe Creative Suite & Canva</span></li>
+                </ul>
+            </div>
+
+            <div class="skill-box">
+                <h4>03 INTERACTION & BRANDING</h4>
+                <ul class="skill-list">
+                    <li>Advanced Prototyping <span>Interactive User Flows & Smart Animate</span></li>
+                    <li>Brand Management <span>Identity Transformation & Storytelling</span></li>
+                    <li>Content Creation <span>Social Media Design & Marketing Assets</span></li>
+                    <li>AI Workflow <span>Midjourney, Chatgpt, Gemini & Prompt Engineering</span></li>
+                </ul>
+            </div>
+
+            <div class="skill-box">
+                <h4>04 TECHNICAL IMPLEMENTATION</h4>
+                <ul class="skill-list">
+                    <li>Frontend Logic <span>React.js & Component Architecture</span></li>
+                    <li>Modern Styling <span>Tailwind CSS & Responsive UI</span></li>
+                    <li>Interactivity <span>JavaScript (ES6+) & GSAP Animations</span></li>
+                    <li>Design Handoff <span>Clean Documentation & Production Specs</span></li>
+                </ul>
             </div>
         </div>
+    </section>
 
-        <div>
-            <h4 style="color: rgba(255,255,255,0.4); font-size: 0.8rem; letter-spacing: 3px; margin-bottom: 30px; text-transform: uppercase;">Education & Life</h4>
-            
-            <div class="timeline-card" style="background: var(--glass); padding: 35px; border-radius: 24px; border: 1px solid var(--glass-border);">
-                <span class="date" style="color: var(--accent); font-weight: 800; font-size: 0.75rem;">GRADUATING JUNE 2026</span>
-                <h3 style="color: #fff; font-size: 1.6rem; margin: 10px 0;">BCA (Computer Applications)</h3>
-                <span class="sub" style="color: var(--text-muted); display: block; margin-bottom: 20px;">Jamia Hamdard University, New Delhi</span>
+    <section id="journey">
+        <span class="section-tag" style="color: var(--accent); font-weight: 800; font-size: 0.75rem; letter-spacing: 2px;">THE JOURNEY</span>
+        <h2 class="section-title">Experience & Education</h2>
+
+        <div class="timeline-container">
+            <div>
+                <h4 style="color: rgba(255,255,255,0.4); font-size: 0.8rem; letter-spacing: 3px; margin-bottom: 30px; text-transform: uppercase;">Experience</h4>
                 
-                <div style="margin-bottom: 25px;">
-                    <h5 style="color: var(--accent); font-size: 0.7rem; letter-spacing: 1.5px; margin-bottom: 10px; text-transform: uppercase;">Technical & Marketing Foundation:</h5>
-                    <p style="color: #d1d1d1; font-size: 0.85rem; line-height: 1.6;">
-                        Specialized focus on <strong>Software Engineering</strong>, <strong>Digital Marketing</strong>, and <strong>Agile Methods</strong>. Proficient in Python, C/C++, Data Structures (DSA), and DBMS. This technical background ensures my designs are programmatically sound and market-ready.
+                <div class="timeline-card" style="margin-bottom: 40px; padding-left: 25px; border-left: 2px solid var(--accent);">
+                    <span class="date" style="color: var(--accent); font-weight: 800; font-size: 0.75rem;">JUNE 2025 — DEC 2025</span>
+                    <h3 style="color: #fff; font-size: 1.6rem; margin: 10px 0;">Freelance Brand Strategist & Designer</h3>
+                    <span class="sub" style="color: var(--text-muted); font-weight: 600; display: block; margin-bottom: 15px;">Azka Fashion (Women's Clothing)</span>
+                    
+                    <p style="color: #d1d1d1; font-size: 0.9rem; line-height: 1.7; margin-bottom: 20px;">
+                        Managed the complete digital presence for a fashion brand. I designed their e-commerce website and executed a social media strategy that led to direct sales.
                     </p>
-                </div>
-
-                <div style="padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.05);">
-                    <h5 style="color: var(--accent); font-size: 0.7rem; letter-spacing: 1.5px; margin-bottom: 15px; text-transform: uppercase;">Hobbies & Interests:</h5>
-                    <ul style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; list-style: none;">
-                        <li style="color: #fff; font-size: 0.8rem;">🎨 Artistic Sketching</li>
-                        <li style="color: #fff; font-size: 0.8rem;">🎥 Anime Enthusiast</li>
-                        <li style="color: #fff; font-size: 0.8rem;">⚽ Football</li>
-                        <li style="color: #fff; font-size: 0.8rem;">🎮 Video Games</li>
-                        <li style="color: #fff; font-size: 0.8rem;">🌎 Learning Languages</li>
-                        <li style="color: #fff; font-size: 0.8rem;">✨ UI/UX Design</li>
+                    
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="color: var(--accent); font-size: 0.85rem; margin-bottom: 8px;">• Built a mobile-friendly digital showroom to centralize their online presence.</li>
+                        <li style="color: var(--accent); font-size: 0.85rem; margin-bottom: 8px;">• Grew organic reach and social following by 4x through design-led SEO.</li>
+                        <li style="color: var(--accent); font-size: 0.85rem;">• Converted social engagement into actual brand sales via WhatsApp & Web.</li>
                     </ul>
                 </div>
+
+                <div class="timeline-card" style="padding-left: 25px; border-left: 2px solid rgba(255,255,255,0.1);">
+                    <span class="date" style="color: var(--accent); font-weight: 800; font-size: 0.75rem;">JAN 2024 — PRESENT</span>
+                    <h3 style="color: #fff; font-size: 1.6rem; margin: 10px 0;">Self-Employed (Product Design)</h3>
+                    <p style="color: #d1d1d1; font-size: 0.9rem; line-height: 1.6;">
+                        Focusing on creating high-fidelity, user-centered prototypes for complex problems. Notable work includes <strong>Parkkaro</strong> (Smart Parking) and <strong>Nekyo</strong> (Education Tech), specializing in bridging the gap between design and technical implementation.
+                    </p>
+                </div>
+            </div>
+
+            <div>
+                <h4 style="color: rgba(255,255,255,0.4); font-size: 0.8rem; letter-spacing: 3px; margin-bottom: 30px; text-transform: uppercase;">Education & Life</h4>
+                
+                <div class="timeline-card" style="background: var(--glass); padding: 35px; border-radius: 24px; border: 1px solid var(--glass-border);">
+                    <span class="date" style="color: var(--accent); font-weight: 800; font-size: 0.75rem;">GRADUATING JUNE 2026</span>
+                    <h3 style="color: #fff; font-size: 1.6rem; margin: 10px 0;">BCA (Computer Applications)</h3>
+                    <span class="sub" style="color: var(--text-muted); display: block; margin-bottom: 20px;">Jamia Hamdard University, New Delhi</span>
+                    
+                    <div style="margin-bottom: 25px;">
+                        <h5 style="color: var(--accent); font-size: 0.7rem; letter-spacing: 1.5px; margin-bottom: 10px; text-transform: uppercase;">Technical & Marketing Foundation:</h5>
+                        <p style="color: #d1d1d1; font-size: 0.85rem; line-height: 1.6;">
+                            Specialized focus on <strong>Software Engineering</strong>, <strong>Digital Marketing</strong>, and <strong>Agile Methods</strong>. Proficient in Python, C/C++, Data Structures (DSA), and DBMS. This technical background ensures my designs are programmatically sound and market-ready.
+                        </p>
+                    </div>
+
+                    <div style="padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.05);">
+                        <h5 style="color: var(--accent); font-size: 0.7rem; letter-spacing: 1.5px; margin-bottom: 15px; text-transform: uppercase;">Hobbies & Interests:</h5>
+                        <ul style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; list-style: none;">
+                            <li style="color: #fff; font-size: 0.8rem;">🎨 Artistic Sketching</li>
+                            <li style="color: #fff; font-size: 0.8rem;">🎥 Anime Enthusiast</li>
+                            <li style="color: #fff; font-size: 0.8rem;">⚽ Football</li>
+                            <li style="color: #fff; font-size: 0.8rem;">🎮 Video Games</li>
+                            <li style="color: #fff; font-size: 0.8rem;">✨ UI/UX Design</li>
+                            <li style="color: #fff; font-size: 0.8rem;">🌎 Learning Languages</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-    <section id="contact">
+    <section id="contact" style="padding-bottom: 120px;">
         <div class="contact-box">
-            <h2 style="font-size: 3rem; margin-bottom: 20px; font-weight: 800; letter-spacing: -2px;">Let's Design Success.</h2>
+            <h2 style="font-size: clamp(2rem, 5vw, 3rem); margin-bottom: 20px; font-weight: 800; letter-spacing: -2px;">Let's Design Success.</h2>
             <p style="margin-bottom: 40px; color:var(--text-muted); font-weight: 600;">nasirhussain11118@gmail.com</p>
             <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
                 <a href="Nasir_Hussain_Resume.pdf" download class="cta-btn" style="background: transparent; color: white; border: 1px solid var(--accent);">Download CV</a>
@@ -435,6 +494,27 @@ nav {
             item.addEventListener('mouseleave', () => {
                 cursor.style.transform = cursor.style.transform.replace(' scale(2.5)', '');
                 cursor.style.backgroundColor = 'transparent';
+            });
+        });
+
+        // Bottom Nav Active State Logic
+        const sections = document.querySelectorAll('section, header');
+        const navItems = document.querySelectorAll('.bottom-nav a');
+
+        window.addEventListener('scroll', () => {
+            let current = "";
+            sections.forEach((section) => {
+                const sectionTop = section.offsetTop;
+                if (pageYOffset >= sectionTop - 150) {
+                    current = section.getAttribute("id");
+                }
+            });
+
+            navItems.forEach((item) => {
+                item.classList.remove("active");
+                if (item.getAttribute("href").includes(current)) {
+                    item.classList.add("active");
+                }
             });
         });
     </script>
