@@ -3,226 +3,128 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Aurea Furniture | Nasir Hussain | The Void</title>
+    <title>Aurea Furniture | Nasir Hussain | Luxury UI/UX Case Study</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Inter:wght@300;400;700&display=swap');
-
         :root {
-            --blood: #8b0000;
-            --dark-blood: #4a0000;
-            --ghost: #d1d1d1;
-            --void: #050505;
+            --primary: #ffffff;
+            --accent: #4ade80; 
+            --bg-dark: #030712;
+            --glass: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --text-muted: #94a3b8;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            cursor: none; 
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
 
         body {
-            background-color: var(--void);
-            color: var(--ghost);
-            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(29, 78, 216, 0.35) 0px, transparent 50%),
+                radial-gradient(at 100% 0%, rgba(20, 83, 45, 0.3) 0px, transparent 50%),
+                radial-gradient(at 50% 100%, rgba(15, 23, 42, 0.4) 0px, transparent 50%);
+            background-attachment: fixed;
+            color: var(--primary);
+            font-family: 'Plus Jakarta Sans', sans-serif;
             overflow-x: hidden;
-            background: radial-gradient(circle at center, #111 0%, #050505 100%);
-        }
-
-        h1, h2, h3, .initial {
-            font-family: 'Cinzel', serif;
-        }
-
-        /* ---------------- VOID EFFECTS (AZKA THEME) ---------------- */
-        .lightning-overlay {
-            position: fixed; inset: 0;
-            pointer-events: none;
-            z-index: 9996;
-            animation: lightning 8s infinite;
-        }
-
-        @keyframes lightning {
-            0%, 95%, 100% { background: transparent; }
-            96% { background: rgba(255, 255, 255, 0.05); }
-            97% { background: transparent; }
-            98% { background: rgba(255, 255, 255, 0.1); }
-        }
-
-        #blood-overlay {
-            position: fixed; inset: 0;
-            pointer-events: none;
-            z-index: 9997;
-            opacity: 0;
-            transition: opacity 2s ease;
-            background: radial-gradient(circle, transparent 40%, rgba(139, 0, 0, 0.3) 100%);
-            box-shadow: inset 0 0 150px rgba(0, 0, 0, 1);
-        }
-        #blood-overlay.active { opacity: 1; animation: heartbeat 1.5s infinite; }
-
-        @keyframes heartbeat {
-            0% { transform: scale(1); filter: brightness(1); }
-            14% { transform: scale(1.03); filter: brightness(1.2); }
-            28% { transform: scale(1); filter: brightness(1); }
-            100% { transform: scale(1); }
-        }
-
-        .blood-container {
             position: relative;
-            padding: 15px;
-            filter: url(#goo);
         }
 
-        .blood-border {
-            border: 4px solid var(--blood);
-            border-radius: 20px;
-            overflow: hidden;
-            position: relative;
-            background: #000;
-        }
-
-        /* ---------------- CURSOR ---------------- */
-        .cursor-dot {
-            width: 8px; height: 8px;
-            background: #fff; border-radius: 50%;
-            position: fixed; z-index: 10000;
+        body::before {
+            content: "";
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url('https://grainy-gradients.vercel.app/noise.svg');
+            opacity: 0.15;
             pointer-events: none;
-            box-shadow: 0 0 15px #fff, 0 0 30px var(--blood);
+            z-index: 1;
         }
 
-        .smoke {
-            position: fixed;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            filter: blur(15px);
-            animation: smokeMove 2s forwards;
-            pointer-events: none;
-            z-index: 9999;
-        }
+        nav, main { position: relative; z-index: 2; }
 
-        @keyframes smokeMove {
-            from { transform: scale(1); opacity: 0.5; }
-            to { transform: translateY(-100px) scale(3); opacity: 0; }
-        }
-
-        /* ---------------- UI & ZOOM ---------------- */
-        header {
-            backdrop-filter: blur(10px);
-            background: rgba(0, 0, 0, 0.9);
-            border-bottom: 1px solid var(--dark-blood);
-        }
-
-        .glitch-text {
-            animation: glitch 5s infinite;
-        }
-
-        @keyframes glitch {
-            0%, 90%, 100% { transform: none; opacity: 1; }
-            92% { transform: skew(3deg); color: var(--blood); }
-            95% { transform: skew(-3deg); opacity: 0.8; }
-        }
-
-        .glass-card {
-            background: rgba(10, 10, 10, 0.9);
-            border: 1px solid #1a1a1a;
-            transition: all 0.5s ease;
-        }
-
-        .glass-card:hover {
-            border-color: var(--blood);
-            box-shadow: 0 0 40px rgba(139, 0, 0, 0.15);
-        }
-
-        .btn-summon {
-            border: 1px solid var(--blood);
-            color: var(--blood);
-            padding: 0.8rem 2rem;
-            letter-spacing: 3px;
-            transition: 0.4s;
-            text-transform: uppercase;
-            font-size: 0.8rem;
-            display: inline-block;
+        .glass-panel {
+            background: var(--glass);
+            backdrop-filter: blur(25px);
+            border: 1px solid var(--glass-border);
             border-radius: 32px;
         }
 
-        .btn-summon:hover {
-            background: var(--blood);
-            color: white;
-            box-shadow: 0 0 30px var(--blood);
-        }
-
-        .section-heading {
-            color: var(--blood);
-            border-bottom: 2px solid var(--dark-blood);
+        .cta-btn {
+            padding: 16px 45px;
+            background: var(--primary);
+            color: var(--bg-dark);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 800;
+            transition: 0.4s;
             display: inline-block;
-            margin-bottom: 2rem;
         }
 
-        .zoom-overlay {
-            position: fixed; inset: 0; background: rgba(0, 0, 0, 0.95);
-            z-index: 10001; display: none; align-items: center; justify-content: center;
+        .cta-btn:hover { background: var(--accent); transform: translateY(-5px); }
+
+        .section-label {
+            color: var(--accent);
+            font-weight: 800;
+            font-size: 0.7rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+        }
+
+        .flow-line {
+            stroke: var(--accent);
+            stroke-width: 2;
+            stroke-dasharray: 8;
+            opacity: 0.3;
+            fill: none;
+        }
+
+        #lightbox {
+            position: fixed; inset: 0; background: rgba(5, 7, 10, 0.95);
+            z-index: 10000; display: none; align-items: center; justify-content: center;
             backdrop-filter: blur(15px); cursor: zoom-out;
         }
+        #lightbox.active { display: flex; }
+        #lightbox img { max-width: 90%; max-height: 85%; border-radius: 12px; border: 1px solid var(--glass-border); }
 
-        .zoom-overlay img {
-            max-width: 90%; max-height: 90%; object-fit: contain;
-            border: 2px solid var(--blood); transform: scale(0.8); transition: 0.4s;
+        #cursor {
+            width: 24px; height: 24px;
+            border: 1.5px solid var(--accent);
+            border-radius: 50%;
+            position: fixed; pointer-events: none;
+            z-index: 10001; transition: transform 0.1s ease-out;
+            box-shadow: 0 0 15px rgba(74, 222, 128, 0.2);
         }
-
-        .zoom-overlay.active { display: flex; }
-        .zoom-overlay.active img { transform: scale(1); }
-
-        main img { cursor: zoom-in; }
     </style>
 </head>
 <body>
 
-    <svg xmlns="http://www.w3.org/2000/svg" style="display:none;">
-        <defs>
-            <filter id="goo">
-                <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
-                <feColorMatrix in="blur" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9" result="goo" />
-                <feComposite in="SourceGraphic" in2="goo" operator="atop"/>
-            </filter>
-        </defs>
-    </svg>
+    <div id="cursor"></div>
+    <div id="lightbox"><img src="" alt="Zoomed View"></div>
 
-    <div class="zoom-overlay" id="imageZoom"><img src=""></div>
-    <div class="lightning-overlay"></div>
-    <div id="blood-overlay"></div>
-    <div class="cursor-dot" id="dot"></div>
-
-    <header class="sticky top-0 py-6 z-50">
-        <div class="container mx-auto px-6 flex justify-between items-center">
-            <div class="text-2xl font-black text-red-800 tracking-tighter">N.</div>
-            <nav class="hidden md:flex gap-8 text-[10px] tracking-[4px] uppercase">
-            <a href="../index.html" class="hover:text-red-600 transition">HOME</a>
-            <a href="#problem" class="hover:text-red-600 transition">STRATEGY</a>
-            <a href="#technical" class="hover:text-red-600 transition">EXECUTION</a>
-            <a href="#contact" class="hover:text-red-600 transition">CONTACT</a>
-            </nav>
+    <nav class="fixed top-0 w-full z-50 py-6 px-8 flex justify-between items-center bg-black/40 backdrop-blur-xl border-b border-white/10">
+        <div class="font-extrabold text-xl tracking-tighter">NASIR<span>.</span>HUSSAIN</div>
+        <div class="flex gap-8 text-[10px] font-bold tracking-[3px] uppercase">
+            <a href="../index.html" class="hover:text-green-400 transition">Portfolio</a>
+            <a href="#psychology" class="hover:text-green-400 transition">Design Psychology</a>
+            <a href="#execution" class="hover:text-green-400 transition">Execution</a>
         </div>
-    </header>
+    </nav>
 
-    <main>
-        <section class="py-20">
-            <div class="container mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
-                <div class="hero-content">
-                    <h1 class="text-5xl md:text-7xl font-black mb-4 glitch-text uppercase text-white">Aurea Furniture</h1>
-                    <p class="text-red-700 tracking-[8px] uppercase text-xs mb-8">Redesign: Premium E-commerce Architecture</p>
-                    
-                    <p class="text-gray-400 mb-10 text-sm leading-relaxed max-w-md">
-                        A digital transformation for a luxury furniture brand, shifting from cluttered template layouts to a high-fidelity, immersive showroom experience.
+    <main class="pt-32">
+        <section class="container mx-auto px-6 mb-24">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div>
+                    <span class="section-label">Luxury Redesign Case Study</span>
+                    <h1 class="text-6xl md:text-8xl font-extrabold mb-6 tracking-tighter text-white">RELAX IN <br> NATURE.</h1>
+                    <p class="text-xl text-slate-400 mb-8 max-w-lg leading-relaxed">
+                        Redefining luxury e-commerce for <strong>Aurea Furniture</strong> by replacing cluttered templates with a high-fidelity showroom experience rooted in organic minimalism.
                     </p>
-
-                    <div class="flex flex-wrap gap-4">
-                        <a href="https://www.figma.com/proto/geh3cePa805BzU12hTdCim/aureafurniture" target="_blank" class="btn-summon">Live Prototype</a>
-                    </div>
+                    <a href="https://www.figma.com/proto/geh3cePa805BzU12hTdCim/aureafurniture" target="_blank" class="cta-btn uppercase">Live Prototype</a>
                 </div>
-
-                <div class="blood-container">
-                    <div class="blood-border">
-                        <video class="w-full  transition duration-1000" autoplay loop muted playsinline>
+                <div class="glass-panel p-4">
+                    <div class="rounded-[24px] overflow-hidden">
+                        <video class="w-full opacity-80" autoplay loop muted playsinline>
                             <source src="../Videos/AureaFurniture.mp4" type="video/mp4">
                         </video>
                     </div>
@@ -230,177 +132,128 @@
             </div>
         </section>
 
-        <div class="container mx-auto px-6 max-w-5xl space-y-24 pb-24">
-            
-            <section id="problem" class="glass-card p-10 md:p-16">
-                <h2 class="section-heading uppercase tracking-[5px] text-xl">02. Problem Statement</h2>
-                <p class="text-gray-400 leading-relaxed text-lg mb-6">
-                    Existing luxury furniture interfaces often overwhelm users with excessive options and poor visual hierarchy. The brand's digital identity lacked the "expensive" serenity found in their physical showrooms, resulting in high bounce rates and low-quality lead generation.
-                </p>
-                <h3 class="text-white text-sm tracking-widest uppercase mb-4">The Solution</h3>
-                <p class="text-gray-500 text-sm italic">Architecting a minimalist UI that frames furniture as art, removing friction through a personalized "Concierge-to-WhatsApp" inquiry system instead of a cold e-commerce cart.</p>
-            </section>
-
-            <section class="glass-card p-10 md:p-16">
-                <h2 class="section-heading uppercase tracking-[5px] text-xl">03. Strategic Discovery</h2>
-                <div class="grid md:grid-cols-2 gap-12 text-gray-400">
-                    <div>
-                        <h4 class="text-white uppercase text-xs tracking-widest mb-4">Consumer Psychology</h4>
-                        <p class="text-sm">Luxury buyers prioritize "Nature's Embrace"—organic materials and comfort. The redesign used beige and earth tones to evoke high-end residential trust.</p>
-                    </div>
-                    <div>
-                        <h4 class="text-white uppercase text-xs tracking-widest mb-4">Competitor Audit</h4>
-                        <p class="text-sm">Identified that competitors failed by hiding high-res details. I implemented circular framing and generous whitespace to draw focus to craftsmanship.</p>
-                    </div>
-                </div>
-            </section>
-
-            <section id="execution" class="space-y-12">
-                <h2 class="section-heading uppercase tracking-[5px] text-xl">04. Technical Execution</h2>
-                <div class="grid md:grid gap-10">
-                    <div class="blood-container">
-                        <div class="blood-border p-6 bg-zinc-950">
-                            <h4 class="text-red-800 text-xs mb-4 uppercase tracking-widest font-bold">Landing Architecture</h4>
-                            <img src="../Images/AureaFurniture.png" alt="Aurea Hero" class="rounded opacity-100 transition duration-500">
-                        </div>
-                    </div>
-                    <div class="blood-container">
-                        <div class="blood-border p-6 bg-zinc-950 border-red-600">
-                            <h4 class="text-red-600 text-xs mb-4 uppercase tracking-widest font-bold">Multi-Section Mockup</h4>
-                            <img src="../Images/AureaFurnituremockup.png" alt="Aurea Mockup" class="border border-red-900 rounded">
+        <div class="relative">
+            <section id="psychology" class="container mx-auto px-6 mb-32">
+                <div class="glass-panel p-12 lg:p-20">
+                    <div class="max-w-4xl">
+                        <span class="section-label">Phase 01: User Psychology</span>
+                        <h2 class="text-4xl font-bold mt-4 mb-8">Architecting Visual Serenity</h2>
+                        <div class="grid md:grid-cols-2 gap-12 text-slate-400 leading-relaxed">
+                            <p>
+                                Luxury furniture buyers prioritize <strong>Nature's Embrace</strong>—organic materials and serene comfort. My competitor audit revealed that most digital interfaces fail by overwhelming users with cluttered grids, destroying the premium showroom feel.
+                            </p>
+                            <p>
+                                I implemented a high-contrast palette of <strong>earthy beiges and soft grays</strong> to evoke residential trust. By utilizing generous whitespace, the design frames each furniture piece as an individual work of art rather than a generic commodity.
+                            </p>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <section class="glass-card p-10 md:p-16">
-                <h2 class="section-heading uppercase tracking-[5px] text-xl">05. Design System Mastery</h2>
-                <div class="grid md:grid-cols-3 gap-6 text-center">
-                    <div class="p-4 border border-zinc-900 rounded">
-                        <h5 class="text-red-600 text-[10px] uppercase mb-2">Typography</h5>
-                        <p class="text-gray-600 text-[11px]">Serif Luxe Pairings</p>
+            <div class="hidden lg:block absolute left-1/2 -translate-x-1/2 h-full top-0 -z-10">
+                <svg width="100" height="1500">
+                    <path class="flow-line" d="M50,0 Q100,300 50,600 T50,1200 T50,1500" />
+                </svg>
+            </div>
+
+            <section id="execution" class="container mx-auto px-6 space-y-12 mb-32">
+                <span class="section-label block text-center mb-12">Phase 02: Execution & Strategic Hierarchy</span>
+                
+                <div class="grid lg:grid-cols-2 gap-8 items-center">
+                    <div class="glass-panel p-10 flex flex-col justify-center">
+                        <h3 class="text-2xl font-bold mb-4 uppercase tracking-tighter">01 // Detailed Product Focus</h3>
+                        <p class="text-slate-400 mb-6 leading-relaxed">I utilized <strong>circular framing</strong> and 3D-depth effects to draw the user's eye to fine textures and craftsmanship. This solves the "Hiding Quality" problem identified in the competitor audit, allowing craftsmanship to speak for itself.</p>
+                        <div class="text-[10px] font-bold text-green-400 uppercase tracking-widest">UI Focus: Texture & Detail Preservation</div>
                     </div>
-                    <div class="p-4 border border-zinc-900 rounded">
-                        <h5 class="text-red-600 text-[10px] uppercase mb-2">Auto Layout </h5>
-                        <p class="text-gray-600 text-[11px]">Dynamic Grids</p>
+                    <div class="glass-panel p-4">
+                        <img src="../Images/AureaFurniture.png" class="w-full h-full object-cover rounded-xl cursor-zoom-in">
                     </div>
-                    <div class="p-4 border border-zinc-900 rounded">
-                        <h5 class="text-red-600 text-[10px] uppercase mb-2">Interaction</h5>
-                        <p class="text-gray-600 text-[11px]">Smart Prototyping</p>
+                </div>
+
+                <div class="grid lg:grid-cols-2 gap-8 items-center">
+                    <div class="glass-panel p-4 order-2 lg:order-1">
+                        <img src="../Images/AureaFurnituremockup.png" class="w-full h-full object-cover rounded-xl cursor-zoom-in">
+                    </div>
+                    <div class="glass-panel p-10 order-1 lg:order-2 flex flex-col justify-center">
+                        <h3 class="text-2xl font-bold mb-4 uppercase tracking-tighter">02 // The Personal Assistant Style</h3>
+                        <p class="text-slate-400 mb-6 leading-relaxed">Luxury is defined by personalized service. I replaced the traditional "Cold Cart" with a <strong>Concierge Inquiry Model</strong>. This direct WhatsApp-integrated hook increased high-intent lead generation by 30% during user testing.</p>
+                        <div class="text-[10px] font-bold text-green-400 uppercase tracking-widest">UX Pattern: Trust-Centric Conversion</div>
                     </div>
                 </div>
             </section>
-
-            <section class="glass-card p-10 md:p-16">
-                <h2 class="section-heading uppercase tracking-[5px] text-xl">06. Engineering Collaboration</h2>
-                <p class="text-gray-400 leading-relaxed text-lg mb-10">
-                    By leveraging my BCA background, I ensured that the organic circular shapes and luxury blurs were programmatically feasible using CSS Grid and Clip-path, preventing handoff friction with development teams.
-                </p>
-                <div class="flex gap-10 justify-center opacity-60 transition-all duration-700">
-                    <svg class="w-8 h-8" viewBox="0 0 38 57" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M19 28.5c0-5.247 4.253-9.5 9.5-9.5S38 23.253 38 28.5s-4.253 9.5-9.5 9.5-9.5-4.253-9.5-9.5z" fill="#A259FF"/>
-                        <path d="M0 47.5c0-5.247 4.253-9.5 9.5-9.5S19 42.253 19 47.5s-4.253 9.5-9.5 9.5S0 52.747 0 47.5z" fill="#1ABCFE"/>
-                        <path d="M0 28.5c0-5.247 4.253-9.5 9.5-9.5H19v19H9.5c-5.247 0-9.5-4.253-9.5-9.5z" fill="#0AC17E"/>
-                        <path d="M0 9.5C0 4.253 4.253 0 9.5 0H19v19H9.5C4.253 19 0 14.747 0 9.5z" fill="#F24E1E"/>
-                        <path d="M19 0h9.5c5.247 0 9.5 4.253 9.5 9.5s-4.253 9.5-9.5 9.5H19V0z" fill="#FF7262"/>
-                    </svg>
-                    
-                </div>
-            </section>
-
-            <section class="glass-card p-10 md:p-16 border-l-2 border-red-900">
-                <h2 class="section-heading uppercase tracking-[5px] text-xl">07. Retrospective</h2>
-                <div class="grid md:grid-cols-2 gap-12 text-sm text-gray-400">
-                    <div>
-                        <h4 class="text-white uppercase text-[10px] mb-4">Senior Pivot</h4>
-                        <p>In the next version, I would implement VR/AR integration, allowing users to visualize furniture in their own space directly from the showroom, further closing the trust gap.</p>
-                    </div>
-                    <div>
-                        <h4 class="text-white uppercase text-[10px] mb-4">Key Learning</h4>
-                        <p>Less is more. Removing the traditional shopping cart in favor of a direct social inquiry model increased high-intent lead generation by 30% during testing.</p>
-                    </div>
-                </div>
-            </section>
-
         </div>
 
-        <section class="py-24 border-t border-zinc-900">
-            <div class="container mx-auto px-6">
-                <h2 class="text-center text-red-950 uppercase tracking-[10px] mb-12">Other Archives</h2>
+        <section class="container mx-auto px-6 mb-32">
+            <div class="glass-panel p-12 lg:p-20 border-l-4 border-green-400">
+                <h2 class="text-3xl font-bold mb-8 uppercase">Design Architecture</h2>
                 <div class="grid md:grid-cols-3 gap-8">
-                    <a href="projectDetailAzkaFashion.html" class="glass-card p-6 block hover:scale-105 transition">
-                        <img src="../Images/azkafashion00.png" class="w-full mb-4 opacity-50 rounded" alt="">
-                        <h3 class="text-red-700 tracking-widest text-xs uppercase">AZKA // Fashion</h3>
-                    </a>
-                    <a href="projectDetailCarPark.html" class="glass-card p-6 block hover:scale-105 transition">
-                        <img src="../Images/car.park1.png" class="w-full mb-4 opacity-50 rounded" alt="">
-                        <h3 class="text-red-700 tracking-widest text-xs uppercase">CAR.PARK // Solution</h3>
-                    </a>
-                    <a href="projectDetailBookItNow.html" class="glass-card p-6 block hover:scale-105 transition">
-                        <img src="../Images/bookitnow00.png" class="w-full mb-4 opacity-50 rounded" alt="">
-                        <h3 class="text-red-700 tracking-widest text-xs uppercase">BOOKITNOW // Architecture</h3>
-                    </a>
+                    
+                    <div class="p-6 border border-white/5 rounded-2xl bg-black/20">
+                        <h4 class="text-green-400 font-bold uppercase text-[10px] mb-2">Typography Hierarchy</h4>
+                        <p class="text-slate-400 text-sm leading-relaxed">Paired <strong>Serif Luxe headings</strong> with Inter-based body text to bridge the gap between traditional craftsmanship and modern digital efficiency.</p>
+                    </div>
+
+                    <div class="p-6 border border-white/5 rounded-2xl bg-black/20">
+                        <h4 class="text-green-400 font-bold uppercase text-[10px] mb-2">Figma System</h4>
+                        <p class="text-slate-400 text-sm leading-relaxed">Engineered using <strong>Auto Layout 5.0</strong> and dynamic grid variables to ensure pixel-perfect responsive states for tablet and mobile viewports.</p>
+                    </div>
+
+                    <div class="p-6 border border-white/5 rounded-2xl bg-black/20">
+                        <h4 class="text-green-400 font-bold uppercase text-[10px] mb-2">Technical Empathy</h4>
+                        <p class="text-slate-400 text-sm leading-relaxed">Leveraged <strong>BCA technical logic</strong> to ensure all organic circular shapes and luxury glass blurs were programmatically feasible via CSS Grid and Clip-path.</p>
+                    </div>
+
                 </div>
             </div>
         </section>
 
-        <section id="contact" class="py-24 bg-black text-center">
-            <div class="container mx-auto px-6">
-                <h2 class="glitch-text text-red-700 text-4xl font-black mb-6 uppercase">Connect with Nasir</h2>
-                <p class="text-gray-600 mb-10 tracking-[5px]">nasirhussain11118@gmail.com</p>
-                <a href="mailto:nasirhussain11118@gmail.com" class="btn-summon">Contact Nasir</a>
+        <section class="py-32 text-center">
+            <div class="glass-panel p-12 lg:p-20 mx-auto max-w-4xl border-t-2 border-green-400">
+                <span class="section-label">Available for UI/UX Opportunities</span>
+                <h2 class="text-5xl font-extrabold mt-6 mb-8 tracking-tighter">
+                    Let's Design Your Next <br> High-Impact Product.
+                </h2>
+                
+                <p class="text-slate-400 text-lg mb-12 max-w-2xl mx-auto leading-relaxed">
+                    Currently looking for high-impact roles where I can combine 
+                    <strong>Systematic Design</strong> and <strong>Interactive Logic</strong> 
+                    to solve complex user problems.
+                </p>
+                
+                <div class="flex flex-wrap justify-center gap-6">
+                    <a href="mailto:nasirhussain11118@gmail.com" class="cta-btn uppercase">Hire Nasir Hussain</a>
+                    <a href="../Nasir_Hussain_Resume.pdf" download class="cta-btn uppercase" style="background: transparent; color: white; border: 1px solid var(--accent);">Download Resume</a>
+                </div>
+                
+                <p class="mt-10 text-[10px] uppercase tracking-[4px] text-slate-500">
+                    Focused on UI/UX, Product Design & UX Research
+                </p>
             </div>
         </section>
     </main>
 
-    <footer class="py-10 border-t border-red-950/30 text-center text-[10px] text-gray-800 tracking-[5px] uppercase">
-        &copy; 2026 Nasir Hussain // Remains recorded in blood.
+    <footer class="py-12 border-t border-white/10 text-center text-[10px] text-slate-500 uppercase tracking-[10px]">
+        &copy; 2026 Nasir Hussain // Digital Experience Design // UI/UX
     </footer>
 
     <script>
-        const dot = document.getElementById('dot');
-        const blood = document.getElementById('blood-overlay');
-        const zoomOverlay = document.getElementById('imageZoom');
-        const zoomImg = zoomOverlay.querySelector('img');
-        let idleTimer;
-
+        // Custom Cursor
+        const cursor = document.getElementById('cursor');
         document.addEventListener('mousemove', e => {
-            dot.style.left = e.clientX + 'px';
-            dot.style.top = e.clientY + 'px';
-            blood.classList.remove('active');
-            clearTimeout(idleTimer);
-            idleTimer = setTimeout(() => blood.classList.add('active'), 4000);
-
-            if (Math.random() > 0.9) {
-                const s = document.createElement('div');
-                s.className = 'smoke';
-                s.style.left = e.clientX + 'px';
-                s.style.top = e.clientY + 'px';
-                const size = Math.random() * 30 + 10;
-                s.style.width = s.style.height = size + 'px';
-                document.body.appendChild(s);
-                setTimeout(() => s.remove(), 2000);
-            }
+            cursor.style.left = e.clientX - 12 + 'px';
+            cursor.style.top = e.clientY - 12 + 'px';
         });
 
-        document.querySelectorAll('main img').forEach(img => {
-            img.addEventListener('click', (e) => {
-                e.stopPropagation();
-                zoomImg.src = img.src;
-                zoomOverlay.classList.add('active');
-                document.body.style.overflow = 'hidden';
+        // Lightbox
+        const lightbox = document.getElementById('lightbox');
+        const lbImg = lightbox.querySelector('img');
+        document.querySelectorAll('img.cursor-zoom-in').forEach(img => {
+            img.addEventListener('click', () => {
+                lbImg.src = img.src;
+                lightbox.classList.add('active');
             });
         });
-
-        zoomOverlay.addEventListener('click', () => {
-            zoomOverlay.classList.remove('active');
-            document.body.style.overflow = 'auto';
-        });
-
-        document.addEventListener('click', () => {
-            blood.classList.add('active');
-            setTimeout(() => blood.classList.remove('active'), 400);
-        });
+        lightbox.addEventListener('click', () => lightbox.classList.remove('active'));
     </script>
 </body>
 </html>

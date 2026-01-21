@@ -3,144 +3,128 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Nekyo | Nasir Hussain | Senior Product Case Study</title>
+    <title>Nekyo | Nasir Hussain | UI/UX Case Study</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Inter:wght@300;400;700&display=swap');
-
         :root {
-            --blood: #bc0000;
-            --dark-blood: #4a0000;
-            --ghost: #d1d1d1;
-            --void: #050505;
+            --primary: #ffffff;
+            --accent: #4ade80; 
+            --bg-dark: #030712;
+            --glass: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --text-muted: #94a3b8;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
 
         body {
-            background-color: var(--void);
-            color: var(--ghost);
-            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(29, 78, 216, 0.35) 0px, transparent 50%),
+                radial-gradient(at 100% 0%, rgba(20, 83, 45, 0.3) 0px, transparent 50%),
+                radial-gradient(at 50% 100%, rgba(15, 23, 42, 0.4) 0px, transparent 50%);
+            background-attachment: fixed;
+            color: var(--primary);
+            font-family: 'Plus Jakarta Sans', sans-serif;
             overflow-x: hidden;
-            background: radial-gradient(circle at center, #111 0%, #050505 100%);
+            position: relative;
         }
 
-        h1, h2, h3, h4, .initial { font-family: 'Cinzel', serif; }
+        body::before {
+            content: "";
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url('https://grainy-gradients.vercel.app/noise.svg');
+            opacity: 0.15;
+            pointer-events: none;
+            z-index: 1;
+        }
 
-        /* ---------------- LIGHTBOX ZOOM ---------------- */
-        .zoom-overlay {
-            position: fixed; inset: 0; background: rgba(0, 0, 0, 0.95);
-            z-index: 10001; display: none; align-items: center; justify-content: center;
+        nav, main { position: relative; z-index: 2; }
+
+        .glass-panel {
+            background: var(--glass);
+            backdrop-filter: blur(25px);
+            border: 1px solid var(--glass-border);
+            border-radius: 32px;
+        }
+
+        .cta-btn {
+            padding: 16px 45px;
+            background: var(--primary);
+            color: var(--bg-dark);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 800;
+            transition: 0.4s;
+            display: inline-block;
+        }
+
+        .cta-btn:hover { background: var(--accent); transform: translateY(-5px); }
+
+        .section-label {
+            color: var(--accent);
+            font-weight: 800;
+            font-size: 0.7rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+        }
+
+        /* Flow SVG Styling */
+        .flow-line {
+            stroke: var(--accent);
+            stroke-width: 2;
+            stroke-dasharray: 8;
+            opacity: 0.3;
+            fill: none;
+        }
+
+        #lightbox {
+            position: fixed; inset: 0; background: rgba(5, 7, 10, 0.95);
+            z-index: 10000; display: none; align-items: center; justify-content: center;
             backdrop-filter: blur(15px); cursor: zoom-out;
         }
-        .zoom-overlay img {
-            max-width: 90%; max-height: 90%; object-fit: contain;
-            border: 2px solid var(--blood); transform: scale(0.8); transition: 0.4s;
-        }
-        .zoom-overlay.active { display: flex; }
-        .zoom-overlay.active img { transform: scale(1); }
-        main img { cursor: zoom-in; }
+        #lightbox.active { display: flex; }
+        #lightbox img { max-width: 90%; max-height: 85%; border-radius: 12px; border: 1px solid var(--glass-border); }
 
-        /* ---------------- HORROR EFFECTS ---------------- */
-        .lightning-overlay {
-            position: fixed; inset: 0; pointer-events: none; z-index: 9996;
-            animation: lightning 8s infinite;
+        #cursor {
+            width: 24px; height: 24px;
+            border: 1.5px solid var(--accent);
+            border-radius: 50%;
+            position: fixed; pointer-events: none;
+            z-index: 10001; transition: transform 0.1s ease-out;
+            box-shadow: 0 0 15px rgba(74, 222, 128, 0.2);
         }
-        @keyframes lightning {
-            0%, 95%, 100% { background: transparent; }
-            96% { background: rgba(255, 255, 255, 0.05); }
-            98% { background: rgba(255, 255, 255, 0.1); }
-        }
-        #blood-overlay {
-            position: fixed; inset: 0; pointer-events: none; z-index: 9997;
-            opacity: 0; transition: opacity 2s ease;
-            background: radial-gradient(circle, transparent 40%, rgba(139, 0, 0, 0.3) 100%);
-        }
-        #blood-overlay.active { opacity: 1; animation: heartbeat 1.5s infinite; }
-
-        .blood-container { position: relative; padding: 15px; filter: url(#goo); }
-        .blood-border { border: 4px solid var(--blood); border-radius: 20px; overflow: hidden; background: #000; }
-
-        .cursor-dot {
-            width: 8px; height: 8px; background: #fff; border-radius: 50%;
-            position: fixed; z-index: 10000; pointer-events: none;
-            box-shadow: 0 0 15px #fff, 0 0 30px var(--blood);
-        }
-
-        header { backdrop-filter: blur(10px); background: rgba(0, 0, 0, 0.9); border-bottom: 1px solid var(--dark-blood); }
-        .glitch-text { animation: glitch 5s infinite; }
-        @keyframes glitch {
-            0%, 90%, 100% { transform: none; opacity: 1; }
-            92% { transform: skew(3deg); color: var(--blood); }
-        }
-
-        .glass-card { background: rgba(10, 10, 10, 0.9); border: 1px solid #1a1a1a; transition: 0.4s; }
-        .glass-card:hover { border-color: var(--blood); box-shadow: 0 0 40px rgba(139, 0, 0, 0.15); }
-
-        .btn-summon {
-            border: 1px solid var(--blood); color: var(--blood); padding: 0.8rem 2rem;
-            letter-spacing: 3px; transition: 0.4s; text-transform: uppercase;
-            font-size: 0.8rem; display: inline-block; border-radius: 32px;
-        }
-        .btn-summon:hover { background: var(--blood); color: white; box-shadow: 0 0 30px var(--blood); }
-
-        .section-heading { color: var(--blood); border-bottom: 2px solid var(--dark-blood); display: inline-block; margin-bottom: 2rem; }
-        .metric-card { background: rgba(20, 0, 0, 0.4); border: 1px solid var(--dark-blood); padding: 20px; border-radius: 12px; text-align: center; }
     </style>
 </head>
 <body>
 
-    <svg xmlns="http://www.w3.org/2000/svg" style="display:none;">
-        <defs>
-            <filter id="goo">
-                <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
-                <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9" result="goo" />
-                <feComposite in="SourceGraphic" in2="goo" operator="atop"/>
-            </filter>
-        </defs>
-    </svg>
+    <div id="cursor"></div>
+    <div id="lightbox"><img src="" alt="Zoomed View"></div>
 
-    <div class="zoom-overlay" id="imageZoom"><img src=""></div>
-    <div class="lightning-overlay"></div>
-    <div id="blood-overlay"></div>
-    <div class="cursor-dot" id="dot"></div>
-
-    <header class="sticky top-0 py-6 z-50">
-        <div class="container mx-auto px-6 flex justify-between items-center">
-            <div class="text-2xl font-black text-red-800 tracking-tighter">N.</div>
-            <nav class="hidden md:flex gap-8 text-[10px] tracking-[4px] uppercase font-bold">
-                <a href="../index.html" class="hover:text-red-600 transition">Home</a>
-                <a href="#overview" class="hover:text-red-600 transition">overview</a>
-                <a href="#accessibility" class="hover:text-red-600 transition">Accessibility</a>
-                <a href="#contact" class="hover:text-red-600 transition">Contact</a>
-            </nav>
+    <nav class="fixed top-0 w-full z-50 py-6 px-8 flex justify-between items-center bg-black/40 backdrop-blur-xl border-b border-white/10">
+        <div class="font-extrabold text-xl tracking-tighter">NASIR<span>.</span>HUSSAIN</div>
+        <div class="flex gap-8 text-[10px] font-bold tracking-[3px] uppercase">
+            <a href="../index.html" class="hover:text-green-400 transition">Portfolio</a>
+            <a href="https://nekyo.vercel.app/" target="_blank" class="text-green-400">Live App</a>
         </div>
-    </header>
+    </nav>
 
-    <main>
-        <section id="overview" class="py-20">
-            <div class="container mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
-                <div class="hero-content">
-                    <h1 class="text-5xl md:text-7xl font-black mb-4 glitch-text uppercase text-white">Nekyo</h1>
-                    <p class="text-red-700 tracking-[8px] uppercase text-xs mb-8">Japanese Learning Ecosystem: A Product Tour</p>
-                    
-                    <div class="grid grid-cols-2 gap-4 mb-10">
-                        <div class="metric-card">
-                            <h4 class="text-3xl font-bold text-red-600 uppercase">9 CH.</h4>
-                            <p class="text-[9px] uppercase tracking-widest text-gray-500">Learning Pathway</p>
-                        </div>
-                        <div class="metric-card">
-                            <h4 class="text-3xl font-bold text-red-600 uppercase">React</h4>
-                            <p class="text-[9px] uppercase tracking-widest text-gray-500">TS Infrastructure</p>
-                        </div>
-                    </div>
-
-                    <a href="https://nekyo.vercel.app/" target="_blank" class="btn-summon">View Live Application</a>
+    <main class="pt-32">
+        <section class="container mx-auto px-6 mb-24">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div>
+                    <span class="section-label">Case Study: Nekyo</span>
+                    <h1 class="text-6xl md:text-8xl font-extrabold mb-6 tracking-tighter">Humanizing <br> Japanese.</h1>
+                    <p class="text-xl text-slate-400 mb-8 max-w-lg">
+                        Designed and coded a multi-sensory Japanese learning ecosystem that solves the "Dull UI" barrier for beginners.
+                    </p>
+                    <a href="https://nekyo.vercel.app/" target="_blank" class="cta-btn">LAUNCH LIVE SITE</a>
                 </div>
-
-                <div class="blood-container">
-                    <div class="blood-border">
-                        <video class="w-full" autoplay loop muted playsinline>
+                <div class="glass-panel p-4">
+                    <div class="rounded-[24px] overflow-hidden">
+                        <video class="w-full opacity-80" autoplay loop muted playsinline>
                             <source src="../Videos/nekyo.mp4" type="video/mp4">
                         </video>
                     </div>
@@ -148,174 +132,123 @@
             </div>
         </section>
 
-        <div class="container mx-auto px-6 max-w-5xl space-y-24 pb-24">
-            
-            <section class="glass-card p-10 md:p-16">
-                <h2 class="section-heading uppercase tracking-[5px] text-xl">01. Design Philosophy</h2>
-                <div class="grid md:grid-cols-2 gap-8 text-sm leading-relaxed">
-                    <div class="border-l-2 border-red-900 pl-6">
-                        <h4 class="text-white uppercase mb-4 tracking-widest font-bold">The Problem</h4>
-                        <p class="text-gray-400">Japanese is intimidating for beginners. Dry academic interfaces and lack of native pronunciation feedback create a high barrier to entry, causing learners to stall before reaching proficiency.</p>
-                    </div>
-                    <div class="border-l-2 border-red-600 pl-6">
-                        <h4 class="text-white uppercase mb-4 tracking-widest font-bold">The Solution</h4>
-                        <p class="text-gray-300">A multi-sensory platform that combines Audio API integration, Stroke Practice Boards, and JSON-driven Conversations to provide a seamless learning journey from basic scripts to real-world chat.</p>
-                    </div>
-                </div>
-            </section>
-
-            <section class="glass-card p-10">
-                <h2 class="section-heading uppercase tracking-[5px] text-xl">02. Script Mastery Page</h2>
-                <div class="grid md:grid-cols-2 gap-12 items-center">
-                    <div class="text-gray-400 space-y-4">
-                        <h4 class="text-white uppercase tracking-widest text-xs font-bold">Hiragana, Katakana & Kanji</h4>
-                        <p class="text-sm leading-relaxed">The foundation of the app. clicking any character triggers instant native pronunciation via an integrated Audio System. Users can also visualize and practice the precise stroke order for each script directly on the responsive canvas, ensuring correct calligraphy from day one.</p>
-                        <div class="bg-zinc-950 p-4 border border-zinc-900 rounded-lg text-[10px] font-mono text-red-600 uppercase">Feature: Instant Audio & Stroke Validation</div>
-                    </div>
-                    <img src="../Images/Nekyo.png" alt="Characters Module" class="rounded border border-zinc-900 shadow-xl">
-                </div>
-            </section>
-
-            <section class="glass-card p-10">
-                <h2 class="section-heading uppercase tracking-[5px] text-xl">03. The Learning Hub</h2>
-                <div class="grid md:grid-cols-2 gap-12 items-center">
-                    <img src="../Images/NekyoMockup.png" alt="Learning Chapters" class="rounded border border-zinc-900 shadow-xl order-2 md:order-1">
-                    <div class="text-gray-400 space-y-4 order-1 md:order-2">
-                        <h4 class="text-white uppercase tracking-widest text-xs font-bold">9 Structured Vocabulary Chapters</h4>
-                        <p class="text-sm leading-relaxed">A comprehensive curriculum divided into 9 chapters. Each chapter uses interactive quizzes to reinforce vocabulary retention. This data-driven approach allows students to track progress as they move from basic greetings to complex nouns.</p>
+        <div class="relative">
+            <section class="container mx-auto px-6 mb-32">
+                <div class="glass-panel p-12 lg:p-20">
+                    <div class="max-w-4xl">
+                        <span class="section-label">Phase 01: Research</span>
+                        <h2 class="text-4xl font-bold mt-4 mb-8">User Problem & Research</h2>
+                        <div class="grid md:grid-cols-2 gap-12 text-slate-400 leading-relaxed">
+                            <p>
+                                Japanese learning is often gated by intimidating 90s-style interfaces. As a JLPT N4 proficiency student, I identified that learners stall because current tools offer dry static tables without sensory feedback.
+                            </p>
+                            <p>
+                                The goal was to solve ocular fatigue and boost retention by bridging the gap between visual character recognition, auditory memory, and physical stroke practice.
+                            </p>
+                        </div>
                     </div>
                 </div>
             </section>
 
-            <section class="glass-card p-10">
-                <h2 class="section-heading uppercase tracking-[5px] text-xl">04. Grammar Video Library</h2>
-                <div class="grid md:grid-cols-2 gap-12 items-center">
-                    <div class="text-gray-400 space-y-4">
-                        <h4 class="text-white uppercase tracking-widest text-xs font-bold">Curated Expert Instruction</h4>
-                        <p class="text-sm leading-relaxed">Recognizing that grammar requires deep explanation, I architected a dedicated Video Page. It sources high-quality lessons from the best Japanese educators on the web, centralizing the most reliable resources into one distraction-free classroom.</p>
-                    </div>
-                    <img src="../Images/NekyoMockup.png" alt="Video Grammar Module" class="rounded border border-zinc-900 shadow-xl">
-                </div>
-            </section>
-
-            <section class="glass-card p-10">
-                <h2 class="section-heading uppercase tracking-[5px] text-xl">05. Real-World Interaction</h2>
-                <div class="grid md:grid-cols-2 gap-12 items-center">
-                    <img src="../Images/NekyoMockup.png" alt="Conversation Module" class="rounded border border-zinc-900 shadow-xl order-2 md:order-1">
-                    <div class="text-gray-400 space-y-4 order-1 md:order-2">
-                        <h4 class="text-white uppercase tracking-widest text-xs font-bold">Bot Chat & Custom Keyboard</h4>
-                        <p class="text-sm leading-relaxed">I created a custom On-Screen Japanese Keyboard to facilitate real-time chat with a JSON-driven bot. This allows students to practice phrasing and slang without installing complex software, providing a safe feedback loop for conversational skills.</p>
-                    </div>
-                </div>
-            </section>
-
-            <section class="glass-card p-10">
-                <h2 class="section-heading uppercase tracking-[5px] text-xl">06. Digital Practice Board</h2>
-                <div class="grid md:grid-cols-2 gap-12 items-center">
-                    <div class="text-gray-400 space-y-4">
-                        <h4 class="text-white uppercase tracking-widest text-xs font-bold">Virtual Green Board Classroom</h4>
-                        <p class="text-sm leading-relaxed">Modeled after a traditional classroom environment, this module allows for free-hand practice. Using mobile touch-events or PC mouse-tracking, students can draw what they have learned, bridging the gap between digital recognition and physical writing skills.</p>
-                    </div>
-                    <img src="../Images/NekyoMockup.png" alt="Classroom Board Module" class="rounded border border-zinc-900 shadow-xl">
-                </div>
-            </section>
-
-           <section id="accessibility" class="glass-card p-10 md:p-16">
-    <h2 class="section-heading uppercase tracking-[5px] text-xl">07. Health & Accessibility</h2>
-    <div class="grid md:grid-cols-2 gap-12 items-center">
-        <div class="space-y-6">
-            <p class="text-gray-400 leading-relaxed text-lg">
-                Language acquisition requires sustained screen time. I implemented a robust Light/Dark Mode toggle designed with student ocular health in mind, managing contrast ratios for late-night study rituals without causing eye fatigue.
-            </p>
-            <div class="flex gap-10 opacity-60">
-                <svg class="w-8 h-8" viewBox="-11.5 -10.23174 23 20.46348" xmlns="http://www.w3.org/2000/svg"><circle cx="0" cy="0" r="2.05" fill="#61dafb"/><g stroke="#61dafb" stroke-width="1" fill="none"><ellipse rx="11" ry="4.2"/><ellipse rx="11" ry="4.2" transform="rotate(60)"/><ellipse rx="11" ry="4.2" transform="rotate(120)"/></g></svg>
-                <svg class="w-8 h-8" viewBox="0 0 38 57" xmlns="http://www.w3.org/2000/svg"><path d="M19 28.5c0-5.247 4.253-9.5 9.5-9.5S38 23.253 38 28.5s-4.253 9.5-9.5 9.5-9.5-4.253-9.5-9.5z" fill="#A259FF"/><path d="M0 47.5c0-5.247 4.253-9.5 9.5-9.5S19 42.253 19 47.5s-4.253 9.5-9.5 9.5S0 52.747 0 47.5z" fill="#1ABCFE"/><path d="M0 28.5c0-5.247 4.253-9.5 9.5-9.5H19v19H9.5c-5.247 0-9.5-4.253-9.5-9.5z" fill="#0AC17E"/><path d="M0 9.5C0 4.253 4.253 0 9.5 0H19v19H9.5C4.253 19 0 14.747 0 9.5z" fill="#F24E1E"/><path d="M19 0h9.5c5.247 0 9.5 4.253 9.5 9.5s-4.253 9.5-9.5 9.5H19V0z" fill="#FF7262"/></svg>
+            <div class="hidden lg:block absolute left-1/2 -translate-x-1/2 h-full top-0 -z-10">
+                <svg width="100" height="1200">
+                    <path class="flow-line" d="M50,0 Q100,200 50,400 T50,800 T50,1200" />
+                </svg>
             </div>
+
+            <section class="container mx-auto px-6 space-y-12 mb-32">
+                <span class="section-label block text-center mb-12">Phase 02: Design & Engineering Solution</span>
+                
+                <div class="grid lg:grid-cols-2 gap-8 items-center">
+                    <div class="glass-panel p-10">
+                        <h3 class="text-2xl font-bold mb-4 uppercase tracking-tighter">01 // Audio Script Mastery</h3>
+                        <p class="text-slate-400 mb-6">Designed a unified module for Hiragana, Katakana, and Kanji. Native pronunciation is triggered on-click using custom Audio API integration, ensuring correct phonetics from the start.</p>
+                        <div class="text-[10px] font-bold text-green-400 uppercase tracking-widest">UI/UX + Frontend Implementation</div>
+                    </div>
+                    <div class="glass-panel overflow-hidden p-4">
+                        <img src="../Images/nekyo00.png" class="w-full h-full object-cover rounded-xl cursor-zoom-in">
+                    </div>
+                </div>
+
+                <div class="grid lg:grid-cols-2 gap-8 items-center">
+                    <div class="glass-panel overflow-hidden p-4 order-2 lg:order-1">
+                        <img src="../Images/conversation and keyboard nekyo.png" class="w-full h-full object-cover rounded-xl cursor-zoom-in">
+                    </div>
+                    <div class="glass-panel p-10 order-1 lg:order-2">
+                        <h3 class="text-2xl font-bold mb-4 uppercase tracking-tighter">02 // Chat Bot & Custom Keyboard</h3>
+                        <p class="text-slate-400 mb-6">Built a JSON-driven bot conversation page paired with an on-screen Japanese keyboard. This removes the friction of installing language packs while allowing users to practice real-time sentence construction.</p>
+                        <div class="text-[10px] font-bold text-green-400 uppercase tracking-widest">Logic Flow Design</div>
+                    </div>
+                </div>
+
+                <div class="grid lg:grid-cols-2 gap-8 items-center">
+                    <div class="glass-panel p-10">
+                        <h3 class="text-2xl font-bold mb-4 uppercase tracking-tighter">03 // Structured Learning Hub</h3>
+                        <p class="text-slate-400 mb-6">Divided the curriculum into 9 progressive chapters. Implemented data-driven interactive quizzes that validate retention before the user advances to the next stage.</p>
+                        <div class="text-[10px] font-bold text-green-400 uppercase tracking-widest">Information Architecture</div>
+                    </div>
+                    <div class="glass-panel overflow-hidden p-4">
+                        <img src="../Images/learnpagenekyo.png" class="w-full h-full object-cover rounded-xl cursor-zoom-in">
+                    </div>
+                </div>
+
+                <div class="grid lg:grid-cols-2 gap-8 items-center">
+                    <div class="glass-panel overflow-hidden p-4 order-2 lg:order-1">
+                        <img src="../Images/practiceboardnekyo.png" class="w-full h-full object-cover rounded-xl cursor-zoom-in">
+                    </div>
+                    <div class="glass-panel p-10 order-1 lg:order-2">
+                        <h3 class="text-2xl font-bold mb-4 uppercase tracking-tighter">04 // Virtual Practice Board</h3>
+                        <p class="text-slate-400 mb-6">Designed a "Virtual Green Board" using HTML5 Canvas. It allows for free-hand stroke practice via mobile touch or mouse, mimicking the muscle memory of a physical classroom.</p>
+                        <div class="text-[10px] font-bold text-green-400 uppercase tracking-widest">Gesture-Based UX</div>
+                    </div>
+                </div>
+            </section>
         </div>
 
-        <div class="blood-container">
-            <div class="blood-border relative group overflow-hidden">
-                <div class="absolute top-4 right-4 bg-black/80 text-white text-[10px] px-3 py-1 rounded-full border border-red-900/50 z-10 uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">
-                    Mode Comparison
-                </div>
-                <img src="../Images/Nekyo.png" alt="Light and Dark Mode Comparison" class="w-full h-auto transition-transform duration-700 group-hover:scale-105">
-                <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent pointer-events-none"></div>
-            </div>
-            <p class="text-[10px] text-center mt-4 text-gray-500 uppercase tracking-[4px]">Visual Harmony across both Spectrums</p>
-        </div>
-    </div>
-</section>
-            <section class="glass-card p-10 md:p-16 border-l-2 border-red-900">
-                <h2 class="section-heading uppercase tracking-[5px] text-xl">08. Final Retrospective</h2>
-                <div class="grid md:grid-cols-2 gap-12 text-sm text-gray-400">
-                    <div>
-                        <h4 class="text-white uppercase text-[10px] mb-4 font-bold">BCA Engineering Edge</h4>
-                        <p>Leveraging my technical background, I optimized the Audio API and canvas practice modules for low-latency performance. Switching to TypeScript ensured that the character and quiz data models remained strictly typed and scalable for future Kanji expansion.</p>
+        <section class="container mx-auto px-6 mb-32">
+            <div class="glass-panel p-12 lg:p-20 border-l-4 border-green-400">
+                <h2 class="text-3xl font-bold mb-8 uppercase">Retrospective & Logic</h2>
+                <div class="grid md:grid-cols-2 gap-12 text-sm">
+                    <div class="space-y-4">
+                        <h4 class="text-white font-bold uppercase tracking-widest text-[10px]">Coding Implementation</h4>
+                        <p class="text-slate-400">Developed with React and TypeScript to ensure scalable data models. Optimized the Audio API and canvas logic for ultra-low latency interaction on mobile devices.</p>
                     </div>
-                    <div>
-                        <h4 class="text-white uppercase text-[10px] mb-4 font-bold">Product Result</h4>
-                        <p>Nekyo provides a seamless design to production solution that removes dry academic barriers. By focusing on writing, listening, and real-time interaction, the app delivers a multi-sensory ritual for serious language beginners.</p>
+                    <div class="space-y-4">
+                        <h4 class="text-white font-bold uppercase tracking-widest text-[10px]">Design Impact</h4>
+                        <p class="text-slate-400">By replacing standard learning hurdles with sensory feedback, Nekyo created a ritual-based learning experience that reduces beginner bounce rates.</p>
                     </div>
                 </div>
-            </section>
-
-        </div>
-
-        <section id="contact" class="py-32 bg-black/60 text-center">
-            <div class="container mx-auto px-6">
-                <h2 class="glitch-text text-red-700 text-5xl font-black mb-10 uppercase">Connect with Nasir</h2>
-                <p class="text-gray-600 mb-12 tracking-[5px] font-bold">nasirhussain11118@gmail.com</p>
-                <a href="mailto:nasirhussain11118@gmail.com" class="btn-summon">Contact Nasir</a>
             </div>
+        </section>
+
+        <section class="py-32 text-center">
+            <span class="section-label">Interested in the logic behind Nekyo?</span>
+            <h2 class="text-5xl font-extrabold mt-6 mb-12">Let's build success.</h2>
+            <a href="mailto:nasirhussain11118@gmail.com" class="cta-btn">GET IN TOUCH</a>
         </section>
     </main>
 
-    <footer class="py-12 border-t border-red-950/30 text-center text-[10px] text-zinc-800 tracking-[10px] uppercase">
-        &copy; 2026 Nasir Hussain // Visual Integrity Maintained.
-    </footer>
+   <footer class="py-12 border-t border-white/10 text-center text-[10px] text-slate-500 uppercase tracking-[10px]">
+    &copy; 2026 Nasir Hussain // Digital Experience Design // UI/UX
+</footer>
 
     <script>
-        const dot = document.getElementById('dot');
-        const blood = document.getElementById('blood-overlay');
-        const zoomOverlay = document.getElementById('imageZoom');
-        const zoomImg = zoomOverlay.querySelector('img');
-
-        document.addEventListener('mousemove', e => {
-            dot.style.left = e.clientX + 'px';
-            dot.style.top = e.clientY + 'px';
-            blood.classList.remove('active');
-            clearTimeout(window.idleTimer);
-            window.idleTimer = setTimeout(() => blood.classList.add('active'), 4000);
-
-            if (Math.random() > 0.9) {
-                const s = document.createElement('div');
-                s.className = 'smoke';
-                s.style.left = e.clientX + 'px';
-                s.style.top = e.clientY + 'px';
-                const size = Math.random() * 30 + 10;
-                s.style.width = s.style.height = size + 'px';
-                document.body.appendChild(s);
-                setTimeout(() => s.remove(), 2000);
-            }
-        });
-
-        document.querySelectorAll('main img').forEach(img => {
-            img.addEventListener('click', (e) => {
-                e.stopPropagation();
-                zoomImg.src = img.src;
-                zoomOverlay.classList.add('active');
-                document.body.style.overflow = 'hidden';
+        // Lightbox
+        const lightbox = document.getElementById('lightbox');
+        const lbImg = lightbox.querySelector('img');
+        document.querySelectorAll('img.cursor-zoom-in').forEach(img => {
+            img.addEventListener('click', () => {
+                lbImg.src = img.src;
+                lightbox.classList.add('active');
             });
         });
+        lightbox.addEventListener('click', () => lightbox.classList.remove('active'));
 
-        zoomOverlay.addEventListener('click', () => {
-            zoomOverlay.classList.remove('active');
-            document.body.style.overflow = 'auto';
-        });
-
-        document.addEventListener('click', () => {
-            blood.classList.add('active');
-            setTimeout(() => blood.classList.remove('active'), 400);
+        // Custom Cursor
+        const cursor = document.getElementById('cursor');
+        document.addEventListener('mousemove', e => {
+            cursor.style.left = e.clientX - 12 + 'px';
+            cursor.style.top = e.clientY - 12 + 'px';
         });
     </script>
 </body>
